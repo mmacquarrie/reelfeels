@@ -1,0 +1,84 @@
+
+/* HOMEPAGE */
+
+.jumbotron p, .jumbotron h3{
+	text-align: center;
+}
+
+.jumbotron{
+	background-size: 100%;
+	height: 600px; /* change - set dynamically with JS */
+	padding: 20% 0;
+}
+
+.home-marketing-point svg{
+	font-size: 50px;
+	color: #fff;
+	width: 150px !important;
+	height: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #b3b3b3;
+    border-radius: 100% 100%;
+    padding: 25px;
+    display:inline-block;
+    margin-bottom: 15px;
+}
+
+.home-marketing-point{
+	text-align: center;
+}
+
+#jumbotron-row{
+	margin-bottom: 25px;
+}
+
+#jumbotron-col{
+	padding:0;
+}
+
+#user-testimony-block{
+	text-align: center;
+	background-color: #d3d3d3;
+	height: 300px;
+	padding: 15px 0;
+}
+
+#user-testimonies{
+	list-style-type: none;
+	padding-left:0;
+}
+
+#user-testimonies li{
+	padding: 10px 0;
+}
+
+.user-testimony-quote{
+	font-size: 1.25em;
+}
+
+.user-testimony-cite{
+	/*text-align:right;*/
+}
+
+.user-testimony-cite::before{
+	content: '\2014';
+
+}
+
+/* COMMON UI ELEMENTS */
+
+footer{
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	height: 75px;
+}
+
+.buffer-bottom{
+	margin-bottom: 25px;
+}
+
+#sign-up-button{
+	color: #fff;
+}
