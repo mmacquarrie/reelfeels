@@ -12,6 +12,23 @@
 	margin-bottom: 25px;
 }
 
+#login-button{
+	color: rgba(255,255,255,.5);
+}
+
+#login-button:hover{
+	color: #fff;
+}
+
+.navbar{
+	background-color: #B5428B;
+}
+
+.btn-main{
+	background-color: #B5428B;
+	border-color: #B5428B;
+}
+
 
 /* HEADER */
 .navbar-brand{
@@ -31,6 +48,22 @@
 	padding: 0 5px;
 }
 
+.fake-social-media{
+	border-bottom: 1px solid #fff;
+	margin-bottom:10px;
+}
+
+.fake-social-media a:hover{
+	color: #B5428B;
+}
+
+footer{
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	height: 100%;
+}
+
 /* HOMEPAGE */
 
 .jumbotron p, .jumbotron h3{
@@ -39,10 +72,53 @@
 
 .jumbotron{
 	background-size: 100%;
-	height: 650px; /* change - set dynamically with JS */
-	padding: 20% 0;
+	height: 95vh;
+	padding: 0;
 	background-image: url('../images/homepage-stock.jpeg');
 	background-repeat: no-repeat;
+	background-position-y: -100px;
+	position: relative;
+
+}
+
+.jumbotron-overlay{
+	background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0));
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	position: absolute;
+}
+
+.jumbotron-text{
+	position: absolute;
+	top: 35%;
+	left: 25%;
+}
+
+#jumbotron-row{
+	margin-bottom: 25px;
+}
+
+#jumbotron-col{
+	padding:0;
+}
+
+#explore-button{
+	background-color: #B5428B;
+    border-color: #B5428B;
+    color: #fff;
+    text-shadow: none;
+}
+
+.jumbotron .lead{
+	color: #fff;
+	text-shadow: 1px 1px #000;
+}
+
+#tagline{
+	color: #fff;
+    text-shadow: 2px 2px #000;
+    font-size: 3rem;
 }
 
 .home-marketing-point svg{
@@ -59,16 +135,12 @@
     margin-bottom: 15px;
 }
 
+.home-marketing-point h4{
+	color: #B5428B;
+}
+
 .home-marketing-point{
 	text-align: center;
-}
-
-#jumbotron-row{
-	margin-bottom: 25px;
-}
-
-#jumbotron-col{
-	padding:0;
 }
 
 #user-testimony-block{
@@ -100,52 +172,6 @@
 
 }
 
-#explore-button{
-	background-color: #B5428B;
-    border-color: #B5428B;
-    color: #fff;
-}
-
-.jumbotron .lead{
-	color: #fff;
-}
-
-#tagline{
-	color: #fff;
-    text-shadow: 2px 2px #000;
-    font-size: 3rem;
-}
-
-.home-marketing-point h4{
-	color: #B5428B;
-}
-
-/* COMMON UI ELEMENTS */
-
-footer{
-	background-color: #000;
-	color: #fff;
-	text-align: center;
-	height: 75px;
-}
-
-.buffer-bottom{
-	margin-bottom: 25px;
-}
-
-#sign-up-button{
-	color: #fff;
-}
-
-.navbar{
-	background-color: #B5428B;
-}
-
-.btn-main{
-	background-color: #B5428B;
-	border-color: #B5428B;
-}
-
 /* SIGN UP */
 
 #user-creation-form{
@@ -158,6 +184,37 @@ footer{
 
 #user-creation-form input{
 	margin: 10px 0;
+}
+
+.profile-pic-upload-wrap{
+	 position: relative;
+	 width: 200px;
+	 height: 200px;
+	 border: 1px solid #ced4da;
+	 margin: 0 auto;
+
+}
+.profile-pic-upload-wrap input{
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	opacity: 0;
+}
+
+.profile-pic-upload-wrap p{
+	width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 170px;
+    color: #495057;
+    padding: 10% 0;
+}
+
+.profile-pic-upload-wrap svg{
+	font-size: 8rem;
 }
 
 /* LOGIN */
