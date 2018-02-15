@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Page title here</title>
+        {% include "styles-and-scripts.html" %}
+    </head>
+    <body>
+        <header>
+            {% include "navbar.html" %}
+        </header>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-4"></div>
+                <div class="col-md-4 col-xs-12">
+                    <img id="profile-picture" src="{% static 'images/jrrtolkien.jpeg' %}">
+                    <h4 class="user-details">JRR Tolkien</h4>
+                    <h5 class="user-details">Favorite Emotion: Joy {emoji here}</h5>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+            <div class="row">
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 col-xs-12">
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+        </div>
+
+        {% include "footer.html" %}
+    </body>
+</html>
+
+<style>
+
+    .row {
+        padding: 20px;
+    }
+
+    #profile-picture {
+        height: 400px;
+        width: 100%;
+        border: 5px solid rgba(169, 169, 169, 0.5);
+    }
+
+    .user-details {
+        text-align: center;
+    }
+</style>
+
+<script>
+
+</script>

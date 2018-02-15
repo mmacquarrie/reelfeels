@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>CS326 Project</title>
+        {% include "styles-and-scripts.html" %}
+        <link rel="stylesheet" href="{% static 'styles/video-content.css' %}">
+        <script src="{% static 'scripts/video-content.js' %}"></script>
+    </head>
+    <body>
+        <header>
+            {% include "navbar.html" %}
+        </header>
+
+        <div class="container-fluid">
+
+            <!-- Content -->
+            <div class="row" style="padding: 20px;">
+
+                <!-- Video -->
+                <div class="col-md-8 col-xs-12">
+                        <iframe style="height: 640px; width: 100%;" src="https://www.youtube.com/embed/7LEmer7wwHI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+
+                <!-- Side stuff -->
+                <div class="col-md-4 col-xs-12">
+
+                    <!-- Stats tabs -->
+                    <div class="row" style="height: 80%; width: 100%;overflow-y:auto;">
+                        <div class="col-md-12">
+                            <div class="tab">
+                                    <button class="tablinks" onclick="openStats(event, statType.user)" id="defaultOpen">Your Stats</button>
+                                    <button class="tablinks" onclick="openStats(event, statType.general)">General Stats</button>
+                            </div>
+            
+                            <!-- Stats content -->
+                            <div id="user-stats" class="tabcontent">
+                                <h3>Your stats</h3>
+                                <div id="user-emotions-chart"></div>
+                                <p>Joy: <strong>x</strong>%</p>
+                                <p>Sadness: <strong>y</strong>%</p>
+                                <p>Disgust: <strong>z</strong>%</p>
+                                <p>Fear: <strong>a</strong>%</p>
+                                <p>Anger: <strong>b</strong>%</p>
+                            </div>
+        
+                            <div id="general-stats" class="tabcontent">
+                                <h3>What others felt</h3>
+                                <div id="general-emotions-chart"></div>
+                                <p>Joy: <strong>x</strong>%</p>
+                                <p>Sadness: <strong>y</strong>%</p>
+                                <p>Disgust: <strong>z</strong>%</p>
+                                <p>Fear: <strong>a</strong>%</p>
+                                <p>Anger: <strong>b</strong>%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Creator info -->
+                    <div class="row" style="overflow-y:auto;">
+                        <div class="col-md-12">
+                            <div id="creator-info">
+                                <img src="{% static 'images/schbosky.jpg' %}">
+                                <p><strong>Stephen Chbosky</strong></p><br>
+                                <p>Published on 09/12/2010</p>
+                                <p>There's nothing like the deep breaths after laughing that hard. Nothing in the world like a sore stomach for the right reasons</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+
+            <!-- Comments -->
+            <div style="padding: 20px;" id="comments-section">
+                <h3>Comments</h3>
+                <!-- insert text box here -->
+    
+                <div class="user-details">
+                    <img class="comment-author-picture" src="{% static 'images/edickinson.jpeg' %}">
+                    <div class="comment-author-name">Emily Dickinson</div>
+                </div>
+                <div class="comment-bubble">One need not be a chamber to be haunted; One need not be a house; The brain has corridors surpassing Material place.</div>
+
+                <br>
+
+                <div class="user-details">
+                    <img class="comment-author-picture" src="{% static 'images/splath.jpg' %}">
+                    <div class="comment-author-name">Sylvia Plath</div>
+                </div>
+                <div class="comment-bubble">I shut my eyes and all the world drops dead; I lift my eyes and all is born again.</div>
+
+                <br>
+
+                <div class="user-details">
+                    <img class="comment-author-picture" src="{% static 'images/jausten.jpg' %}">
+                    <div class="comment-author-name">Jane Austen</div>
+                </div>
+                <div class="comment-bubble">Friendship is certainly the finest balm for the pangs of disappointed love.</div>
+            </div>
+        </div>
+
+        {% include "footer.html" %}
+    </body>
+</html>
