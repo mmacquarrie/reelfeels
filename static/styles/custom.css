@@ -1,3 +1,35 @@
+/* COMMON UI ELEMENTS */
+
+.hidden{
+	display: none;
+}
+
+.container-fluid{
+	min-height:75vh;
+}
+
+.mb-25{
+	margin-bottom: 25px;
+}
+
+
+/* HEADER */
+.navbar-brand{
+	font-family: 'Noto Serif';
+	font-size: 1.5rem;
+}
+
+.logo{
+	height: 25px;
+	margin-bottom: 5px;
+}
+
+/* FOOTER */
+.fake-social-media a{
+	font-size: 3rem;
+	color: #fff;
+	padding: 0 5px;
+}
 
 /* HOMEPAGE */
 
@@ -9,7 +41,8 @@
 	background-size: 100%;
 	height: 650px; /* change - set dynamically with JS */
 	padding: 20% 0;
-	background-image: url('https://images.unsplash.com/photo-1511900680221-4d62cb42ced1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a6201a4792b699052e5a8b4a42a0bc3b&auto=format&fit=crop&w=1650&q=80');
+	background-image: url('../images/homepage-stock.jpeg');
+	background-repeat: no-repeat;
 }
 
 .home-marketing-point svg{
@@ -122,5 +155,16 @@ footer{
 #sign-up-info{
 	border-right: 1px solid #b3b3b3;
 }
+
+#user-creation-form input{
+	margin: 10px 0;
+}
+
+/* LOGIN */
+
+#sign-in-form input{
+	margin: 10px 0;
+}
+
 
 
