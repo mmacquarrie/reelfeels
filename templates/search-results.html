@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Search Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{% static 'custom.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="custom.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
+      <a class="navbar-brand" href="#"><i class="far fa-smile"></i> reel feels</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar-content">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"href="#"><i class="fas fa-compass"></i> Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-arrow-circle-up"></i> Upload </a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <a href="#" class="btn" id="sign-up-button"><i class="fas fa-user"></i> Sign up</a>
+      </div>
+    </nav>
+
+    <!--everything below the navbar -->
+    <div class = "container-fluid">
+      <div class = "row">
+
+      	<!--side bar-->>
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar"><!--remove bg-light to change color w/ .sidebar -->
+          	<div class="sidebar-sticky">
+            	<h2 align="center"> Filter by:</h2>
+
+              	<!--checkboxes, probably what we want, just need to make them look better -->
+      			<div class="btn-group-toggle" data-toggle="buttons">
+      			  <label class="btn btn-secondary btn-block">
+      			    <input type="checkbox" checked> Anger
+      			  </label>
+      			</div>
+      			<div class="btn-group-toggle" data-toggle="buttons">
+      			  <label class="btn btn-secondary btn-block">
+      			    <input type="checkbox"> Disgust
+      			  </label>
+      			</div>
+      			<div class="btn-group-toggle" data-toggle="buttons">
+      			  <label class="btn btn-secondary btn-block">
+      			    <input type="checkbox"> Happy
+      			  </label>
+      			</div>
+      			<div class="btn-group-toggle" data-toggle="buttons">
+      			  <label class="btn btn-secondary btn-block">
+      			    <input type="checkbox"> Sadness
+      			  </label>
+      			</div>
+      			<div class="btn-group-toggle" data-toggle="buttons">
+      			  <label class="btn btn-secondary btn-block">
+      			    <input type="checkbox"> Surprise
+      			  </label>
+      			</div>
+          	</div>
+        </nav>
+
+        <!--Main space aside the sidebar -->
+        <main role ="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="album py-5">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                      <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img1.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">My Trip To Japan</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Rufinoman</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Happy</button>
+                        </div>
+                        <small class="text-muted">892 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                      <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img2.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">Beautiful walk in the park!!!</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">thund3rbolt</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Happy</button>
+                        </div>
+                        <small class="text-muted">111 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                    	<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img3.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">Top 10 reasons to fall in love with the Fall.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">candidekun</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Surprise</button>
+                        </div>
+                        <small class="text-muted">429 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                    	<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img4.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">A sunset that everyone should see.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Honorius</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Happy</button>
+                        </div>
+                        <small class="text-muted">23 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                    	<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img5.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">Best night under the stars.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">drwarp</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Sadness</button>
+                        </div>
+                        <small class="text-muted">342 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                    	<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img6.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">The best place to go swimming</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">BronzeTurtle1</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Surprise</button>
+                        </div>
+                        <small class="text-muted">12 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                    	<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img7.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">Beautiful night under the stars.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">godofo</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Sadness</button>
+                        </div>
+                        <small class="text-muted">908 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                    	<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img8.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">Why i hate the beach.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Doommoth</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Happy</button>
+                        </div>
+                        <small class="text-muted">456 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  	<a href="#">
+                    	<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img9.jpg" data-holder-rendered="true">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text">Reasons to dislike the snow.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">DaFunOne</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Anger</button>
+                        </div>
+                        <small class="text-muted">7853 Views</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
