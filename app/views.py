@@ -19,3 +19,9 @@ def signup_page(request):
 
 def upload_page(request):
     return render(request, 'upload.html', {})
+
+def search_page(request):
+    return render(request, 'search-results.html', {})
+
+def explore_page(request):
+    return render(request, 'explore.html', {})

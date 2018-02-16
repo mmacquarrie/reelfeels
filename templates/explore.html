@@ -1,42 +1,19 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   	<head>
     	<!-- Required meta tags -->
-    	<meta charset="utf-8">
     	<title>Explore Page</title>
-    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    	<!-- Bootstrap CSS -->
-    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    	<link href="{% static 'custom.css' %}" rel="stylesheet">
-    	<link rel="stylesheet" href="custom.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		{% include "styles-and-scripts.html" %}
+		<link rel="stylesheet" href="{% static 'styles/explore.css' %}">
   	</head>
 	<body>
-	    <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
-	    	<a class="navbar-brand" href="#"><i class="far fa-smile"></i> reel feels</a>
-	      	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-	        	<span class="navbar-toggler-icon"></span>
-	      	</button>
 
-	      	<div class="collapse navbar-collapse" id="navbar-content">
-	        	<ul class="navbar-nav mr-auto">
-	          		<li class="nav-item active">
-	            		<a class="nav-link" href="#"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
-	          		</li>
-	          		<li class="nav-item">
-	            		<a class="nav-link"href="#"><i class="fas fa-compass"></i> Explore</a>
-	          		</li>
-	          		<li class="nav-item">
-	            		<a class="nav-link" href="#"><i class="fas fa-arrow-circle-up"></i> Upload </a>
-	          		</li>
-	        	</ul>
-		        <form class="form-inline my-2 my-lg-0">
-		          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-		          <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-		        </form>
-	        	<a href="#" class="btn" id="sign-up-button"><i class="fas fa-user"></i> Sign up</a>
-	      	</div>
-	    </nav>
+		<header>
+			{% include "navbar.html" %}
+		</header>
 
 	    <div class = "container-fluid">
 	      	<div class = "row">
@@ -85,7 +62,7 @@
 		                		<div class="col-md-4">
 		                  			<div class="card mb-4 box-shadow">
 		                  				<a href="#">
-		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img1.jpeg" data-holder-rendered="true">
+		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img1.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
 		                      				<p class="card-text">My first live show!</p>
@@ -103,7 +80,7 @@
 		                		<div class="col-md-4">
 		                  			<div class="card mb-4 box-shadow">
 		                  				<a href="#">
-		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img2.jpg" data-holder-rendered="true">
+		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img2.jpg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
 		                      				<p class="card-text">The lights were unreal.</p>
@@ -121,7 +98,7 @@
 		                		<div class="col-md-4">
 		                  			<div class="card mb-4 box-shadow">
 		                  				<a href="#">
-		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img3.jpeg" data-holder-rendered="true">
+		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img3.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
 		                      				<p class="card-text">Why you should love this band as much as i do!!!!!!!!!!</p>
@@ -150,7 +127,7 @@
 		                		<div class="col-md-4">
 		                  			<div class="card mb-4 box-shadow">
 		                  				<a href="#">
-		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img4.jpeg" data-holder-rendered="true">
+		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img4.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
 		                      				<p class="card-text">Best Band Globe.</p>
@@ -168,7 +145,7 @@
 		                		<div class="col-md-4">
 		                  			<div class="card mb-4 box-shadow">
 		                  				<a href="#">
-		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img5.jpeg" data-holder-rendered="true">
+		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img5.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
 		                      				<p class="card-text">Ornage you glad you saw this.</p>
@@ -186,7 +163,7 @@
 		                		<div class="col-md-4">
 		                  			<div class="card mb-4 box-shadow">
 		                  				<a href="#">
-		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="Images/Img6.jpeg" data-holder-rendered="true">
+		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img6.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
 		                      				<p class="card-text">Big Red.</p>
@@ -205,51 +182,10 @@
 		          	</div>         
 		        </main>
 	      	</div>
-	    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	    <!-- Optional JavaScript -->
-		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		</div>
+		
+		<footer>
+			{% include "footer.html" %}
+		</footer>
 	</body>
 </html>

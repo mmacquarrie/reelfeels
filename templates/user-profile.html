@@ -5,7 +5,9 @@
         <title>Page title here</title>
         {% include "styles-and-scripts.html" %}
         <link rel="stylesheet" href="{% static 'styles/tab-styles.css' %}">
-        <script src="{% script 'scripts/user-profile.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'styles/user-profile.css' %}">
+        
+        <script src="{% static 'scripts/user-profile.js' %}"></script>
     </head>
     <body>
         <header>
