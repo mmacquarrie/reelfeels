@@ -27,6 +27,7 @@
 .btn-main{
 	background-color: #B5428B;
 	border-color: #B5428B;
+	color: #fff;
 }
 
 
@@ -92,8 +93,7 @@ footer{
 .jumbotron-text{
 	position: absolute;
 	top: 35%;
-	left: 25%;
-	width: 50%;
+	width: 100%;
 }
 
 #jumbotron-row{
@@ -114,6 +114,7 @@ footer{
 .jumbotron .lead{
 	color: #fff;
 	text-shadow: 1px 1px #000;
+	padding: 10px;
 }
 
 #tagline{
