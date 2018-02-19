@@ -2,10 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models
+import uuid
 
 # Videos
 class Video(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4.hex[:8], editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False)
+
+    title = models.TextField(max_length=100, help_text='Insert video title here')
 
     video_link = models.TextField(verbose_name='video_link', max_length=1000, help_text='Insert video link here')
 
@@ -19,17 +22,19 @@ class Video(models.Model):
 
     total_views = models.IntegerField(verbose_name='total_views', default=0)
 
-    user_id = models.ForeignKey('User', on_delete=models.SET_NULL)
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["-date_shared"]
 
     def __str__(self):
-        return self.video_link
+        return self.title
 
 # Users
 class User(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4.hex[:8], editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False)
+
+    date_joined = models.DateField(verbose_name='date_joined', blank=False)
 
     username = models.CharField(max_length=50)
 
@@ -43,10 +48,10 @@ class User(models.Model):
 
 # Emotions for certain videos
 class VideoToUser(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4.hex[:8], editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False)
 
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL)
-    video_id = models.ForeignKey(Video, on_delete=models.SET_NULL)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    video_id = models.ForeignKey(Video, on_delete=models.CASCADE)
 
     happiness = models.IntegerField(verbose_name='e_happiness', default=0)
     sadness = models.IntegerField(verbose_name='e_sadness', default=0)
