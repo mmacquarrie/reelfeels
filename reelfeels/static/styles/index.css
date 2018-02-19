@@ -30,6 +30,11 @@
 	color: #fff;
 }
 
+img.emoticon{
+	height:25px;
+	width: auto;
+}
+
 
 /* HEADER */
 .navbar-brand{
@@ -224,6 +229,3 @@ footer{
 #sign-in-form input{
 	margin: 10px 0;
 }
-
-
-

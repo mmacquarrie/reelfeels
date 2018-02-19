@@ -58,7 +58,7 @@ h2{
 }
 
 /*Check boxes */
-.btn-secondary{ 
+.btn-secondary{
   color: #d1e0e0;
   background-color: #80aaff;
   border-color: #80aaff;
@@ -79,70 +79,3 @@ h2{
   background-color: #B5428B;
   border-color: #B5428B;
 }
-/*                     */ 
-
-#explore-button{
-  background-color: #B5428B;
-    border-color: #B5428B;
-    color: #fff;
-}
-
-.jumbotron .lead{
-  color: #fff;
-}
-
-#tagline{
-  color: #fff;
-    text-shadow: 2px 2px #000;
-    font-size: 3rem;
-}
-
-.home-marketing-point h4{
-  color: #B5428B;
-}
-
-a.card-link.text-secondary:hover {
-    text-decoration: underline;
-    color: #6c757d!important;
-}
-
-/* COMMON UI ELEMENTS */
-
-footer{
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  height: 75px;
-}
-
-.buffer-bottom{
-  margin-bottom: 25px;
-}
-
-#sign-up-button{
-  color: #fff;
-}
-
-.navbar{
-  background-color: #B5428B;
-}
-
-.sidebar { /* Color of filter side bar */
-  background-color: #f8ecf4;
-}
-
-.btn-main{
-  background-color: #B5428B;
-  border-color: #B5428B;
-}
-
-/* SIGN UP */
-
-#user-creation-form{
-  height:100%;
-}
-
-#sign-up-info{
-  border-right: 1px solid #b3b3b3;
-}
-
