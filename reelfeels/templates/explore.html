@@ -17,38 +17,40 @@
 
 	    <div class = "container-fluid">
 	      	<div class = "row">
-		        <nav class="col-md-2 d-none d-md-block bg-light sidebar"><!--remove bg-light to change color w/ .sidebar -->
-		        	<div class="sidebar-sticky">
-			            <h2 align="center"> Filter by:</h2>
 
-			            <!--checkboxes, probably what we want, just need to make them look better -->
-						<div class="btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary btn-block">
-						    <input type="checkbox" checked> Anger
-						  </label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary btn-block">
-						    <input type="checkbox"> Disgust
-						  </label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary btn-block">
-						    <input type="checkbox"> Happy
-						  </label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary btn-block">
-						    <input type="checkbox"> Sadness
-						  </label>
-						</div>
-						<div class="btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary btn-block">
-						    <input type="checkbox"> Surprise
-						  </label>
-						</div>
-					</div>
-		        </nav>
+	      		<!--side bar-->>
+		        <nav class="col-md-2 d-none d-md-block bg-light sidebar"><!--remove bg-light to change color w/ .sidebar -->
+          			<div class="sidebar-sticky">
+            			<h2 align="center"> Filter by:</h2>
+
+              			<!--checkboxes, probably what we want, just need to make them look better -->
+      					<div class="btn-group-toggle" data-toggle="buttons">
+      			  			<label class="btn btn-secondary btn-block">
+      			    			<input type="checkbox" checked> Anger
+      			  			</label>
+      					</div>
+      					<div class="btn-group-toggle" data-toggle="buttons">
+      			  			<label class="btn btn-secondary btn-block">
+      			    			<input type="checkbox"> Disgust
+      			  			</label>
+      					</div>
+      					<div class="btn-group-toggle" data-toggle="buttons">
+      			  			<label class="btn btn-secondary btn-block">
+      			    			<input type="checkbox"> Happy
+      			  			</label>
+      					</div>
+      					<div class="btn-group-toggle" data-toggle="buttons">
+      			  			<label class="btn btn-secondary btn-block">
+      			    			<input type="checkbox"> Sadness
+      			  			</label>
+      					</div>
+      					<div class="btn-group-toggle" data-toggle="buttons">
+      			  			<label class="btn btn-secondary btn-block">
+      			    			<input type="checkbox"> Surprise
+      			  			</label>
+      					</div>
+          			</div>
+        		</nav>
 
 	        	<!-- New Section -->
 		        <main role ="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
@@ -65,15 +67,15 @@
 		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img1.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
-		                      				<p class="card-text">My first live show!</p>
-		                      				<div class="d-flex justify-content-between align-items-center">
-		                        				<div class="btn-group">
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">1upFX</button>
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Surprise</button>
-		                        				</div>
-		                        				<small class="text-muted">13 Views</small>
-		                      				</div>
-		                    			</div>
+	                      					<h6 class="card-text">My first live show!</h6>
+	                      					<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">1upFX</a>
+	                      					</div>
+	    									<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">top emotion: surprise</a>
+	    										<small class="text-muted">13 views</small>
+	                      					</div>
+	    								</div>
 		                  			</div>
 		                		</div>
 
@@ -83,15 +85,15 @@
 		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img2.jpg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
-		                      				<p class="card-text">The lights were unreal.</p>
-		                      				<div class="d-flex justify-content-between align-items-center">
-		                        				<div class="btn-group">
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">fireeternal</button>
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Sadness</button>
-		                        				</div>
-		                        				<small class="text-muted">30 Views</small>
-		                      				</div>
-		                    			</div>
+	                      					<h6 class="card-text">The lights were unreal</h6>
+	                      					<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">fireeternal</a>
+	                      					</div>
+	    									<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">top emotion: sadness</a>
+	    										<small class="text-muted">30 views</small>
+	                      					</div>
+	    								</div>
 		                  			</div>
 		                		</div>
 
@@ -101,15 +103,15 @@
 		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img3.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
-		                      				<p class="card-text">Why you should love this band as much as i do!!!!!!!!!!</p>
-		                      				<div class="d-flex justify-content-between align-items-center">
-		                        				<div class="btn-group">
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Sudssoda</button>
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Anger</button>
-		                        				</div>
-		                        				<small class="text-muted">25 Views</small>
-		                      				</div>
-		                    			</div>
+	                      					<h6 class="card-text">Why you should love this band as much as i do!!!!!!!!!!</h6>
+	                      					<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">Sudssoda</a>
+	                      					</div>
+	    									<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">top emotion: anger</a>
+	    										<small class="text-muted">25 views</small>
+	                      					</div>
+	    								</div>
 		                  			</div>
 		                		</div>
 		              		</div>
@@ -130,15 +132,15 @@
 		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img4.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
-		                      				<p class="card-text">Best Band Globe.</p>
-		                      				<div class="d-flex justify-content-between align-items-center">
-		                        				<div class="btn-group">
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">imheretostealyourmemes</button>
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Surprise</button>
-		                        				</div>
-		                        				<small class="text-muted">5892 Views</small>
-		                      				</div>
-		                    			</div>
+	                      					<h6 class="card-text">Best Band Globe</h6>
+	                      					<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">imheretostealyourmemes</a>
+	                      					</div>
+	    									<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">top emotion: surprise</a>
+	    										<small class="text-muted">5.8K views</small>
+	                      					</div>
+	    								</div>
 		                  			</div>
 		                		</div>
 
@@ -148,15 +150,15 @@
 		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img5.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
-		                      				<p class="card-text">Ornage you glad you saw this.</p>
-		                      				<div class="d-flex justify-content-between align-items-center">
-		                        				<div class="btn-group">
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Memlet</button>
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Disgust</button>
-		                        				</div>
-		                        				<small class="text-muted">3146 Views</small>
-		                      				</div>
-		                    			</div>
+	                      					<h6 class="card-text">Ornage you glad you saw this.</h6>
+	                      					<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">Memlet</a>
+	                      					</div>
+	    									<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">top emotion: surprise</a>
+	    										<small class="text-muted">3.1K views</small>
+	                      					</div>
+	    								</div>
 		                  			</div>
 		                		</div>
 
@@ -166,15 +168,15 @@
 		                    				<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/explore-images/Img6.jpeg' %}" data-holder-rendered="true">
 		                    			</a>
 		                    			<div class="card-body">
-		                      				<p class="card-text">Big Red.</p>
-		                      				<div class="d-flex justify-content-between align-items-center">
-		                        				<div class="btn-group">
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">dizzyturtle</button>
-		                          					<button type="button" class="btn btn-sm btn-outline-secondary">Top Emotion: Angry</button>
-		                        				</div>
-		                        				<small class="text-muted">9760 Views</small>
-		                      				</div>
-		                    			</div>
+	                      					<h6 class="card-text">Big Red</h6>
+	                      					<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">dizzyturtle</a>
+	                      					</div>
+	    									<div class="d-flex justify-content-between align-items-center">
+	                          					<a href="#" class="card-link text-secondary">top emotion: anger</a>
+	    										<small class="text-muted">917K views</small>
+	                      					</div>
+	    								</div>
 		                  			</div>
 		                		</div>
 		              		</div>
