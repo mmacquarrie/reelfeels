@@ -35,6 +35,10 @@ img.emoticon{
 	width: auto;
 }
 
+.card .card-body{
+	overflow: scroll;
+}
+
 
 /* HEADER */
 .navbar-brand{
