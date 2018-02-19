@@ -3,7 +3,7 @@
 }
 
 #profile-picture {
-    height: 400px;
+    height: auto;
     width: 100%;
     border: 5px solid rgba(169, 169, 169, 0.5);
 }
@@ -13,6 +13,19 @@
 }
 
 .video-thumbnail {
-    height: 250px;
-    width: 100%;
+    height: auto;
+    width: 100px;
+}
+
+.tab button.tablinks{
+  width: 50%;
+}
+
+.tab button.tablinks.active{
+  background-color: #B5428B;
+  color: #fff;
+}
+
+#user-feels{
+  display:block;
 }

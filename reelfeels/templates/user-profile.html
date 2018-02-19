@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-  <title>Page title here</title>
+  <title>JRR Tolkien</title>
   {% include "styles-and-scripts.html" %}
   <link rel="stylesheet" href="{% static 'styles/tab-styles.css' %}">
   <link rel="stylesheet" href="{% static 'styles/user-profile.css' %}">
@@ -20,7 +20,9 @@
       <div class="col-md-4 col-xs-12">
         <img id="profile-picture" src="{% static 'images/jrrtolkien.jpeg' %}">
         <h4 class="user-details">JRR Tolkien</h4>
-        <h5 class="user-details">Favorite Emotion: Joy {emoji here}</h5>
+        <h5 class="user-details">Favorite Emotion: Joy
+          <img src="{% static 'images/emoticons/happy-small.png' %}" style="height: 25px; width: auto;">
+        </h5>
       </div>
       <div class="col-md-4"></div>
     </div>
@@ -31,7 +33,7 @@
 
         <!-- Tabs -->
         <div class="tab">
-          <button class="tablinks" onclick="openTab(event, infoType.feels)" id="defaultOpen">Feels</button>
+          <button class="tablinks active" onclick="openTab(event, infoType.feels)" id="defaultOpen">Feels</button>
           <button class="tablinks" onclick="openTab(event, infoType.content)">Content</button>
         </div>
 
@@ -58,7 +60,7 @@
               <p>“Now it is a strange thing, but things that are good to have and days that are good to spend are soon told about, and not much to listen to; while things that are uncomfortable, palpitating, and even gruesome, may make a good tale, and take a deal of telling anyway.”</p>
             </div>
           </div>
-
+          <hr>
           <div class="row">
             <div class="col-md-4 col-xs-12">
               <!-- video thumbnail -->
