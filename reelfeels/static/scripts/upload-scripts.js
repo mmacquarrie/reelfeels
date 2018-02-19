@@ -1,22 +1,22 @@
+//runs on page load
 $(document).ready(function(){
-    $("h3").hide();
     //set up click function
-    $(".form-group").on('click', '#test-preview-button', validateYouTubeUrl);
+    $(".form-group").on('click', '#upload-next-button', validateYouTubeUrl);
+    
+    //(doesn't really work...) do same thing when pressing enter
+    $("#video-url-input").keyup(function(event){
+        //if 'enter' key pressed
+        if(event.keyCode === 13)
+        {
+            $("#upload-next-button").click();
+        }
+    });
+
+    $("#upload-form fieldset:not(:first-of-type)").hide();
+    ///$("#upload-form fieldset").css("background-color", "red");
 });
 
-//SOURCE: https://stackoverflow.com/a/20910296
-//generates an embedded video in '#video-preview' of the link typed in '#video-url-input'
-//when '#test-preview-button' is clicked
-/*function preview() {
-    $("h3").show();
-    function generatePreview() {
-        var input = $('#video-url-input').val();
-        return input.replace(/(?:http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe src="http://www.youtube.com/embed/$1" allowfullscreen></iframe>');
-    }
-    //$("#video-prev.iew").replaceWith(generatePreview());
-}*/
-    
-//script for validating YouTube URLs and replacing src with new url
+//script for validating YouTube URLs and replacing embedded src with new url
 //SOURCE: https://stackoverflow.com/a/28735569
 function validateYouTubeUrl(){
     var url = $('#video-url-input').val();
@@ -24,19 +24,103 @@ function validateYouTubeUrl(){
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
         var match = url.match(regExp);
         if (match && match[2].length == 11) {
-            // Do anything for being valid
-            // if need to change the url to embed url then use below line
+            //valid url
             $('#video-preview').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0');
-
-            //***TO-DO[3/4]: display embedded video preview as well as display description, tag, etc. fields
-            //(the rest of the upload page)
-            preview();
+    
+            //animate the form now that a valid URL was input
+            formAnimate();
         }
         else {
-            // Do anything for not being valid
-
-            //***TO-DO[4/4]: display message saying it's not a valid YouTube URL, ask to enter new URL
-            alert("Enter a valid YouTube video URL pls.");
+            //invalid url
+            alert("Invalid YouTube URL.");
         }
     }
+}
+
+//formAnimate function for animating page transitions in a multistep form
+//SOURCE: https://codepen.io/designify-me/pen/qrJWpG
+
+//vars for formAnimate
+var current_fs, next_fs, previous_fs; //fieldsets
+var left, opacity, scale; //fieldset properties which we will animate
+var animating; //flag to prevent quick multi-click glitches
+
+function formAnimate(){
+    $("#upload-next-button").click(function(){
+        if(animating) return false;
+        animating = true;
+    
+        current_fs = $(this).closest("fieldset");
+        next_fs = $(this).closest("fieldset").next();
+
+        //activate next step on progressbar using the index of next_fs
+        //$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+        //show the next fieldset
+        next_fs.show(); 
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale current_fs down to 80%
+                scale = 1 - (1 - now) * 0.2;
+                //2. bring next_fs from the right(50%)
+                left = (now * 50)+"%";
+                //3. increase opacity of next_fs to 1 as it moves in
+                opacity = 1 - now;
+                current_fs.css({
+                    'transform': 'scale('+scale+')',
+                    'position': 'absolute'
+                });
+                next_fs.css({'left': left, 'opacity': opacity});
+            },
+            duration: 800, 
+            complete: function(){
+                current_fs.hide();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    });
+
+    $(".previous").click(function(){
+        if(animating) return false;
+        animating = true;
+
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+
+        //de-activate current step on progressbar
+        //$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+        //show the previous fieldset
+        previous_fs.show(); 
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale previous_fs from 80% to 100%
+                scale = 0.8 + (1 - now) * 0.2;
+                //2. take current_fs to the right(50%) - from 0%
+                left = ((1-now) * 50)+"%";
+                //3. increase opacity of previous_fs to 1 as it moves in
+                opacity = 1 - now;
+                current_fs.css({'left': left});
+                previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+            }, 
+            duration: 800, 
+            complete: function(){
+                current_fs.hide();
+                animating = false;
+            }, 
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    });
+
+    //used <a> instead
+    //$("#upload-submit-button").click(function(){
+        //return false;
+    //})
 }

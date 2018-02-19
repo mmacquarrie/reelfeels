@@ -4,55 +4,57 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CS326 Project/Video Upload Page</title>
+		
 		{% include "styles-and-scripts.html" %}
 
 		<!--custom JavaScript for upload-->
-		<script src="{% static 'scripts/upload-scripts.js' %}}"></script>
+		<script src="{% static 'scripts/upload-scripts.js' %}"></script>
 
 	</head>
 	<body>
 		<header>
-				{% include "navbar.html" %}
+			{% include "navbar.html" %}
 		</header>
 
 		<div class="container-fluid">
 			
-			<div class="row">
-				
-				<div class="col-md-8 mx-auto">
-					<form id="upload-form">
-						<fieldset>
-							<div class="form-group">
-								<label for="video-url-input">Video URL (YouTube):</label>
-								<input type="url" class="form-control" id="video-url-input">
-								<input type="button" id="test-preview-button" value="Next">
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group">
-								<label for="upload-desc">Description</label>
-								<input type="text" id="upload-desc"></input>
-								<button>Share!</button>
-							</div>
-					</fieldset>
-					</form>
-				</div>
-	
-			</div>
-
-			<div class="row">
-				<div class="col-md-8 mx-auto">
-					<h3>Video Preview:</h3>
-					<div class="embed-responsive embed-responsive-16by9">
-						<iframe id="video-preview" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			<form id="upload-form">
+				<fieldset>
+					<div class="form-row justify-content-center mt-2">
+						<div class="form-group col-md-8">
+							<label for="video-url-input">YouTube URL:</label>
+							<input type="text" class="form-control" id="video-url-input">
+						</div>
+						<div class="form-group align-self-end">
+							<button type="button" class="btn btn-main" id="upload-next-button">Next</button>
+						</div>
 					</div>
-				</div>
+				</fieldset>
+				<fieldset>
+					<div class="form-row justify-content-center mt-2">
+						<div class="form-group col-md-8">
+							<p class="display-4 text-center">Video Preview:</p>
+							<div class="embed-responsive embed-responsive-16by9">
+								<iframe id="video-preview" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+							</div>
+						</div>
+					</div>
+					<div class="form-row justify-content-center mt-2">
+						<div class="form-group col-md-8">	
+							<label for="upload-desc" class="text-center h5">Description:</label>
+							<textarea class="form-control" id="upload-desc"></textarea>
+						</div>
+					</div>
+					<div class="form-row justify-content-center my-4">
+						<a href="video-content" class="btn-lg btn-main" id="upload-submit-button">Share!</a>
+					</div>
+				</fieldset>
+			</form>	
 
-			</div>
-		
 		</div>
 		
-		<!--footer copied from index.html for now-->
-		{% include "footer.html" %}
+		<footer>
+			{% include "footer.html" %}
+		</footer>
 	</body>
 </html>
