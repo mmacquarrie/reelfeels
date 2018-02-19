@@ -1,84 +1,82 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>CS326 Project</title>
-    {% include "styles-and-scripts.html" %}
-  </head>
-  <body>
-  	<header>
-  		{% include "navbar.html" %}
-  	</header>
+<head>
+  <meta charset="UTF-8">
+  <title>CS326 Project</title>
+  {% include "styles-and-scripts.html" %}
+</head>
+<body>
+  <header>
+    {% include "navbar.html" %}
+  </header>
 
-  	<div class="container-fluid">
-  		<div class="row buffer-bottom">
-  			<div class="col-md-12" id="jumbotron-col">
-  				<div class="jumbotron">
-            <div class="jumbotron-overlay ml-auto mr-auto"></div>
-            <div class="jumbotron-text">
-              <h3 class="display 1" id="tagline">Real people. Real feelings. </h3>
-                <p class="lead">Content that's affective.</p>
-                <p class="lead">
-                   <a class="btn btn-dark btn-main btn-lg" id="explore-button" href="#" role="button">Explore!</a>
-                </p>
-              </div>
-  				</div>
-  			</div>
-  		</div>
+  <div class="container-fluid">
+    <div class="row buffer-bottom">
+      <div class="col-md-12" id="jumbotron-col">
+        <div class="jumbotron">
+          <div class="jumbotron-overlay ml-auto mr-auto"></div>
+          <div class="jumbotron-text">
+            <h3 class="display 1" id="tagline">Real people. Real feelings. </h3>
+            <p class="lead">Content that's affective.</p>
+            <p class="lead">
+              <a class="btn btn-dark btn-main btn-lg" id="explore-button" href="#" role="button">Explore!</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  		<div class="row buffer-bottom">
-  			<div class="col-md-3 ml-md-auto">
-  				<div class="home-marketing-point">
-            <i class="fas fa-heart"></i>
-  					<h4>Wear your heart on your screen</h4>
-  					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  				</div>
-  				
-  			</div>
-  			<div class="col-md-3">
-  				<div class="home-marketing-point">
-  					<i class="far fa-smile"></i><br>
-  					<h4>We'll tell you how you really feel</h4>
-  					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  				</div>
-  				
-  			</div>
-  			<div class="col-md-3 mr-md-auto">
-  				<div class="home-marketing-point">
-  					<i class="fas fa-comments"></i><br>
-  					<h4>Eliminate the noise</h4>
-            <p>In an age of troll comments and recycled memes, it's hard to know how people really feel. With reelfeels, the feelings are always real. </p>
-  				</div>
-  				
-  			</div>
-  		</div>
+    <div class="row buffer-bottom">
+      <div class="col-md-3 ml-md-auto">
+        <div class="home-marketing-point">
+          <i class="fas fa-heart"></i>
+          <h4>Wear your heart on your screen</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
 
-  		<div class="row" id="user-testimony-block">
-  			<div class="col-md-4 ml-md-auto mr-md-auto" >
-  				<h4> Don't ask us, ask our users!</h4>
-  				<ul id="user-testimonies">
-  					<li>
-  						<div class="user-testimony-quote">&ldquo;I like it&rdquo;</div>
-  						<div class="user-testimony-cite">Someone, hopefully</div>
-  					</li>
-  					<li>
-  						<div class="user-testimony-quote">&ldquo;A+&rdquo;</div>
-  						<div class="user-testimony-cite">Tim Richards, ideally</div>
-  					</li>
-            <li>
-              <div class="user-testimony-quote">&ldquo;Thanks&rdquo;</div>
-              <div class="user-testimony-cite">Obama</div>
-            </li>
-  				</ul>
-  				
-  			</div>
+      </div>
+      <div class="col-md-3">
+        <div class="home-marketing-point">
+          <i class="far fa-smile"></i><br>
+          <h4>We'll tell you how you really feel</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
 
-  		</div>
-  	</div>
+      </div>
+      <div class="col-md-3 mr-md-auto">
+        <div class="home-marketing-point">
+          <i class="fas fa-comments"></i><br>
+          <h4>Eliminate the noise</h4>
+          <p>In an age of troll comments and recycled memes, it's hard to know how people really feel. With reelfeels, the feelings are always real. </p>
+        </div>
 
-    <footer>
-  	{% include "footer.html" %}
-    </footer>
-  </body>
+      </div>
+    </div>
+
+    <div class="row" id="user-testimony-block">
+      <div class="col-md-4 ml-md-auto mr-md-auto" >
+        <h4> Don't ask us, ask our users!</h4>
+        <ul id="user-testimonies">
+          <li>
+            <div class="user-testimony-quote">&ldquo;I like it&rdquo;</div>
+            <div class="user-testimony-cite">Someone, hopefully</div>
+          </li>
+          <li>
+            <div class="user-testimony-quote">&ldquo;A+&rdquo;</div>
+            <div class="user-testimony-cite">Tim Richards, ideally</div>
+          </li>
+          <li>
+            <div class="user-testimony-quote">&ldquo;Thanks&rdquo;</div>
+            <div class="user-testimony-cite">Obama</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    {% include "footer.html" %}
+  </footer>
+</body>
 </html>

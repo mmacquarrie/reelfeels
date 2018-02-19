@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-    <head>
-        <title>Page title here</title>
-        {% include "styles-and-scripts.html" %}
-        <link rel="stylesheet" href="{% static 'styles/tab-styles.css' %}">
-        <link rel="stylesheet" href="{% static 'styles/user-profile.css' %}">
-        
-        <script src="{% static 'scripts/user-profile.js' %}"></script>
-    </head>
-    <body>
-        <header>
-            {% include "navbar.html" %}
-        </header>
+<head>
+  <title>Page title here</title>
+  {% include "styles-and-scripts.html" %}
+  <link rel="stylesheet" href="{% static 'styles/tab-styles.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/user-profile.css' %}">
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4 col-xs-12">
-                    <img id="profile-picture" src="{% static 'images/jrrtolkien.jpeg' %}">
-                    <h4 class="user-details">JRR Tolkien</h4>
-                    <h5 class="user-details">Favorite Emotion: Joy {emoji here}</h5>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
+  <script src="{% static 'scripts/user-profile.js' %}"></script>
+</head>
+<body>
+  <header>
+    {% include "navbar.html" %}
+  </header>
 
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6 col-xs-12">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 col-xs-12">
+        <img id="profile-picture" src="{% static 'images/jrrtolkien.jpeg' %}">
+        <h4 class="user-details">JRR Tolkien</h4>
+        <h5 class="user-details">Favorite Emotion: Joy {emoji here}</h5>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
 
-                    <!-- Tabs -->
-                    <div class="tab">
-                            <button class="tablinks" onclick="openTab(event, infoType.feels)" id="defaultOpen">Feels</button>
-                            <button class="tablinks" onclick="openTab(event, infoType.content)">Content</button>
-                    </div>
-    
-                    <!-- Feels -->
-                    <div id="user-feels" class="tabcontent">
-                        <div id="user-emotions-chart"></div>
-                        <p>Joy: <strong>x</strong>%</p>
-                        <p>Sadness: <strong>y</strong>%</p>
-                        <p>Disgust: <strong>z</strong>%</p>
-                        <p>Fear: <strong>a</strong>%</p>
-                        <p>Anger: <strong>b</strong>%</p>
-                    </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 col-xs-12">
 
-                    <!-- Content -->
-                    <div id="user-content" class="tabcontent">
-                        <div class="row">
-                            <div class="col-md-4 col-xs-12">
-                                <!-- video thumbnail -->
-                                <img class="video-thumbnail" src="{% static 'images/thehobbit.jpg' %}">
-                            </div>
-                            <div class="col-md-8 col-xs-12">
-                                <!-- video text -->
-                                <h5>The Hobbit</h5>
-                                <p>“Now it is a strange thing, but things that are good to have and days that are good to spend are soon told about, and not much to listen to; while things that are uncomfortable, palpitating, and even gruesome, may make a good tale, and take a deal of telling anyway.”</p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                                <div class="col-md-4 col-xs-12">
-                                    <!-- video thumbnail -->
-                                    <img class="video-thumbnail" src="{% static 'images/lotr.png' %}">
-                                </div>
-                                <div class="col-md-8 col-xs-12">
-                                    <!-- video text -->
-                                    <h5>Lord of the Rings</h5>
-                                    <p>"That there’s some good in this world, Mr. Frodo. And it’s worth fighting for."</p>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-md-3"></div>
-            </div>
+        <!-- Tabs -->
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, infoType.feels)" id="defaultOpen">Feels</button>
+          <button class="tablinks" onclick="openTab(event, infoType.content)">Content</button>
         </div>
-    </body>
+
+        <!-- Feels -->
+        <div id="user-feels" class="tabcontent">
+          <div id="user-emotions-chart"></div>
+          <p>Joy: <strong>x</strong>%</p>
+          <p>Sadness: <strong>y</strong>%</p>
+          <p>Disgust: <strong>z</strong>%</p>
+          <p>Fear: <strong>a</strong>%</p>
+          <p>Anger: <strong>b</strong>%</p>
+        </div>
+
+        <!-- Content -->
+        <div id="user-content" class="tabcontent">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <!-- video thumbnail -->
+              <img class="video-thumbnail" src="{% static 'images/thehobbit.jpg' %}">
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <!-- video text -->
+              <h5>The Hobbit</h5>
+              <p>“Now it is a strange thing, but things that are good to have and days that are good to spend are soon told about, and not much to listen to; while things that are uncomfortable, palpitating, and even gruesome, may make a good tale, and take a deal of telling anyway.”</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <!-- video thumbnail -->
+              <img class="video-thumbnail" src="{% static 'images/lotr.png' %}">
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <!-- video text -->
+              <h5>Lord of the Rings</h5>
+              <p>"That there’s some good in this world, Mr. Frodo. And it’s worth fighting for."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</body>
 </html>

@@ -1,59 +1,52 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>CS326 Project</title>
-    {% include "styles-and-scripts.html" %}
+<head>
+  <meta charset="UTF-8">
+  <title>CS326 Project</title>
+  {% include "styles-and-scripts.html" %}
 
-  </head>
-  <body>
-  	<header class="mb-25">
-     {% include "navbar.html" %}
-    </header>
+</head>
+<body>
+  <header class="mb-25">
+    {% include "navbar.html" %}
+  </header>
 
-  	<div class="container-fluid fill">
-  		<div class="row mb-25">
-        <div class="col-md-5 ml-auto" id="sign-up-info">
-          <h3>Marketing/tag line</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-        </div>
-        <div class="col-md-5 mr-auto">
-          <h2 class="text-center"> Create an account </h2>
-          <form id="user-creation-form" class="text-center">
-
-            <label for="profile-pic" class="hidden">Profile picture</label>
-
-            
-
-            <div class="profile-pic-upload-wrap">
-              <input type="file" name="profile-pic" accept="image/png, image/jpg, image/jpeg, image/gif">
-              <p> <i class="fas fa-image"></i></p>
-            </div>
-
-              
-
-            <label for="email" class="hidden">Email</label>
-            <input type="email" class="form-control required" name="email" placeholder="Email" required>
-
-            <label for="username" class="hidden">Username</label>
-            <input type="text" class="form-control required" name="username" placeholder="Username" required>
-
-            <label for="password" class="hidden">Password</label>
-            <input type="password" class="form-control required" name="password" placeholder="Password" required>
-
-            <button type="button" class="btn btn-main btn-dark" href="profile">Sign Up!</button>
-
-          </form>
-
-        </div>
+  <div class="container-fluid fill">
+    <div class="row mb-25">
+      <div class="col-md-5 ml-auto" id="sign-up-info">
+        <h3>Marketing/tag line</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
       </div>
-  </div>  
+      <div class="col-md-5 mr-auto">
+        <h2 class="text-center"> Create an account </h2>
+        <form id="user-creation-form" class="text-center">
+
+          <label for="profile-pic" class="hidden">Profile picture</label>
+          <div class="profile-pic-upload-wrap">
+            <input type="file" name="profile-pic" accept="image/png, image/jpg, image/jpeg, image/gif">
+            <p> <i class="fas fa-image"></i></p>
+          </div>
+
+          <label for="email" class="hidden">Email</label>
+          <input type="email" class="form-control required" name="email" placeholder="Email" required>
+
+          <label for="username" class="hidden">Username</label>
+          <input type="text" class="form-control required" name="username" placeholder="Username" required>
+
+          <label for="password" class="hidden">Password</label>
+          <input type="password" class="form-control required" name="password" placeholder="Password" required>
+
+          <button type="button" class="btn btn-main btn-dark" href="profile">Sign Up!</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
   <footer>
     {% include "footer.html" %}
   </footer>
 
-  </body>
+</body>
 </html>
