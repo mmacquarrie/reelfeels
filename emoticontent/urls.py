@@ -15,17 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
 
-import views
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('video', views.video_content),
-    path('profile', views.user_profile),
-    path('upload', views.upload_page),
-    path('login', views.login_page),
-    path('signup', views.signup_page),
-    path('search', views.search_page),
-    path('explore', views.explore_page)
+    path('', include('reelfeels.urls'))
 ]
+
+
+# Serve static files
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
