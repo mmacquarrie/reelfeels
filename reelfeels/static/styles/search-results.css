@@ -1,4 +1,4 @@
-/* ExplorePage */
+/* SearchPage */
 
 /*
  * Sidebar
@@ -48,6 +48,10 @@
   text-transform: uppercase;
 }
 
+h2{
+  margin-top: 20px;
+}
+
 .btn-group-toggle {
   padding: 8px 30px;
   font-size: 16px;
@@ -77,7 +81,6 @@
 }
 /*                     */ 
 
-
 #explore-button{
   background-color: #B5428B;
     border-color: #B5428B;
@@ -96,6 +99,11 @@
 
 .home-marketing-point h4{
   color: #B5428B;
+}
+
+a.card-link.text-secondary:hover {
+    text-decoration: underline;
+    color: #6c757d!important;
 }
 
 /* COMMON UI ELEMENTS */
