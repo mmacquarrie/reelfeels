@@ -1,0 +1,28 @@
+/*'Next' button (colors taken from explore.css)*/
+
+.btn-next{
+    color: #fff;
+    background-color: #80aaff;
+  }
+
+.btn-next:hover{
+    background-color: #9D71C0;
+}
+
+.btn-main{
+    color: rgba(255,255,255,.5);
+}
+
+.btn-main:hover{
+    color: #fff;
+}
+
+/*top padding for url input*/
+#fs1{
+    padding-top: 10%;
+}
+
+/*initially show only first fieldset*/
+fieldset:not(:first-of-type){
+    display: none;
+}
