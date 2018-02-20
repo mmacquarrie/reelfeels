@@ -26,3 +26,20 @@
 fieldset:not(:first-of-type){
     display: none;
 }
+
+/*tags input CSS*/
+input {
+    display: inline-block;
+    padding: 2px;
+    margin: 2px 0;
+    background: #FFF;
+    border: 1px solid #CCC;
+    width: 16em;
+    font: inherit;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+input:focus, .tags-input.focus {
+    border-color: #59F;
+    outline: none;
+}

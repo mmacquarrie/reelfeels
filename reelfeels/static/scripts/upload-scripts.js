@@ -11,6 +11,20 @@ $(document).ready(function(){
             $("#upload-next-button").click();
         }
     });
+    //script for adding tags input field
+    //SOURCE: http://jsfiddle.net/d5w4jpxq/194/
+    let $ = s => [].slice.call(document.querySelectorAll(s));
+
+    // log events as they happen:
+    let t = $('#tags')[0];
+    t.addEventListener('input', log);
+    t.addEventListener('change', log);
+    function log(e) {
+        $('#out')[0].textContent = `${e.type}: ${this.value.replace(/,/g,', ')}`;
+    }
+
+    // hook 'em up:
+    $('input[type="tags"]').forEach(tagsInput);
 });
 
 //script for validating YouTube URLs and replacing embedded src with new url
@@ -106,4 +120,21 @@ function formAnimate(fsNum){
             easing: 'easeInOutBack'
         });
     }
+}
+
+function renderTags(){
+//script for adding tags input field
+//SOURCE: http://jsfiddle.net/d5w4jpxq/194/
+let $ = s => [].slice.call(document.querySelectorAll(s));
+
+// log events as they happen:
+let t = $('#tags')[0];
+t.addEventListener('input', log);
+t.addEventListener('change', log);
+function log(e) {
+    $('#out')[0].textContent = `${e.type}: ${this.value.replace(/,/g,', ')}`;
+}
+
+// hook 'em up:
+$('input[type="tags"]').forEach(tagsInput);
 }
