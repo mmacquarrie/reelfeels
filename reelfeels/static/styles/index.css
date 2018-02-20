@@ -233,3 +233,20 @@ footer{
 #sign-in-form input{
 	margin: 10px 0;
 }
+
+/* FILTER SIDEBAR ON MOBILE */
+@media (max-width: 768px){
+	.sidebar.filter-sidebar{
+		position: relative;
+	}
+
+	.filter-sidebar .sidebar-sticky{
+		height:100%;
+    padding:5px;
+	}
+
+	.filter-btn-container .btn-group-toggle{
+		display: inline-block;
+    padding: 5px;
+	}
+}
