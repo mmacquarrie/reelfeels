@@ -30,6 +30,9 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
+def profile_filename(instance, filename):
+    return 'static/uploads/user_{0}/{1}'.format(instance.id, filename);
+
 # Users
 class User(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False)
@@ -38,6 +41,9 @@ class User(models.Model):
 
     username = models.CharField(max_length=50)
 
+    # TO-DO: decide where to put uploaded files
+    profile_pic = models.FileField(upload_to=profile_filename, null=True, blank=True,)
+
     # TO-DO: figure out how to use encryption to store passwords
 
     happiness = models.IntegerField(verbose_name='e_happiness', default=0)
@@ -45,6 +51,8 @@ class User(models.Model):
     disgust = models.IntegerField(verbose_name='e_disgust', default=0)
     anger = models.IntegerField(verbose_name='e_anger', default=0)
     surprise = models.IntegerField(verbose_name='e_surprise', default=0)
+
+    date_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
 
 # Emotions for certain videos
 class VideoToUser(models.Model):
@@ -58,5 +66,3 @@ class VideoToUser(models.Model):
     disgust = models.IntegerField(verbose_name='e_disgust', default=0)
     anger = models.IntegerField(verbose_name='e_anger', default=0)
     surprise = models.IntegerField(verbose_name='e_surprise', default=0)
-
-    
