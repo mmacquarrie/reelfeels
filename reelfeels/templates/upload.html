@@ -6,9 +6,12 @@
 		<title>CS326 Project/Video Upload Page</title>
 		
 		{% include "styles-and-scripts.html" %}
-		<link rel="stylesheet" href="{%static 'styles/upload.css' %}"></style>
 		
-		<!--custom JavaScript for upload-->
+		<!--have to include 'full' version of JQuery for animation (fade) effects-->
+		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+		<!--custom CSS and JavaScript for upload-->
+		<link rel="stylesheet" href="{%static 'styles/upload.css' %}"></style>
 		<script src="{% static 'scripts/upload-scripts.js' %}"></script>
 
 	</head>
@@ -18,7 +21,7 @@
 		</header>
 
 		<div class="container-fluid">
-			
+
 			<form id="upload-form">
 				<fieldset id="fs1">
 					<div class="form-row justify-content-center">
@@ -28,16 +31,23 @@
 					</div>
 					<div class="form-row justify-content-center mt-2">
 						<div class="form-group">
-							<button type="button" class="btn btn-next btn-lg" id="upload-next-button">Next</button>
+							<button type="button" class="btn btn-toggle btn-lg" id="upload-next-button">Next</button>
 						</div>
 					</div>
 				</fieldset>
 				<fieldset id="fs2">
 					<div class="form-row justify-content-center mt-2">
+						<div class="form-group">
+							<button type="button" class="btn btn-toggle" id="upload-previous-button">Previous</button>
+						</div>
+					</div>
+					<div class="form-row justify-content-center">
 						<div class="form-group col-md-8">
-							<p class="display-4 text-center">Video Preview:</p>
+							<p class="text-center">Video Preview:</p>
+						</div>
+						<div class="form-group col-md-6">
 							<div class="embed-responsive embed-responsive-16by9">
-								<iframe id="video-preview" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								<iframe id="video-preview" allow="encrypted-media" allowfullscreen></iframe>
 							</div>
 						</div>
 					</div>
@@ -52,7 +62,7 @@
 						</div>
 					</div>
 					<div class="form-row justify-content-center my-4">
-						<a href="video"><button type="button" class="btn btn-lg btn-main" href="http://www.google.com" id="upload-submit-button">Share!</button></a>
+						<a href="video"><button type="button" class="btn btn-lg btn-main" id="upload-submit-button">Share!</button></a>
 					</div>
 				</fieldset>
 			</form>	
