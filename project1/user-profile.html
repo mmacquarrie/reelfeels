@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JRR Tolkien</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- fontawesome, jQuery, bootstrap JS -->
+  <script defer src="scripts/font-awesome-all.js"></script>
+  <script src="scripts/jquery-3.2.1.slim.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/googlecharts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/tab-styles.css">
+  <link rel="stylesheet" href="styles/user-profile.css">
+  <script src="scripts/user-profile.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo-idea-2-white-small.png" class="logo">
+        reel<strong>feels</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="explore.html"><i class="fas fa-compass"></i> Explore</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="upload.html"><i class="fas fa-arrow-circle-up"></i> Upload </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="video-content.html"><i class="fas fa-video"></i></i> Video </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="user-profile.html"><i class="fas fa-user"></i></i> Profile </a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="button"><a href="search-results.html"><i class="fas fa-search"></i></a></button>
+          </form>
+          <a href="login.html" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+        </div>
+      </nav>
+
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 col-xs-12">
+        <img id="profile-picture" src="images/jrrtolkien.jpeg">
+        <h4 class="user-details">JRR Tolkien</h4>
+        <h5 class="user-details">Favorite Emotion: Joy
+          <img src="images/emoticons/happy-small.png" class="emoticon">
+        </h5>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 col-xs-12">
+
+        <!-- Tabs -->
+        <div class="tab">
+          <button class="tablinks active" onclick="openTab(event, infoType.feels)" id="defaultOpen">Feels</button>
+          <button class="tablinks" onclick="openTab(event, infoType.content)">Content</button>
+        </div>
+
+        <!-- Feels -->
+        <div id="user-feels" class="tabcontent">
+          <div id="user-emotions-chart"></div>
+          <p>Joy: <strong>x</strong>%</p>
+          <p>Sadness: <strong>y</strong>%</p>
+          <p>Disgust: <strong>z</strong>%</p>
+          <p>Fear: <strong>a</strong>%</p>
+          <p>Anger: <strong>b</strong>%</p>
+        </div>
+
+        <!-- Content -->
+        <div id="user-content" class="tabcontent">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <!-- video thumbnail -->
+              <img class="video-thumbnail" src="images/thehobbit.jpg">
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <!-- video text -->
+              <h5>The Hobbit</h5>
+              <p>“Now it is a strange thing, but things that are good to have and days that are good to spend are soon told about, and not much to listen to; while things that are uncomfortable, palpitating, and even gruesome, may make a good tale, and take a deal of telling anyway.”</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <!-- video thumbnail -->
+              <img class="video-thumbnail" src="images/lotr.png">
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <!-- video text -->
+              <h5>Lord of the Rings</h5>
+              <p>"That there’s some good in this world, Mr. Frodo. And it’s worth fighting for."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="fake-social-media">
+    			<a href="#"><i class="fab fa-github"></i></a>
+    			<a href="#"><i class="fab fa-twitter"></i></a>
+    			<a href="#"><i class="fab fa-facebook-f"></i></a>
+    			<a href="#"><i class="fab fa-instagram"></i></a>
+    		</div>
+    		<p>Copyright &copy; 2018</p>
+    	</div>
+    </div>
+
+
+  </footer>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <title>Search Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- fontawesome, jQuery, bootstrap JS -->
+  <script defer src="scripts/font-awesome-all.js"></script>
+  <script src="scripts/jquery-3.2.1.slim.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/googlecharts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/search-results.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo-idea-2-white-small.png" class="logo">
+        reel<strong>feels</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="explore.html"><i class="fas fa-compass"></i> Explore</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="upload.html"><i class="fas fa-arrow-circle-up"></i> Upload </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="video-content.html"><i class="fas fa-video"></i></i> Video </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="user-profile.html"><i class="fas fa-user"></i></i> Profile </a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="button"><a href="search-results.html"><i class="fas fa-search"></i></a></button>
+          </form>
+          <a href="login.html" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+        </div>
+      </nav>
+
+  </header>
+
+  <!--everything below the navbar -->
+  <div class = "container-fluid">
+    <div class = "row">
+
+      <!--side bar-->
+      <nav class="col-md-2 d-md-block bg-light sidebar filter-sidebar"><!--remove bg-light to change color w/ .sidebar -->
+        <div class="sidebar-sticky">
+          <h2 align="center"> Filter by:</h2>
+
+          <!--checkboxes, probably what we want, just need to make them look better -->
+          <div class="filter-btn-container text-center">
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary btn-block">
+                <input type="checkbox" checked> Anger
+              </label>
+            </div>
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary btn-block">
+                <input type="checkbox"> Disgust
+              </label>
+            </div>
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary btn-block">
+                <input type="checkbox"> Happy
+              </label>
+            </div>
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary btn-block">
+                <input type="checkbox"> Sadness
+              </label>
+            </div>
+            <div class="btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary btn-block">
+                <input type="checkbox"> Surprise
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </nav>
+
+      <!--Main space aside the sidebar -->
+      <main role ="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="album py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img1.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">My Trip To Japan</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">olympicsfan2018</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: happy</a>
+                      <small class="text-muted">892 views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img2.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">Beautiful walk in the park!!!</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">thund3rbolt</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: surprise</a>
+                      <small class="text-muted">1M views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img3.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">Top 10 reasons to fall in love with the Fall.</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">BigBoosting</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: surprise</a>
+                      <small class="text-muted">429 views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img4.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">A sunset that everyone should see.</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">boopmonger</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: anger</a>
+                      <small class="text-muted">53K views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img5.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">Best night under the stars.</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">Shenanigans239</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: disgust</a>
+                      <small class="text-muted">143 views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img6.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">The best place to go swimming</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">chasingcars4</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: sadness</a>
+                      <small class="text-muted">25K views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img7.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">The best place to go swimming</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">Fiss</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: surprise</a>
+                      <small class="text-muted">200 views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img8.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">Why i hate the beach.</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">ComanderKeen</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: surprise</a>
+                      <small class="text-muted">3.3K views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="#">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="images/search-results-images/Img9.jpg" data-holder-rendered="true">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-text">Reasons to dislike the snow.</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">NightAtTheMemeMuseum</a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="#" class="card-link text-secondary">top emotion: disgust</a>
+                      <small class="text-muted">9K views</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="fake-social-media">
+    			<a href="#"><i class="fab fa-github"></i></a>
+    			<a href="#"><i class="fab fa-twitter"></i></a>
+    			<a href="#"><i class="fab fa-facebook-f"></i></a>
+    			<a href="#"><i class="fab fa-instagram"></i></a>
+    		</div>
+    		<p>Copyright &copy; 2018</p>
+    	</div>
+    </div>
+
+  </footer>
+
+</body>
+</html>

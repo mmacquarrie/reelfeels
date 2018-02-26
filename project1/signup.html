@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CS326 Project</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- fontawesome, jQuery, bootstrap JS -->
+  <script defer src="scripts/font-awesome-all.js"></script>
+  <script src="scripts/jquery-3.2.1.slim.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/googlecharts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+
+
+</head>
+<body>
+  <header class="mb-25">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo-idea-2-white-small.png" class="logo">
+        reel<strong>feels</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="explore.html"><i class="fas fa-compass"></i> Explore</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="upload.html"><i class="fas fa-arrow-circle-up"></i> Upload </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="video-content.html"><i class="fas fa-video"></i></i> Video </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="user-profile.html"><i class="fas fa-user"></i></i> Profile </a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="button"><a href="search-results.html"><i class="fas fa-search"></i></a></button>
+          </form>
+          <a href="login.html" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+        </div>
+      </nav>
+
+  </header>
+
+  <div class="container-fluid fill">
+    <div class="row mb-25">
+      <div class="col-md-5 ml-auto" id="sign-up-info">
+        <h3>Marketing/tag line</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+      </div>
+      <div class="col-md-5 mr-auto">
+        <h2 class="text-center"> Create an account </h2>
+        <form id="user-creation-form" class="text-center">
+
+          <label for="profile-pic" class="hidden">Profile picture</label>
+          <div class="profile-pic-upload-wrap">
+            <input type="file" name="profile-pic" accept="image/png, image/jpg, image/jpeg, image/gif">
+            <p> <i class="fas fa-image"></i></p>
+          </div>
+
+          <label for="email" class="hidden">Email</label>
+          <input type="email" class="form-control required" name="email" placeholder="Email" required>
+
+          <label for="username" class="hidden">Username</label>
+          <input type="text" class="form-control required" name="username" placeholder="Username" required>
+
+          <label for="password" class="hidden">Password</label>
+          <input type="password" class="form-control required" name="password" placeholder="Password" required>
+
+          <button type="button" class="btn btn-main btn-dark" href="profile">Sign Up!</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="fake-social-media">
+    			<a href="#"><i class="fab fa-github"></i></a>
+    			<a href="#"><i class="fab fa-twitter"></i></a>
+    			<a href="#"><i class="fab fa-facebook-f"></i></a>
+    			<a href="#"><i class="fab fa-instagram"></i></a>
+    		</div>
+    		<p>Copyright &copy; 2018</p>
+    	</div>
+    </div>
+
+  </footer>
+
+</body>
+</html>

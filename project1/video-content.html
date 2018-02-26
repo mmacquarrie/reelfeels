@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CS326 Project</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- fontawesome, jQuery, bootstrap JS -->
+  <script defer src="scripts/font-awesome-all.js"></script>
+  <script src="scripts/jquery-3.2.1.slim.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/googlecharts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/video-content.css">
+  <link rel="stylesheet" href="styles/tab-styles.css">
+  <script src="scripts/video-content.js"></script>
+</head>
+<body>
+  <header class="mb-25">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo-idea-2-white-small.png" class="logo">
+        reel<strong>feels</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-content">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="explore.html"><i class="fas fa-compass"></i> Explore</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="upload.html"><i class="fas fa-arrow-circle-up"></i> Upload </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="video-content.html"><i class="fas fa-video"></i></i> Video </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="user-profile.html"><i class="fas fa-user"></i></i> Profile </a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="button"><a href="search-results.html"><i class="fas fa-search"></i></a></button>
+          </form>
+          <a href="login.html" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+        </div>
+      </nav>
+
+  </header>
+
+  <div class="container-fluid">
+
+    <!-- Content -->
+    <div class="row" id="video-and-stats">
+
+      <!-- Video -->
+      <div class="col-md-8 col-xs-12">
+        <div class="video-container">
+          <iframe  src="https://www.youtube.com/embed/7LEmer7wwHI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- Side stuff -->
+      <div class="col-md-4 col-xs-12">
+
+        <!-- Stats tabs -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="tab">
+              <button class="tablinks active" onclick="openStats(event, statType.user)" id="defaultOpen">Your Stats</button>
+              <button class="tablinks" onclick="openStats(event, statType.general)">General Stats</button>
+            </div>
+
+            <!-- Stats content -->
+            <div id="user-stats" class="tabcontent">
+              <h3>Your stats</h3>
+              <div id="user-emotions-chart"></div>
+              <p>Joy: <strong>x</strong>%</p>
+              <p>Sadness: <strong>y</strong>%</p>
+              <p>Disgust: <strong>z</strong>%</p>
+              <p>Fear: <strong>a</strong>%</p>
+              <p>Anger: <strong>b</strong>%</p>
+            </div>
+
+            <div id="general-stats" class="tabcontent">
+              <h3>What others felt</h3>
+              <div id="general-emotions-chart"></div>
+              <p>Joy: <strong>x</strong>%</p>
+              <p>Sadness: <strong>y</strong>%</p>
+              <p>Disgust: <strong>z</strong>%</p>
+              <p>Fear: <strong>a</strong>%</p>
+              <p>Anger: <strong>b</strong>%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Creator info -->
+    <div class="row">
+      <div class="col-md-12">
+        <div id="creator-info">
+          <div id="creator-name">
+            <img src="images/schbosky.jpg">
+            <p><strong>Stephen Chbosky</strong></p><br>
+          </div>
+          <p>There's nothing like the deep breaths after laughing that hard. Nothing in the world like a sore stomach for the right reasons</p>
+          <br />
+          <small>Published on 09/12/2010</small>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- Comments -->
+    <div id="comments-section">
+      <h3>Comments</h3>
+      <!-- insert text box here -->
+
+      <div class="comment">
+        <div class="user-details">
+          <img class="comment-author-picture" src="images/edickinson.jpeg">
+          <div class="comment-author-name">Emily Dickinson</div>
+        </div>
+        <div class="comment-bubble">One need not be a chamber to be haunted; One need not be a house; The brain has corridors surpassing Material place.</div>
+      </div>
+      <br>
+
+      <div class="comment">
+        <div class="user-details">
+          <img class="comment-author-picture" src="images/splath.jpg">
+          <div class="comment-author-name">Sylvia Plath</div>
+        </div>
+        <div class="comment-bubble">I shut my eyes and all the world drops dead; I lift my eyes and all is born again.</div>
+      </div>
+
+      <br>
+      <div class="comment">
+        <div class="user-details">
+          <img class="comment-author-picture" src="images/jausten.jpg">
+          <div class="comment-author-name">Jane Austen</div>
+        </div>
+        <div class="comment-bubble">Friendship is certainly the finest balm for the pangs of disappointed love.</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="fake-social-media">
+    			<a href="#"><i class="fab fa-github"></i></a>
+    			<a href="#"><i class="fab fa-twitter"></i></a>
+    			<a href="#"><i class="fab fa-facebook-f"></i></a>
+    			<a href="#"><i class="fab fa-instagram"></i></a>
+    		</div>
+    		<p>Copyright &copy; 2018</p>
+    	</div>
+    </div>
+
+  </footer>
+</body>
+</html>
