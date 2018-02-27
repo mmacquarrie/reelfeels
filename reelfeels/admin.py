@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 # Register your models here.
-from .models import Video, User, VideoToUser
+from .models import Video, User, VideoToUser, Comment
 
 # Video class
 @admin.register(Video)
@@ -20,3 +20,4 @@ class UserAdmin(admin.ModelAdmin):
 
 # VideoToUser
 admin.site.register(VideoToUser)
+admin.site.register(Comment)
