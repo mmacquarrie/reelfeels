@@ -69,3 +69,14 @@ class VideoToUser(models.Model):
     disgust = models.IntegerField(verbose_name='e_disgust', default=0)
     anger = models.IntegerField(verbose_name='e_anger', default=0)
     surprise = models.IntegerField(verbose_name='e_surprise', default=0)
+
+# Comment for a given video, made by a given user
+class Comment(models.Model):
+    # I copied the id from the other tables above -- is this fine for comments?
+    id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
+
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    video_id = models.ForeignKey(Video, on_delete=models.CASCADE)
+
+    # TO-DO: decide what (if any) the max_length of a single comment should be
+    text = models.TextField(max_length=1000, help_text='Write your comment here!', verbose_name='The text content of a comment')
