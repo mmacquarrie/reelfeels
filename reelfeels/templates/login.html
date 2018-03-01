@@ -1,44 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>CS326 Project</title>
-  {% include "styles-and-scripts.html" %}
+{% extends "base_template.html" %}
 
-</head>
-<body>
-  <header class="mb-25">
-    {% include "navbar.html" %}
-  </header>
+{% block title %}<title>Log In</title>{% endblock %}
 
-  <div class="container-fluid">
-    <div class="row mb-25">
-      <div class="col-md-4 ml-auto mr-auto">
-        <form id="sign-in-form">
-          <h3 class="text-center">Welcome Back!</h3>
-          <label for="username" class="hidden">Username</label>
-          <input type="text" class="form-control required" name="username" placeholder="Username" required>
-          <label for="password" class="hidden">Password</label>
-          <input type="password" class="form-control required" name="password" placeholder="Password" required>
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-          <button type="submit" class="btn btn-main btn-lg btn-block btn-dark">Log in</button>
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-5 ml-auto mr-auto">
-        <h4 class="text-center"> Don't have an account? <a href="signup">Sign Up!</a></h4>
-      </div>
+{% block content %}
+<div class="container-fluid">
+  <div class="row mb-25">
+    <div class="col-md-4 ml-auto mr-auto">
+      <form id="sign-in-form">
+        <h3 class="text-center">Welcome Back!</h3>
+        <label for="username" class="hidden">Username</label>
+        <input type="text" class="form-control required" name="username" placeholder="Username" required>
+        <label for="password" class="hidden">Password</label>
+        <input type="password" class="form-control required" name="password" placeholder="Password" required>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button type="submit" class="btn btn-main btn-lg btn-block btn-dark">Log in</button>
+      </form>
     </div>
   </div>
-
-  <footer>
-    {% include "footer.html" %}
-  </footer>
-
-</body>
-</html>
+  <div class="row">
+    <div class="col-md-5 ml-auto mr-auto">
+      <h4 class="text-center"> Don't have an account? <a href="signup">Sign Up!</a></h4>
+    </div>
+  </div>
+</div>
+{% endblock %}
