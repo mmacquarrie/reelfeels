@@ -19,12 +19,16 @@ class Video(models.Model):
     anger = models.IntegerField(verbose_name='Global anger', default=0)
     surprise = models.IntegerField(verbose_name='Global surprise', default=0)
 
+    last_updated_emotions = models.DateField(blank=False)
+
+    yesterdays_views = models.IntegerField(verbose_name='Yesterdays views', default=0)
+
+    todays_views = models.IntegerField(verbose_name='Todays views', default=0)
+
     date_shared = models.DateField(blank=False)
-    last_updated = models.DateField(blank=False)
 
-    total_views = models.IntegerField(verbose_name='Total views', default=0)
-
-    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    #not in our diagram, but we need some reference to the uploader(User model)
+    uploader_id = models.ForeignKey('User', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["-date_shared"]
@@ -44,7 +48,7 @@ class User(models.Model):
     username = models.CharField(max_length=50)
 
     # TO-DO: decide where to put uploaded files
-    profile_pic = models.FileField(upload_to=profile_filename, null=True, blank=True,)
+    profile_pic = models.ImageField(upload_to=profile_filename, null=True, blank=True,)
 
     # TO-DO: figure out how to use encryption to store passwords
 
@@ -54,16 +58,16 @@ class User(models.Model):
     anger = models.IntegerField(verbose_name='Overall anger', default=0)
     surprise = models.IntegerField(verbose_name='Overall surprise', default=0)
 
-    date_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
+    last_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
 
 # Emotions for certain videos
-class VideoToUser(models.Model):
+class ViewInstance(models.Model):
     id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
 
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    video_id = models.ForeignKey(Video, on_delete=models.CASCADE)
+    viewer_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
 
-    date_updated = models.DateField(verbose_name='Date updated', blank=False)
+    last_watched = models.DateField(verbose_name='Date updated', blank=False)
 
     happiness = models.IntegerField(verbose_name='Happiness', default=0)
     sadness = models.IntegerField(verbose_name='Sadness', default=0)
@@ -76,8 +80,18 @@ class Comment(models.Model):
     # I copied the id from the other tables above -- is this fine for comments?
     id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
 
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    video_id = models.ForeignKey(Video, on_delete=models.CASCADE)
+    video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
+    commenter_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    
 
     # TO-DO: decide what (if any) the max_length of a single comment should be
-    text = models.TextField(max_length=1000, help_text='Write your comment here!', verbose_name='The text content of a comment')
+    content = models.TextField(max_length=1000, help_text='Write your comment here!', verbose_name='The text content of a comment')
+
+# The uploads
+class Upload(models.Model):
+    # I copied the id from the other tables above -- is this fine for uploads?
+    id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
+
+    video_id = models.OneToOneField('Video', on_delete=models.CASCADE)
+
+    uploader_id = models.ForeignKey('User', on_delete=models.CASCADE)
