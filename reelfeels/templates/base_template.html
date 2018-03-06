@@ -26,26 +26,26 @@
         <div class="collapse navbar-collapse" id="navbar-content">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'home' %}" data-navlink="index"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="explore"><i class="fas fa-compass"></i> Explore</a>
+              <a class="nav-link" href="{% url 'explore' %}" data-navlink="explore"><i class="fas fa-compass"></i> Explore</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="upload"><i class="fas fa-arrow-circle-up"></i> Upload </a>
+              <a class="nav-link" href="{% url 'upload' %}" data-navlink="upload"><i class="fas fa-arrow-circle-up"></i> Upload </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="video"><i class="fas fa-video"></i></i> Video </a>
+              <a class="nav-link" href="{% url 'video-static' %}" data-navlink="video"><i class="fas fa-video"></i></i> Video </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="profile"><i class="fas fa-user"></i></i> Profile </a>
+              <a class="nav-link" href="{% url 'profile-static' %}" data-navlink="profile"><i class="fas fa-user"></i></i> Profile </a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn my-2 my-sm-0" type="button"><a href="search"><i class="fas fa-search"></i></a></button>
           </form>
-          <a href="login" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+          <a href="{% url 'login'%}" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
         </div>
       </nav>
     </header>
