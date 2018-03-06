@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 # Register your models here.
-from .models import Video, User, VideoToUser, Comment
+from .models import Video, User, Upload, Comment
 
 # Video class
 @admin.register(Video)
@@ -19,5 +19,5 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ('username', 'date_joined')
 
 # VideoToUser
-admin.site.register(VideoToUser)
+admin.site.register(Upload)
 admin.site.register(Comment)
