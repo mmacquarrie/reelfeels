@@ -20,8 +20,8 @@ $(document).ready(function(){
         toggleForm();
     });
 
-    //tag functionality not in place yet
-    $("[for='tags'], [type='tags']").hide();
+    //really strange bug that requires this input to exist in order for 'enter' key to work...
+    $("#bug").hide();
 });
 
 //script for validating YouTube URLs and replacing embedded src with new url
@@ -60,7 +60,7 @@ function toggleForm(){
         $("#fs1").hide();
 
         //show the preview fieldset
-        $("#fs2").fadeIn("fast");
+        $("#fs2").show();
     }
     //else if 'previous' button was clicked
     else{
@@ -73,6 +73,6 @@ function toggleForm(){
         $("#video-preview").attr("src", "");
 
         //show the url form fieldset
-        $("#fs1").fadeIn("fast");
+        $("#fs1").show();
     }
 }
