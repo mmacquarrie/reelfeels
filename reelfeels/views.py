@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import Context
 from .models import Video
-from .filters import *
 import datetime
+from django.db.models import F
 
 def index(request):
     return render(request, 'index.html', {})
@@ -32,7 +32,8 @@ def explore_page(request):
     new_videos = Video.objects.filter(date_shared__gte=new_cutoff)
 
     # get list of popular videos
-    popular_videos = Video.objects.all()
+    popular_videos = Video.objects.filter(todays_views__gte=F('yesterdays_views')*1.5)
+
     # get list of controversial videos?
     return render(
         request,
