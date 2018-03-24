@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 
 from django.db import models
 import uuid
+import datetime
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
 
 # Videos
 class Video(models.Model):
@@ -35,6 +38,17 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_youtube_thumbnail(self):
+        parsed_url = urlparse(self.video_link)
+        query = parse_qs(parsed_url.query)
+        video_id = query["v"][0]
+        return "http://i4.ytimg.com/vi/" + video_id + "/0.jpg"
+
+    def get_top_emotion(self):
+        emotions = {"happiness": self.happiness, "sadness":self.sadness,
+            "disgust":self.disgust, "anger":self.anger, "surprise":self.surprise}
+        return max(emotions, key=lambda key: emotions[key])
 
 def profile_filename(instance, filename):
     return 'static/profile_pictures/user_{0}/{1}'.format(instance.id, filename)
@@ -82,7 +96,7 @@ class Comment(models.Model):
 
     video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
     commenter_id = models.ForeignKey('User', on_delete=models.CASCADE)
-    
+
 
     # TO-DO: decide what (if any) the max_length of a single comment should be
     content = models.TextField(max_length=1000, help_text='Write your comment here!', verbose_name='The text content of a comment')

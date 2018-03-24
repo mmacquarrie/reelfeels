@@ -79,3 +79,9 @@ h2{
   background-color: #B5428B;
   border-color: #B5428B;
 }
+
+.thumbnail-img{
+  height: 225px;
+  width: 100%;
+  display: block;
+}
