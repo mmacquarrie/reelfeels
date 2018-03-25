@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import Context
-from .models import Video
+from .models import Video, User
 import datetime
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
@@ -9,8 +9,43 @@ from urllib.parse import parse_qs, urlparse
 def index(request):
     return render(request, 'index.html', {})
 
-def video_content(request):
-    return render(request, 'video-content.html', {})
+def video_content(request, video_id):
+    #get video object from url
+    video = Video.objects.get(pk=video_id)
+
+    uploader = video.uploader_id
+
+    return render(
+        request,
+        'video-content.html',
+        context={
+            'video_code':video.video_link,
+            'happiness':video.happiness,
+            'sadness':video.sadness,
+            'disgust':video.disgust,
+            'surprise':video.surprise,
+            'anger':video.anger,
+
+            # TO-DO:
+            # current user's stats displayed in 'Your stats' tab...
+            """
+            'your_happiness':cur_user.happiness,
+            'your_sadness':cur_user.sadness,
+            'your_disgust':cur_user.disgust,
+            'your_surprise':cur_user.surprise,
+            'your_anger':cur_user.anger,
+            """
+
+            # TO-DO: fix strange behavior in line below...
+            'why':'the below thing wont appear unless this entry exists --- WHY IS THIS',
+
+            'uploader_name':uploader.username,
+            'uploader_image':uploader.user_image,
+            
+            'video_desc':video.video_description,
+            'upload_date':video.date_shared,
+            'comment_list':video.comment_set.all,
+        })
 
 def user_profile(request):
     return render(request, 'user-profile.html', {})

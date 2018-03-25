@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.conf import settings
 import uuid
 import datetime
 from urllib.parse import urlparse
@@ -51,7 +52,11 @@ class Video(models.Model):
         return max(emotions, key=lambda key: emotions[key])
 
 def profile_filename(instance, filename):
-    return 'static/profile_pictures/user_{0}/{1}'.format(instance.id, filename)
+    return 'profile_pictures/user_{0}/{1}'.format(instance.id, filename)
+
+# shortcut method for User and Commenter image
+def get_user_image(user):
+        return '{0}{1}'.format(settings.MEDIA_URL, user.profile_pic)
 
 # Users
 class User(models.Model):
@@ -73,6 +78,12 @@ class User(models.Model):
     surprise = models.IntegerField(verbose_name='Overall surprise', default=0)
 
     last_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
+
+    def __str__(self):
+        return self.username
+
+    def user_image(self):
+        return get_user_image(self)
 
 # Emotions for certain videos
 class ViewInstance(models.Model):
@@ -97,9 +108,14 @@ class Comment(models.Model):
     video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
     commenter_id = models.ForeignKey('User', on_delete=models.CASCADE)
 
-
     # TO-DO: decide what (if any) the max_length of a single comment should be
     content = models.TextField(max_length=1000, help_text='Write your comment here!', verbose_name='The text content of a comment')
+
+    def __str__(self):
+        return self.content
+
+    def commenter_image(self):
+        return self.commenter_id.profile_pic.url#get_user_image(self.commenter_id)
 
 # The uploads
 class Upload(models.Model):
@@ -109,3 +125,6 @@ class Upload(models.Model):
     video_id = models.OneToOneField('Video', on_delete=models.CASCADE)
 
     uploader_id = models.ForeignKey('User', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '"{0}" -- {1}'.format(self.video_id, self.uploader_id)

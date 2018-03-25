@@ -124,3 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Media root path for uploaded images
+MEDIA_ROOT = '/static/media/'
+MEDIA_URL = '/media/'
