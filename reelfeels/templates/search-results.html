@@ -56,169 +56,26 @@
       <div class="album py-5">
         <div class="container">
           <div class="row">
+
+            {% for video in matching_videos %}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img1.jpg' %}" data-holder-rendered="true">
+                  <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{{video.get_youtube_thumbnail}}" data-holder-rendered="true">
                 </a>
                 <div class="card-body">
-                  <h6 class="card-text">My Trip To Japan</h6>
+                  <h6 class="card-text">{{video.title}}</h6>
                   <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">olympicsfan2018</a>
+                    <a href="#" class="card-link text-secondary">{{video.uploader_id.username}}</a>
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: happy</a>
-                    <small class="text-muted">892 views</small>
+                    <a href="#" class="card-link text-secondary">{{video.get_top_emotion}}</a>
+                    <small class="text-muted">{{video.todays_views}}</small>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img2.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">Beautiful walk in the park!!!</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">thund3rbolt</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: surprise</a>
-                    <small class="text-muted">1M views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img3.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">Top 10 reasons to fall in love with the Fall.</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">BigBoosting</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: surprise</a>
-                    <small class="text-muted">429 views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img4.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">A sunset that everyone should see.</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">boopmonger</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: anger</a>
-                    <small class="text-muted">53K views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img5.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">Best night under the stars.</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">Shenanigans239</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: disgust</a>
-                    <small class="text-muted">143 views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img6.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">The best place to go swimming</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">chasingcars4</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: sadness</a>
-                    <small class="text-muted">25K views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img7.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">The best place to go swimming</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">Fiss</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: surprise</a>
-                    <small class="text-muted">200 views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img8.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">Why i hate the beach.</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">ComanderKeen</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: surprise</a>
-                    <small class="text-muted">3.3K views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <a href="#">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{% static 'images/search-results-images/Img9.jpg' %}" data-holder-rendered="true">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text">Reasons to dislike the snow.</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">NightAtTheMemeMuseum</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="#" class="card-link text-secondary">top emotion: disgust</a>
-                    <small class="text-muted">9K views</small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>

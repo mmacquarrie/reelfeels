@@ -117,6 +117,8 @@ class Comment(models.Model):
     def commenter_image(self):
         return self.commenter_id.profile_pic.url#get_user_image(self.commenter_id)
 
+
+"""
 # The uploads
 class Upload(models.Model):
     # I copied the id from the other tables above -- is this fine for uploads?
@@ -128,3 +130,4 @@ class Upload(models.Model):
 
     def __str__(self):
         return '"{0}" -- {1}'.format(self.video_id, self.uploader_id)
+"""
