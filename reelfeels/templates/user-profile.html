@@ -15,10 +15,10 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 col-xs-12">
-      <img id="profile-picture" src="{% static 'images/jrrtolkien.jpeg' %}">
-      <h4 class="user-details">JRR Tolkien</h4>
-      <h5 class="user-details">Favorite Emotion: Joy
-        <img src="{% static 'images/emoticons/happy-small.png' %}" class="emoticon">
+      <img id="profile-picture" src="{{user.profile_pic}}">
+      <h4 class="user-details">{{user.username}}</h4>
+      <h5 class="user-details">Favorite Emotion: {{user.get_top_emotion}}
+        <img src="{% static 'images/emoticons/{{user.get_top_emotion}}-small.png' %}" class="emoticon">
       </h5>
     </div>
     <div class="col-md-4"></div>
@@ -37,38 +37,29 @@
       <!-- Feels -->
       <div id="user-feels" class="tabcontent">
         <div id="user-emotions-chart"></div>
-        <p>Joy: <strong>x</strong>%</p>
-        <p>Sadness: <strong>y</strong>%</p>
-        <p>Disgust: <strong>z</strong>%</p>
-        <p>Fear: <strong>a</strong>%</p>
-        <p>Anger: <strong>b</strong>%</p>
+        <p>Joy: <strong>{{user.happiness}}</strong>%</p>
+        <p>Sadness: <strong>{{user.sadness}}</strong>%</p>
+        <p>Disgust: <strong>{{user.disgust}}</strong>%</p>
+        <p>Surprise: <strong>{{user.surprise}}</strong>%</p>
+        <p>Anger: <strong>{{user.anger}}</strong>%</p>
       </div>
 
       <!-- Content -->
       <div id="user-content" class="tabcontent">
+      	{% for video in user.video_set.all %}
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <!-- video thumbnail -->
-            <img class="video-thumbnail" src="{% static 'images/thehobbit.jpg' %}">
+            <img class="video-thumbnail" src="{{video|youtube_thumbnail}}">
           </div>
           <div class="col-md-8 col-xs-12">
             <!-- video text -->
-            <h5>The Hobbit</h5>
-            <p>“Now it is a strange thing, but things that are good to have and days that are good to spend are soon told about, and not much to listen to; while things that are uncomfortable, palpitating, and even gruesome, may make a good tale, and take a deal of telling anyway.”</p>
+            <h5>{{video.title}}</h5>
+            <p>{{video.video_description}}</p>
           </div>
         </div>
         <hr>
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-            <!-- video thumbnail -->
-            <img class="video-thumbnail" src="{% static 'images/lotr.png' %}">
-          </div>
-          <div class="col-md-8 col-xs-12">
-            <!-- video text -->
-            <h5>Lord of the Rings</h5>
-            <p>"That there’s some good in this world, Mr. Frodo. And it’s worth fighting for."</p>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
     <div class="col-md-3"></div>

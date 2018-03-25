@@ -47,7 +47,13 @@ def video_content(request, video_id):
         })
 
 def user_profile(request):
-    return render(request, 'user-profile.html', {})
+    user_id=get_object_or_404(User, pk=pk)
+    
+    return render(
+        request,
+        'catalog/user-profile.html',
+        context={'user':user_id,}
+    )
 
 def login_page(request):
     return render(request, 'login.html', {})
