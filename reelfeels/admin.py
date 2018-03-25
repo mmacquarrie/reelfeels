@@ -9,7 +9,7 @@ from .models import Video, User, Upload, Comment, ViewInstance
 # Video class
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id', 'video_link', 'todays_views')
+    list_display = ('title', 'id', 'video_link', 'video_description', 'todays_views')
     list_filter = ('title', 'todays_views')
 
 # User class

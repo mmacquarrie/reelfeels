@@ -74,6 +74,9 @@ class User(models.Model):
 
     last_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
 
+    def __str__(self):
+        return self.username
+
 # Emotions for certain videos
 class ViewInstance(models.Model):
     id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
@@ -97,9 +100,17 @@ class Comment(models.Model):
     video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
     commenter_id = models.ForeignKey('User', on_delete=models.CASCADE)
 
-
     # TO-DO: decide what (if any) the max_length of a single comment should be
     content = models.TextField(max_length=1000, help_text='Write your comment here!', verbose_name='The text content of a comment')
+
+    def __str__(self):
+        return self.content
+
+    def commenter_name(self):
+        return self.commenter_id.username
+
+    def commenter_image(self):
+        return self.commenter_id.profile_pic
 
 # The uploads
 class Upload(models.Model):

@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='home'),
     path('video', views.video_content, name='video-static'),
-    #path('video/<uuid>', views.video_content, name='video'),
+    path('video/<video_id>', views.video_content, name='video'),
     path('profile', views.user_profile, name='profile-static'),
     #path('profile/<uuid>', views.user_profile, name='profile'),
     path('upload', views.upload_page, name='upload'),

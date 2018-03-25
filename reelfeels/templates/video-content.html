@@ -17,7 +17,7 @@
     <!-- Video -->
     <div class="col-md-8 col-xs-12">
       <div class="video-container">
-        <iframe  src="https://www.youtube.com/embed/7LEmer7wwHI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe  src="https://www.youtube.com/embed/{{ video_code }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -39,18 +39,18 @@
             <p>Joy: <strong>x</strong>%</p>
             <p>Sadness: <strong>y</strong>%</p>
             <p>Disgust: <strong>z</strong>%</p>
-            <p>Fear: <strong>a</strong>%</p>
-            <p>Anger: <strong>b</strong>%</p>
+            <p>Surprise: <strong>a</strong>%</p>
+            <p>Anger: <strong>b</strong>%</p>            
           </div>
 
           <div id="general-stats" class="tabcontent">
             <h3>What others felt</h3>
             <div id="general-emotions-chart"></div>
-            <p>Joy: <strong>x</strong>%</p>
-            <p>Sadness: <strong>y</strong>%</p>
-            <p>Disgust: <strong>z</strong>%</p>
-            <p>Fear: <strong>a</strong>%</p>
-            <p>Anger: <strong>b</strong>%</p>
+            <p>Joy: <strong>{{ happiness }}</strong>%</p>
+            <p>Sadness: <strong>{{ sadness }}</strong>%</p>
+            <p>Disgust: <strong>{{ disgust }}</strong>%</p>
+            <p>Surprise: <strong>{{ surprise }}</strong>%</p>
+            <p>Anger: <strong>{{ anger }}</strong>%</p>
           </div>
         </div>
       </div>
@@ -61,12 +61,12 @@
     <div class="col-md-12">
       <div id="creator-info">
         <div id="creator-name">
-          <img src="{% static 'images/schbosky.jpg' %}">
-          <p><strong>Stephen Chbosky</strong></p><br>
+          <img src="{{ user_photo_path }}">
+          <p><strong>{{ uploader_name }}</strong></p><br>
         </div>
-        <p>There's nothing like the deep breaths after laughing that hard. Nothing in the world like a sore stomach for the right reasons</p>
+        <p>{{ video_desc }}</p>
         <br />
-        <small>Published on 09/12/2010</small>
+        <small>Published on {{ upload_date }}</small>
       </div>
     </div>
   </div>
@@ -78,33 +78,17 @@
     <h3>Comments</h3>
     <!-- insert text box here -->
 
+    {% for comment in comment_list %}
     <div class="comment">
       <div class="user-details">
-        <img class="comment-author-picture" src="{% static 'images/edickinson.jpeg' %}">
-        <div class="comment-author-name">Emily Dickinson</div>
+        <img class="comment-author-picture" src="{{ comment.commenter_image }}">
+        <div class="comment-author-name">{{ comment.commenter_name }}</div>
       </div>
-      <div class="comment-bubble">One need not be a chamber to be haunted; One need not be a house; The brain has corridors surpassing Material place.</div>
+      <div class="comment-bubble">{{ comment }}</div>
     </div>
     <br>
+    {% endfor %}
 
-    <div class="comment">
-      <div class="user-details">
-        <img class="comment-author-picture" src="{% static 'images/splath.jpg' %}">
-        <div class="comment-author-name">Sylvia Plath</div>
-      </div>
-      <div class="comment-bubble">I shut my eyes and all the world drops dead; I lift my eyes and all is born again.</div>
-    </div>
-
-    <br>
-    <div class="comment">
-      <div class="user-details">
-        <img class="comment-author-picture" src="{% static 'images/jausten.jpg' %}">
-        <div class="comment-author-name">Jane Austen</div>
-      </div>
-      <div class="comment-bubble">Friendship is certainly the finest balm for the pangs of disappointed love.</div>
-    </div>
-  </div>
-</div>
 {% endblock %}
 
 {% block customjs %}
