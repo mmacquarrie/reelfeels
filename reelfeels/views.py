@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import Context
 from .models import Video, User
 import datetime
@@ -11,7 +11,7 @@ def index(request):
 
 def video_content(request, video_id):
     #get video object from url
-    video = Video.objects.get(pk=video_id)
+    video = get_object_or_404(Video, pk=video_id)
 
     uploader = video.uploader_id
 
@@ -19,31 +19,18 @@ def video_content(request, video_id):
         request,
         'video-content.html',
         context={
-            'video_code':video.video_link,
-            'happiness':video.happiness,
-            'sadness':video.sadness,
-            'disgust':video.disgust,
-            'surprise':video.surprise,
-            'anger':video.anger,
+            'video': video,
 
             # TO-DO:
             # current user's stats displayed in 'Your stats' tab...
-            """
-            'your_happiness':cur_user.happiness,
-            'your_sadness':cur_user.sadness,
-            'your_disgust':cur_user.disgust,
-            'your_surprise':cur_user.surprise,
-            'your_anger':cur_user.anger,
-            """
+            # 'your_happiness':cur_user.happiness,
+            # 'your_sadness':cur_user.sadness,
+            # 'your_disgust':cur_user.disgust,
+            # 'your_surprise':cur_user.surprise,
+            # 'your_anger':cur_user.anger,
 
-            # TO-DO: fix strange behavior in line below...
-            'why':'the below thing wont appear unless this entry exists --- WHY IS THIS',
-
-            'uploader_name':uploader.username,
-            'uploader_image':uploader.user_image,
-            
-            'video_desc':video.video_description,
-            'upload_date':video.date_shared,
+            # 'uploader_image':uploader.user_image,
+            'uploader': uploader,
             'comment_list':video.comment_set.all,
         })
 

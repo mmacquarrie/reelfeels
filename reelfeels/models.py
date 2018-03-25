@@ -51,12 +51,9 @@ class Video(models.Model):
             "disgust":self.disgust, "anger":self.anger, "surprise":self.surprise}
         return max(emotions, key=lambda key: emotions[key])
 
-def profile_filename(instance, filename):
-    return 'profile_pictures/user_{0}/{1}'.format(instance.id, filename)
-
-# shortcut method for User and Commenter image
-def get_user_image(user):
-        return '{0}{1}'.format(settings.MEDIA_URL, user.profile_pic)
+# TO-DO: find a way to delete this without it breaking
+def profile_filename():
+    return 'I exist because there is a weird migration conflict when I am not here'
 
 # Users
 class User(models.Model):
@@ -67,7 +64,8 @@ class User(models.Model):
     username = models.CharField(max_length=50)
 
     # TO-DO: decide where to put uploaded files
-    profile_pic = models.ImageField(upload_to=profile_filename, null=True, blank=True,)
+    #profile_pic = models.ImageField(upload_to=profile_filename, null=True, blank=True,)
+    profile_pic = models.ImageField(upload_to='profile_pictures/', null=True, blank=True,)
 
     # TO-DO: figure out how to use encryption to store passwords
 
@@ -81,9 +79,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
-
-    def user_image(self):
-        return get_user_image(self)
 
 # Emotions for certain videos
 class ViewInstance(models.Model):
@@ -113,9 +108,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
-
-    def commenter_image(self):
-        return self.commenter_id.profile_pic.url#get_user_image(self.commenter_id)
 
 
 """

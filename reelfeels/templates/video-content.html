@@ -46,11 +46,11 @@
           <div id="general-stats" class="tabcontent">
             <h3>What others felt</h3>
             <div id="general-emotions-chart"></div>
-            <p>Joy: <strong>{{ happiness }}</strong>%</p>
-            <p>Sadness: <strong>{{ sadness }}</strong>%</p>
-            <p>Disgust: <strong>{{ disgust }}</strong>%</p>
-            <p>Surprise: <strong>{{ surprise }}</strong>%</p>
-            <p>Anger: <strong>{{ anger }}</strong>%</p>
+            <p>Joy: <strong>{{ video.happiness }}</strong>%</p>
+            <p>Sadness: <strong>{{ video.sadness }}</strong>%</p>
+            <p>Disgust: <strong>{{ video.disgust }}</strong>%</p>
+            <p>Surprise: <strong>{{ video.surprise }}</strong>%</p>
+            <p>Anger: <strong>{{ video.anger }}</strong>%</p>
           </div>
         </div>
       </div>
@@ -61,12 +61,12 @@
     <div class="col-md-12">
       <div id="creator-info">
         <div id="creator-name">
-          <img class="comment-author-picture" src="{{ uploader_image }}">
-          <p><strong>{{ uploader_name }}</strong></p><br>
+          <img class="comment-author-picture" src="{{ uploader.profile_pic.url }}">
+          <p><strong>{{ uploader.username }}</strong></p><br>
         </div>
-        <p>{{ video_desc }}</p>
+        <p>{{ video.video_description }}</p>
         <br />
-        <small>Published on {{ upload_date }}</small>
+        <small>Published on {{ video.date_shared }}</small>
       </div>
     </div>
   </div>
@@ -81,7 +81,7 @@
     {% for comment in comment_list %}
     <div class="comment">
       <div class="user-details">
-        <img class="comment-author-picture" src="{{ comment.commenter_image }}">
+        <img class="comment-author-picture" src="{{ comment.commenter_id.profile_pic.url }}">
         <div class="comment-author-name">{{ comment.commenter_id.username }}</div>
       </div>
       <div class="comment-bubble">{{ comment }}</div>
