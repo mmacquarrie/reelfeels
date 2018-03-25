@@ -10,7 +10,7 @@ from urllib.parse import parse_qs
 
 # Videos
 class Video(models.Model):
-    id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     title = models.TextField(max_length=100, help_text='Insert video title here', verbose_name='Title')
 
@@ -57,7 +57,7 @@ def profile_filename():
 
 # Users
 class User(models.Model):
-    id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     date_joined = models.DateField(verbose_name='Date Joined', blank=False)
 
