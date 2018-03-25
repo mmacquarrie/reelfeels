@@ -61,7 +61,7 @@
     <div class="col-md-12">
       <div id="creator-info">
         <div id="creator-name">
-          <img src="{{ user_photo_path }}">
+          <img class="comment-author-picture" src="{{ uploader_image }}">
           <p><strong>{{ uploader_name }}</strong></p><br>
         </div>
         <p>{{ video_desc }}</p>
@@ -82,7 +82,7 @@
     <div class="comment">
       <div class="user-details">
         <img class="comment-author-picture" src="{{ comment.commenter_image }}">
-        <div class="comment-author-name">{{ comment.commenter_name }}</div>
+        <div class="comment-author-name">{{ comment.commenter_id.username }}</div>
       </div>
       <div class="comment-bubble">{{ comment }}</div>
     </div>

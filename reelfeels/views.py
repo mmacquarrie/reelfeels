@@ -12,8 +12,8 @@ def video_content(request, video_id):
     #get video object from url
     video = Video.objects.get(pk='06aec4dc')#video_id)
 
-    uploader = User.objects.get(pk='240ee468')#video.uploader_id)
-    user_photo_path = uploader.profile_pic.url
+    #uploader = User.objects.get(pk='240ee468')#video.uploader_id)
+    uploader = video.uploader_id
 
     return render(
         request,
@@ -29,15 +29,19 @@ def video_content(request, video_id):
             # TO-DO:
             # current user's stats displayed in 'Your stats' tab...
             """
-            'your_happiness':uploader.happiness,
-            'your_sadness':uploader.sadness,
-            'your_disgust':uploader.disgust,
-            'your_surprise':uploader.surprise,
-            'your_anger':uploader.anger,
+            'your_happiness':cur_user.happiness,
+            'your_sadness':cur_user.sadness,
+            'your_disgust':cur_user.disgust,
+            'your_surprise':cur_user.surprise,
+            'your_anger':cur_user.anger,
             """
 
-            'user_photo_path':user_photo_path,
+            # TO-DO: fix strange behavior in line below...
+            'why':'the below thing wont appear unless this entry exists --- WHY IS THIS',
+
             'uploader_name':uploader.username,
+            'uploader_image':uploader.user_image,
+            
             'video_desc':video.video_description,
             'upload_date':video.date_shared,
             'comment_list':video.comment_set.all,

@@ -127,4 +127,4 @@ STATIC_URL = '/static/'
 
 # Media root path for uploaded images
 MEDIA_ROOT = '/static/media/'
-MEDIA_URL = '/static/media/'
+MEDIA_URL = '/media/'
