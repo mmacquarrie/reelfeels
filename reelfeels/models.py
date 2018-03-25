@@ -56,7 +56,7 @@ def profile_filename(instance, filename):
 
 # shortcut method for User and Commenter image
 def get_user_image(user):
-        return '{0}{1}'.format(settings.MEDIA_URL, user.profile_pic.url)
+        return '{0}{1}'.format(settings.MEDIA_URL, user.profile_pic)
 
 # Users
 class User(models.Model):
@@ -83,7 +83,7 @@ class User(models.Model):
         return self.username
 
     def user_image(self):
-        return self.profile_pic.url#get_user_image(self)
+        return get_user_image(self)
 
 # Emotions for certain videos
 class ViewInstance(models.Model):

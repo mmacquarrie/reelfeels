@@ -10,9 +10,8 @@ def index(request):
 
 def video_content(request, video_id):
     #get video object from url
-    video = Video.objects.get(pk='06aec4dc')#video_id)
+    video = Video.objects.get(pk=video_id)
 
-    #uploader = User.objects.get(pk='240ee468')#video.uploader_id)
     uploader = video.uploader_id
 
     return render(
