@@ -4,6 +4,7 @@ from django.template import Context
 from .models import Video
 import datetime
 from django.db.models import F
+from urllib.parse import parse_qs, urlparse
 
 def index(request):
     return render(request, 'index.html', {})
@@ -24,7 +25,20 @@ def upload_page(request):
     return render(request, 'upload.html', {})
 
 def search_page(request):
-    return render(request, 'search-results.html', {})
+    search_query = request.GET.get('search-query')
+
+    if search_query == None:
+        return render(request, 'explore.html', {})
+
+    matching_videos = Video.objects.filter(title__icontains=search_query)
+
+    return render(
+        request, 
+        'search-results.html',
+        context = {
+            "matching_videos":matching_videos
+        }
+    )
 
 def explore_page(request):
     # get list of new videos

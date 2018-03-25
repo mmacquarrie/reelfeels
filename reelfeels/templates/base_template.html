@@ -15,6 +15,7 @@
 
 </head>
 <body>
+
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="main-nav">
       <a class="navbar-brand" href="/">
@@ -41,14 +42,15 @@
               <a class="nav-link" href="{% url 'profile-static' %}" data-navlink="profile"><i class="fas fa-user"></i></i> Profile </a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn my-2 my-sm-0" type="button"><a href="search"><i class="fas fa-search"></i></a></button>
+          <form class="form-inline my-2 my-lg-0" onSubmit="return getSearchResults()">
+            <input class="form-control mr-sm-2" id="search-query" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn my-2 my-sm-0" onclick="return getSearchResults()"><i class="fas fa-search"></i></button>
           </form>
           <a href="{% url 'login'%}" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
         </div>
       </nav>
     </header>
+
   {% block content %}{% endblock %}
   <footer>
     <div class="row">
@@ -63,6 +65,7 @@
       </div>
     </div>
   </footer>
+
   <!-- SCRIPTS -->
   <script src="{% static 'scripts/jquery-3.2.1.slim.min.js' %}"></script>
   <script src="{% static 'scripts/bootstrap.min.js' %}"></script>
@@ -70,6 +73,19 @@
   <script src="{% static 'scripts/font-awesome-all.js' %}"></script>
   <script src="{% static 'scripts/googlecharts.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script type=text/javascript>
+    var searchURL = "{% url 'search' %}"
+
+    function getSearchResults(){
+      var searchQuery = document.getElementById('search-query').value;
+      if (searchQuery.length > 0)
+          self.location.href = searchURL + '?search-query=' + searchQuery;
+      else
+          self.location.href = searchURL;
+      return false;
+    }
+  
+  </script>
 
   {% block customjs %}{% endblock%}
 </body>
