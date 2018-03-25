@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="{% static 'styles/search-results.css' %}">
 {% endblock %}
 
+{% block customjs %}
+<script src="{% static 'scripts/emo-filter.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <!--everything below the navbar -->
 <div class = "container-fluid">
@@ -18,37 +22,33 @@
     <nav class="col-md-2 d-md-block bg-light sidebar filter-sidebar"><!--remove bg-light to change color w/ .sidebar -->
       <div class="sidebar-sticky">
         <h2 align="center"> Filter by:</h2>
-
-        <!--checkboxes, probably what we want, just need to make them look better -->
-        <div class="filter-btn-container text-center">
-          <div class="btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-block">
-              <input type="checkbox" checked> Anger
-            </label>
-          </div>
-          <div class="btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-block">
-              <input type="checkbox"> Disgust
-            </label>
-          </div>
-          <div class="btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-block">
-              <input type="checkbox"> Happy
-            </label>
-          </div>
-          <div class="btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-block">
-              <input type="checkbox"> Sadness
-            </label>
-          </div>
-          <div class="btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-block">
-              <input type="checkbox"> Surprise
-            </label>
-          </div>
+        <div class="btn-group-toggle filter-btn-container text-center" data-toggle="buttons">
+          <label class="btn btn-secondary btn-block active">
+            <input class="emo-filter" type="radio" name="emotions" id="all-filter" checked>
+            <label for="all-filter">All</label>
+          </label>
+          <label class="btn btn-secondary btn-block">
+            <input class="emo-filter" type="radio" name="emotions" id="anger-filter">
+            <label for="anger-filter">Anger</label>
+          </label>
+          <label class="btn btn-secondary btn-block">
+            <input class="emo-filter" type="radio" name="emotions" id="disgust-filter">
+            <label for="digust-filter">Disgust</label>
+          </label>
+          <label class="btn btn-secondary btn-block">
+            <input class="emo-filter" type="radio" name="emotions" id="happiness-filter">
+            <label for="happiness-filter">Happiness</label>
+          </label>
+          <label class="btn btn-secondary btn-block">
+            <input class="emo-filter" type="radio" name="emotions" id="sadness-filter">
+            <label for="sadness-filter">Sadness</label>
+          </label>
+          <label class="btn btn-secondary btn-block">
+            <input class="emo-filter" type="radio" name="emotions" id="surprise-filter">
+            <label for="surprise-filter">Surprise</label>
+          </label>
         </div>
       </div>
-
     </nav>
 
     <!--Main space aside the sidebar -->
@@ -58,7 +58,7 @@
           <div class="row">
 
             {% for video in matching_videos %}
-            <div class="col-md-4">
+            <div class="col-md-4 video-container {{video|top_emotion}} all">
               <div class="card mb-4 box-shadow">
                 <a href="#">
                   <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{{video.get_youtube_thumbnail}}" data-holder-rendered="true">
