@@ -14,6 +14,7 @@ def video_content(request, video_id):
     video = get_object_or_404(Video, pk=video_id)
 
     uploader = video.uploader_id
+    print(uploader.profile_pic.url)
 
     return render(
         request,
@@ -34,13 +35,13 @@ def video_content(request, video_id):
             'comment_list':video.comment_set.all,
         })
 
-def user_profile(request):
-    user_id=get_object_or_404(User, pk=pk)
+def user_profile(request, user_id):
+    profile=get_object_or_404(User, pk=user_id)
 
     return render(
         request,
-        'catalog/user-profile.html',
-        context={'user':user_id,}
+        'user-profile.html',
+        context={'user':profile,}
     )
 
 def login_page(request):

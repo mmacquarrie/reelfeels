@@ -41,10 +41,7 @@ class Video(models.Model):
         return self.title
 
     def get_youtube_thumbnail(self):
-        parsed_url = urlparse(self.video_link)
-        query = parse_qs(parsed_url.query)
-        video_id = query["v"][0]
-        return "http://i4.ytimg.com/vi/" + video_id + "/0.jpg"
+        return "http://i4.ytimg.com/vi/" + self.video_link + "/0.jpg"
 
     def get_top_emotion(self):
         emotions = {"happiness": self.happiness, "sadness":self.sadness,
@@ -82,7 +79,7 @@ class User(models.Model):
 
 # Emotions for certain videos
 class ViewInstance(models.Model):
-    id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     viewer_id = models.ForeignKey('User', on_delete=models.CASCADE)
     video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
@@ -98,7 +95,7 @@ class ViewInstance(models.Model):
 # Comment for a given video, made by a given user
 class Comment(models.Model):
     # I copied the id from the other tables above -- is this fine for comments?
-    id = models.CharField(primary_key=True, default=uuid.uuid4().hex[:8], editable=False, max_length=8)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
     commenter_id = models.ForeignKey('User', on_delete=models.CASCADE)

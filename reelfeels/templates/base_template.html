@@ -36,14 +36,14 @@
               <a class="nav-link" href="{% url 'upload' %}" data-navlink="upload"><i class="fas fa-arrow-circle-up"></i> Upload </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'video-static' %}" data-navlink="video"><i class="fas fa-video"></i></i> Video </a>
+              <a class="nav-link" href="" data-navlink="video"><i class="fas fa-video"></i></i> Video </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'profile-static' %}" data-navlink="profile"><i class="fas fa-user"></i></i> Profile </a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" onSubmit="return getSearchResults()">
-            <input class="form-control mr-sm-2" id="search-query" type="text" placeholder="Search" aria-label="Search">
+            <!-- <input class="form-control mr-sm-2" id="search-query" type="text" placeholder="Search" aria-label="Search"> -->
             <button class="btn my-2 my-sm-0" onclick="return getSearchResults()"><i class="fas fa-search"></i></button>
           </form>
           <a href="{% url 'login'%}" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
