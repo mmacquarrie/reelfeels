@@ -18,7 +18,7 @@
       <img id="profile-picture" src="{{user.profile_pic.url}}">
       <h4 class="user-details">{{user.username}}</h4>
       <h5 class="user-details">Favorite Emotion: {{user.get_top_emotion}}
-        <img src="{% static 'images/emoticons/{{user.get_top_emotion.url}}-small.png' %}" class="emoticon">
+        <img src="{% static 'images/emoticons/'|add:user.get_top_emotion|add:'-small.png' %}" class="emoticon">
       </h5>
     </div>
     <div class="col-md-4"></div>
