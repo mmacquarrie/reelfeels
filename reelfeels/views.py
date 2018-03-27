@@ -36,7 +36,7 @@ def video_content(request, video_id):
 
 def user_profile(request):
     user_id=get_object_or_404(User, pk=pk)
-    
+
     return render(
         request,
         'catalog/user-profile.html',
@@ -61,7 +61,7 @@ def search_page(request):
     matching_videos = Video.objects.filter(title__icontains=search_query)
 
     return render(
-        request, 
+        request,
         'search-results.html',
         context = {
             "matching_videos":matching_videos
@@ -74,7 +74,7 @@ def explore_page(request):
     new_videos = Video.objects.filter(date_shared__gte=new_cutoff)
 
     # get list of popular videos
-    popular_videos = Video.objects.filter(todays_views__gte=F('yesterdays_views')*1.5)
+    popular_videos = Video.objects.order_by("-todays_views")[:10]
 
     # get list of controversial videos?
     return render(
