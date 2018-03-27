@@ -44,7 +44,7 @@ class Video(models.Model):
         return "http://i4.ytimg.com/vi/" + self.video_link + "/0.jpg"
 
     def get_top_emotion(self):
-        emotions = {"happiness": self.happiness, "sadness":self.sadness,
+        emotions = {"none": 0, "happiness": self.happiness, "sadness":self.sadness,
             "disgust":self.disgust, "anger":self.anger, "surprise":self.surprise}
         return max(emotions, key=lambda key: emotions[key])
 
@@ -76,6 +76,11 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+    def get_top_emotion(self):
+        emotions = {"none": 0, "happiness": self.happiness, "sadness":self.sadness,
+            "disgust":self.disgust, "anger":self.anger, "surprise":self.surprise}
+        return max(emotions, key=lambda key: emotions[key]) 
 
 # Emotions for certain videos
 class ViewInstance(models.Model):
