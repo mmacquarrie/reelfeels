@@ -10,10 +10,6 @@
 <link rel="stylesheet" href="{% static 'styles/explore.css' %}">
 {% endblock %}
 
-{% block customjs %}
-<script src="{% static 'scripts/emo-filter.js' %}"></script>
-{% endblock %}
-
 {% block content %}
 <div class = "container-fluid">
   <div class = "row">
@@ -33,7 +29,7 @@
           </label>
           <label class="btn btn-secondary btn-block">
             <input class="emo-filter" type="radio" name="emotions" id="disgust-filter">
-            <label for="digust-filter">Disgust</label>
+            <label for="disgust-filter">Disgust</label>
           </label>
           <label class="btn btn-secondary btn-block">
             <input class="emo-filter" type="radio" name="emotions" id="happiness-filter">
@@ -118,4 +114,8 @@
     </main>
   </div>
 </div>
+{% endblock %}
+
+{% block customjs %}
+<script src="{% static 'scripts/emo-filter.js' %}"></script>
 {% endblock %}
