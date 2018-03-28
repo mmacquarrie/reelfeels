@@ -50,11 +50,13 @@
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <!-- video thumbnail -->
-            <img class="video-thumbnail" src="{{video.get_youtube_thumbnail}}">
+            <a href="{% url 'video' video.id %}">
+              <img class="video-thumbnail" src="{{video.get_youtube_thumbnail}}">
+            </a>
           </div>
           <div class="col-md-8 col-xs-12">
             <!-- video text -->
-            <h5>{{video.title}}</h5>
+              <a href="{% url 'video' video.id %}"><h5>{{video.title}}</h5></a>
             <p>{{video.video_description}}</p>
           </div>
         </div>

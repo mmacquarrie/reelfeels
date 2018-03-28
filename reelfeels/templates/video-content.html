@@ -40,7 +40,7 @@
             <p>Sadness: <strong>y</strong>%</p>
             <p>Disgust: <strong>z</strong>%</p>
             <p>Surprise: <strong>a</strong>%</p>
-            <p>Anger: <strong>b</strong>%</p>            
+            <p>Anger: <strong>b</strong>%</p>
           </div>
 
           <div id="general-stats" class="tabcontent">
@@ -62,7 +62,10 @@
       <div id="creator-info">
         <div id="creator-name">
           <img class="comment-author-picture" src="{{ uploader.profile_pic.url }}">
-          <p><strong>{{ uploader.username }}</strong></p><br>
+          <p>
+            <a href="{% url 'profile' uploader.id %}"><strong>{{ uploader.username }}</strong></a>
+          </p>
+          <br>
         </div>
         <p>{{ video.video_description }}</p>
         <br />
@@ -82,7 +85,9 @@
     <div class="comment">
       <div class="user-details">
         <img class="comment-author-picture" src="{{ comment.commenter_id.profile_pic.url }}">
-        <div class="comment-author-name">{{ comment.commenter_id.username }}</div>
+        <a href="{% url 'profile' comment.commenter_id.id %}">
+          <div class="comment-author-name">{{ comment.commenter_id.username }}</div>
+        </a>
       </div>
       <div class="comment-bubble">{{ comment }}</div>
     </div>
