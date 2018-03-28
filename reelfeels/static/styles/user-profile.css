@@ -2,9 +2,10 @@
     padding: 20px;
 }
 
-#profile-picture {
-    height: auto;
-    width: 100%;
+.profile-pic {
+    height: 200px;
+    width: auto;
+    margin: 0 auto;
     border: 5px solid rgba(169, 169, 169, 0.5);
 }
 
