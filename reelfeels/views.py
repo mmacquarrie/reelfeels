@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template import Context
-from .models import Video, User
+from .models import Video, Profile
 import datetime
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
@@ -36,7 +36,7 @@ def video_content(request, video_id):
         })
 
 def user_profile(request, user_id):
-    profile=get_object_or_404(User, pk=user_id)
+    profile=get_object_or_404(Profile, pk=user_id)
 
     return render(
         request,

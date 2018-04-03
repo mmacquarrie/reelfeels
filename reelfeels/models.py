@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 import uuid
 import datetime
 from urllib.parse import urlparse
@@ -32,7 +33,7 @@ class Video(models.Model):
     date_shared = models.DateField(blank=False)
 
     #not in our diagram, but we need some reference to the uploader(User model)
-    uploader_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    uploader_id = models.ForeignKey('Profile', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["-date_shared"]
@@ -53,12 +54,14 @@ def profile_filename():
     return 'I exist because there is a weird migration conflict when I am not here'
 
 # Users
-class User(models.Model):
+class Profile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, db_column='user')
 
     date_joined = models.DateField(verbose_name='Date Joined', blank=False)
 
-    username = models.CharField(max_length=50)
+    # username = models.CharField(max_length=50)
 
     # TO-DO: decide where to put uploaded files
     #profile_pic = models.ImageField(upload_to=profile_filename, null=True, blank=True,)
@@ -75,7 +78,7 @@ class User(models.Model):
     last_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
 
     def __str__(self):
-        return self.username
+        return self.user.__str__()
 
     def get_top_emotion(self):
         emotions = {"none": 0, "happiness": self.happiness, "sadness":self.sadness,
@@ -86,7 +89,7 @@ class User(models.Model):
 class ViewInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    viewer_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    viewer_id = models.ForeignKey('Profile', on_delete=models.CASCADE)
     video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
 
     last_watched = models.DateField(verbose_name='Date updated', blank=False)
@@ -103,7 +106,7 @@ class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     video_id = models.ForeignKey('Video', on_delete=models.CASCADE)
-    commenter_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    commenter_id = models.ForeignKey('Profile', on_delete=models.CASCADE)
 
     # TO-DO: decide what (if any) the max_length of a single comment should be
     content = models.TextField(max_length=1000, help_text='Write your comment here!', verbose_name='The text content of a comment')
