@@ -31,8 +31,6 @@ def video_content(request, video_id):
             # 'your_disgust':cur_user.disgust,
             # 'your_surprise':cur_user.surprise,
             # 'your_anger':cur_user.anger,
-
-            # 'uploader_image':uploader.user_image,
             'uploader': uploader,
             'comment_list': video.comment_set.all,
         }
@@ -64,7 +62,7 @@ def login_page(request):
 
         if form.is_valid():
             form_data = form.cleaned_data
-            user = authenticate(username=form_data['username'], password=form_data['password'])
+            user = authenticate(username=form_data.get('username'), password=form_data.get('password'))
 
             # A backend authenticated the credentials
             if user is not None:
