@@ -41,12 +41,20 @@
             <button class="btn my-2 my-sm-0" onclick="return getSearchResults()"><i class="fas fa-search"></i></button>
           </form>
 
+          <ul class="navbar-nav">
           {% if request.user.is_authenticated %}
-            <a class="nav-link" href="{% url 'profile' request.user.profile.id %}"><i class="fas fa-user"></i></i> Profile </a>
-            <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' request.user.profile.id %}" data-navlink="profile"><i class="fas fa-user"></i> Profile </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+            </li>
           {% else %}
-            <a href="{% url 'login' %}" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}" id="login-button" data-navlink="login"><i class="fas fa-user"></i> Log In</a>
+            </li>
           {% endif %}
+          </ul>
         </div>
       </nav>
     </header>
