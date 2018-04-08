@@ -99,7 +99,15 @@ def signup_page(request):
     return render(request, 'signup.html', {"form":form})
 
 def upload_page(request):
-    return render(request, 'upload.html', {})
+
+    if request.user.is_authenticated:
+        return render(request, 'upload.html', {})
+    else:
+        form = UserRegistrationForm()
+        message = "You must log in to upload videos"
+        return render(request, 'login.html', {'form': form, 'message': message})
+
+    
 
 def search_page(request):
     search_query = request.GET.get('search-query')
