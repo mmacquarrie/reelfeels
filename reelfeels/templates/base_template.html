@@ -35,22 +35,18 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'upload' %}" data-navlink="upload"><i class="fas fa-arrow-circle-up"></i> Upload </a>
             </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link" href="" data-navlink="video"><i class="fas fa-video"></i></i> Video </a> -->
-              <!-- directs to a real video page for demonstration purposes for project 2 -->
-              <a class="nav-link" href="{% url 'video' video_id='bb1571d1-dbe1-4f1f-9393-f05b5a80bd63' %}" data-navlink="video"><i class="fas fa-video"></i></i> Video </a>
-            </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link" href="{% url 'profile-static' %}" data-navlink="profile"><i class="fas fa-user"></i></i> Profile </a> -->
-              <!-- directs to a real user page for demonstration purposes for project 2 -->
-              <a class="nav-link" href="{% url 'profile' user_id='b4f31b1a-a2cd-4e99-bdc7-57a46d9e1129' %}" data-navlink="profile"><i class="fas fa-user"></i></i> Profile </a>
-            </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" onSubmit="return getSearchResults()">
             <input class="form-control mr-sm-2" id="search-query" type="text" placeholder="Search" aria-label="Search">
             <button class="btn my-2 my-sm-0" onclick="return getSearchResults()"><i class="fas fa-search"></i></button>
           </form>
-          <a href="{% url 'login' %}" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+
+          {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'profile' request.user.profile.id %}"><i class="fas fa-user"></i></i> Profile </a>
+            <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn" id="login-button"><i class="fas fa-user"></i> Log In</a>
+          {% endif %}
         </div>
       </nav>
     </header>

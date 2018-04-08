@@ -8,7 +8,9 @@ import uuid
 import datetime
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
-from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Videos
 class Video(models.Model):
@@ -59,9 +61,6 @@ class Profile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_column='user')
-
-    date_joined = models.DateField(verbose_name='Date Joined', blank=False)
-
     # TO-DO: decide where to put uploaded files
     profile_pic = models.ImageField(upload_to='profile_pictures/', null=True, blank=True, default = 'profile_pictures/default.jpg')
 
@@ -72,6 +71,15 @@ class Profile(models.Model):
     surprise = models.IntegerField(verbose_name='Overall surprise', default=0)
 
     last_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
+
+    def get_username(self, obj):
+        return obj.user.username
+
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+        instance.profile.save()
 
     def __str__(self):
         return self.user.__str__()

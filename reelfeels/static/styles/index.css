@@ -44,6 +44,10 @@ img.emoticon{
 	overflow: scroll;
 }
 
+p.form-error{
+	color: red;
+}
+
 
 /* HEADER */
 .navbar-brand{

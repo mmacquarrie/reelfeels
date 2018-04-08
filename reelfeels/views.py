@@ -1,11 +1,13 @@
 import datetime
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import Context
 from .models import Video, Profile
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from .forms import UserRegistrationForm
+from django.contrib.auth import login, authenticate, logout
+from .forms import SignUpForm
 
 def index(request):
     return render(request, 'index.html', {})
@@ -60,14 +62,14 @@ def login_page(request):
         # Create a form instance and populate it with data from the request (binding):
         form = UserRegistrationForm(request.POST)
 
-        if form.isValid():
+        if form.is_valid():
             form_data = form.cleaned_data
             user = authenticate(username=form_data['username'], password=form_data['password'])
 
             # A backend authenticated the credentials
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                return redirect('home')
             else:
                 form = UserRegistrationForm()
                 message = "Invalid credentials :( Try again"
@@ -77,8 +79,26 @@ def login_page(request):
     form = UserRegistrationForm()
     return render(request, 'login.html', {'form': form})
 
+def logout_page(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('home')
+
 def signup_page(request):
-    return render(request, 'signup.html', {})
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.profile_pic = form.cleaned_data.get('profile_pic')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {"form":form})
 
 def upload_page(request):
     return render(request, 'upload.html', {})

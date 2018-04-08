@@ -6,7 +6,8 @@
 <div class="container-fluid">
   <div class="row mb-25">
     <div class="col-md-4 ml-auto mr-auto">
-      <form id="sign-in-form">
+      <form id="sign-in-form" method="post">
+        {% csrf_token %}
         <h3 class="text-center">{% if message %} {{ message }}  {% else %} Welcome Back! {% endif %}</h3>
         <p>Username</p>
         {{ form.username }}
