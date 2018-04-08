@@ -1,8 +1,8 @@
+import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import Context
 from .models import Video, Profile
-import datetime
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from django.contrib.auth import login, authenticate
@@ -13,7 +13,7 @@ def index(request):
     return render(request, 'index.html', {})
 
 def video_content(request, video_id):
-    #get video object from url
+    # Get video object from url
     video = get_object_or_404(Video, pk=video_id)
 
     uploader = video.uploader_id
@@ -35,16 +35,19 @@ def video_content(request, video_id):
 
             # 'uploader_image':uploader.user_image,
             'uploader': uploader,
-            'comment_list':video.comment_set.all,
-        })
+            'comment_list': video.comment_set.all,
+        }
+    )
 
 def user_profile(request, user_id):
-    profile=get_object_or_404(Profile, pk=user_id)
+    profile = get_object_or_404(Profile, id=user_id)
 
     return render(
         request,
         'user-profile.html',
-        context={'user':profile,}
+        context={
+            'user': profile,
+        }
     )
 
 def login_page(request):
@@ -81,24 +84,24 @@ def search_page(request):
         request,
         'search-results.html',
         context = {
-            "matching_videos":matching_videos
+            "matching_videos": matching_videos
         }
     )
 
 def explore_page(request):
-    # get list of new videos
+    # Get list of new videos
     new_cutoff = datetime.datetime.now() - datetime.timedelta(days=7)
     new_videos = Video.objects.filter(date_shared__gte=new_cutoff)
 
-    # get list of popular videos
+    # Get list of popular videos
     popular_videos = Video.objects.order_by("-todays_views")[:10]
 
-    # get list of controversial videos?
+    # Get list of controversial videos?
     return render(
         request,
         'explore.html',
         context={
-            "new_videos":new_videos,
-            "popular_videos":popular_videos,
+            "new_videos": new_videos,
+            "popular_videos": popular_videos,
         },
     )

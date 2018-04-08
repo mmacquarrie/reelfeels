@@ -56,7 +56,7 @@ ROOT_URLCONF = 'sanguinethirst.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(os.path.dirname(__file__), '..//', 'templates').replace('\\', '/')],
+        'DIRS': ['./reelfeels/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +128,6 @@ STATIC_URL = '/static/'
 # Media root path for uploaded images
 MEDIA_ROOT = os.path.join(BASE_DIR,STATIC_ROOT,'media')
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

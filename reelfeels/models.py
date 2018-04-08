@@ -61,14 +61,8 @@ class Profile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_column='user')
-
-    # username = models.CharField(max_length=50)
-
     # TO-DO: decide where to put uploaded files
-    #profile_pic = models.ImageField(upload_to=profile_filename, null=True, blank=True,)
-    profile_pic = models.ImageField(upload_to='profile_pictures/', null=True, blank=True,)
-
-    # TO-DO: figure out how to use encryption to store passwords
+    profile_pic = models.ImageField(upload_to='profile_pictures/', null=True, blank=True, default = 'profile_pictures/default.jpg')
 
     happiness = models.IntegerField(verbose_name='Overall happiness', default=0)
     sadness = models.IntegerField(verbose_name='Overall sadness', default=0)
@@ -133,8 +127,8 @@ class Upload(models.Model):
 
     video_id = models.OneToOneField('Video', on_delete=models.CASCADE)
 
-    uploader_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    uploader = models.ForeignKey('User', on_delete=models.CASCADE)
 
     def __str__(self):
-        return '"{0}" -- {1}'.format(self.video_id, self.uploader_id)
+        return '"{0}" -- {1}'.format(self.video_id, self.uploader)
 """
