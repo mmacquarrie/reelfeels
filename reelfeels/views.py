@@ -5,6 +5,7 @@ from django.template import Context
 from .models import Video, Profile
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
+from .forms import UserRegistrationForm
 
 def index(request):
     return render(request, 'index.html', {})
@@ -14,7 +15,6 @@ def video_content(request, video_id):
     video = get_object_or_404(Video, pk=video_id)
 
     uploader = video.uploader_id
-    print(uploader.profile_pic.url)
 
     return render(
         request,
@@ -48,7 +48,34 @@ def user_profile(request, user_id):
     )
 
 def login_page(request):
-    return render(request, 'login.html', {})
+
+    # If the user is already logged in
+    if request.user.is_authenticated:
+        return(request, 'index.html', {})
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+        print('Post request received')
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = UserRegistrationForm(request.POST)
+
+        if form.isValid():
+            form_data = form.cleaned_data
+            user = authenticate(username=form_data['username'], password=form_data['password'])
+
+            # A backend authenticated the credentials
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('home'))
+            else:
+                form = UserRegistrationForm()
+                message = "Invalid credentials :( Try again"
+                return render(request, 'login.html', {'form': form, 'message': message})
+
+    # Else show form
+    form = UserRegistrationForm()
+    return render(request, 'login.html', {'form': form})
 
 def signup_page(request):
     return render(request, 'signup.html', {})

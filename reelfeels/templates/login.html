@@ -7,11 +7,11 @@
   <div class="row mb-25">
     <div class="col-md-4 ml-auto mr-auto">
       <form id="sign-in-form">
-        <h3 class="text-center">Welcome Back!</h3>
-        <label for="username" class="hidden">Username</label>
-        <input type="text" class="form-control required" name="username" placeholder="Username" required>
-        <label for="password" class="hidden">Password</label>
-        <input type="password" class="form-control required" name="password" placeholder="Password" required>
+        <h3 class="text-center">{% if message %} {{ message }}  {% else %} Welcome Back! {% endif %}</h3>
+        <p>Username</p>
+        {{ form.username }}
+        <p>Password</p>
+        {{ form.password }}
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
