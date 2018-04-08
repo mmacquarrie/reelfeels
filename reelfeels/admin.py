@@ -15,8 +15,8 @@ class VideoAdmin(admin.ModelAdmin):
 # User class
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'id', 'date_joined')
-    list_filter = ('user', 'date_joined')
+    list_display = ('user', 'id')
+    list_filter = ('user',)
 
 # VideoToUser
 # admin.site.register(Upload)

@@ -11,25 +11,34 @@
     </div>
     <div class="col-md-5 mr-auto">
       <h2 class="text-center"> Create an account </h2>
-      <form id="user-creation-form" class="text-center">
 
-        <label for="profile-pic" class="hidden">Profile picture</label>
-        <div class="profile-pic-upload-wrap">
-          <input type="file" name="profile-pic" accept="image/png, image/jpg, image/jpeg, image/gif">
-          <p> <i class="fas fa-image"></i></p>
-        </div>
+      <form id="user-creation-form"  class="text-center" method="post" action="">
+          {% csrf_token %}
 
-        <label for="email" class="hidden">Email</label>
-        <input type="email" class="form-control required" name="email" placeholder="Email" required>
+          <label for="profile-pic" class="hidden">Profile picture</label>
+          <div class="profile-pic-upload-wrap">
+            {{form.profile_pic}}
+            <p><i class="fas fa-image"></i></p>
+          </div>
+          <small style="color: grey">(Optional)</small>
+          <p class="form-error">{{form.profile_pic.errors|striptags}}</p>
 
-        <label for="username" class="hidden">Username</label>
-        <input type="text" class="form-control required" name="username" placeholder="Username" required>
+          <label for="email" class="hidden">Email</label>
+          {{form.email}}
+          <p class="form-error">{{form.email.errors|striptags}}</p>
 
-        <label for="password" class="hidden">Password</label>
-        <input type="password" class="form-control required" name="password" placeholder="Password" required>
+          <label for="username" class="hidden">Username</label>
+          {{form.username}}
+          <p class="form-error">{{form.username.errors|striptags}}</p>
 
-        <button type="button" class="btn btn-main btn-dark" href="profile">Sign Up!</button>
+          {{form.password1}}
+          {{form.password2}}
 
+          <p class="form-error">{{form.password1.errors|striptags}}</p>
+          <p class="form-error">{{form.password2.errors|striptags}}</p>
+
+          <br/>
+          <button type="submit" class="btn btn-main btn-dark">Sign Up!</button>
       </form>
     </div>
   </div>

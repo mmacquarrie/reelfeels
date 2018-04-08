@@ -8,6 +8,9 @@ import uuid
 import datetime
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Videos
 class Video(models.Model):
@@ -59,8 +62,6 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_column='user')
 
-    date_joined = models.DateField(verbose_name='Date Joined', blank=False)
-
     # username = models.CharField(max_length=50)
 
     # TO-DO: decide where to put uploaded files
@@ -77,13 +78,22 @@ class Profile(models.Model):
 
     last_updated_emotions = models.DateField(verbose_name='When overall emotions were last calculated', blank=True, null=True)
 
+    def get_username(self, obj):
+        return obj.user.username
+
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+        instance.profile.save()
+
     def __str__(self):
         return self.user.__str__()
 
     def get_top_emotion(self):
         emotions = {"none": 0, "happiness": self.happiness, "sadness":self.sadness,
             "disgust":self.disgust, "anger":self.anger, "surprise":self.surprise}
-        return max(emotions, key=lambda key: emotions[key]) 
+        return max(emotions, key=lambda key: emotions[key])
 
 # Emotions for certain videos
 class ViewInstance(models.Model):
