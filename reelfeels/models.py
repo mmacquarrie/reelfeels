@@ -8,6 +8,7 @@ import uuid
 import datetime
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
+from django.contrib.auth.models import User
 
 # Videos
 class Video(models.Model):
@@ -61,13 +62,10 @@ class Profile(models.Model):
 
     date_joined = models.DateField(verbose_name='Date Joined', blank=False)
 
-    # username = models.CharField(max_length=50)
+    username = models.CharField(max_length=50)
 
     # TO-DO: decide where to put uploaded files
-    #profile_pic = models.ImageField(upload_to=profile_filename, null=True, blank=True,)
     profile_pic = models.ImageField(upload_to='profile_pictures/', null=True, blank=True,)
-
-    # TO-DO: figure out how to use encryption to store passwords
 
     happiness = models.IntegerField(verbose_name='Overall happiness', default=0)
     sadness = models.IntegerField(verbose_name='Overall sadness', default=0)
