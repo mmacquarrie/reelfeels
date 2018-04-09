@@ -98,6 +98,22 @@
     <br>
     {% endfor %}
 
+    <!-- insert comment form here -->
+    <!-- if the user is signed in we give them the form to make a new comment -->
+    {% if request.user.is_authenticated %}
+      <form id="comment-creation-form" method="post">
+          {% csrf_token %}
+          {{form}}
+          <button type="submit" class="btn btn-main btn-dark">Comment</button>
+      </form>
+      <h4 class="text-center"> Welcome User </h4>
+
+    <!-- if the user isn't signed in we tell them to sign in to comment -->
+    {% else %}
+      <h4 class="text-center"> Want to comment? <a href="{% url 'signup' %}">Sign Up!</a></h4>
+    {% endif %}
+    <!-- insert comment form here -->
+
 {% endblock %}
 
 {% block customjs %}

@@ -2,12 +2,13 @@ import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import Context
-from .models import Video, Profile
+from .models import Video, Profile, Comment
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from .forms import UserRegistrationForm
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm
+from .forms import CommentCreationForm
 
 def index(request):
     return render(request, 'index.html', {})
@@ -17,6 +18,42 @@ def video_content(request, video_id):
     video = get_object_or_404(Video, pk=video_id)
 
     uploader = video.uploader_id
+
+
+    #form content
+    if request.method == 'POST':
+        form = CommentCreationForm(request.POST)
+
+        if form.is_valid():
+            form_data = form.cleaned_data
+            new_comment = Comment()
+            new_comment.video_id = video
+            new_comment.commenter_id = request.user.profile.id
+            new_comment.content = form_data.get('comment')
+            new_comment.save()
+
+            return render(
+                request,
+                'video-content.html',
+                context={
+                    'form' : form,
+                    'video': video,
+                    # TO-DO:
+                    # current user's stats displayed in 'Your stats' tab...
+                    # 'your_happiness':cur_user.happiness,
+                    # 'your_sadness':cur_user.sadness,
+                    # 'your_disgust':cur_user.disgust,
+                    # 'your_surprise':cur_user.surprise,
+                    # 'your_anger':cur_user.anger,
+                    'uploader': uploader,
+                    'comment_list': video.comment_set.all,
+                }
+             )
+
+
+            #create a new comment using video, and the content from the form also need to get the comment creators  id 
+    #form content
+
 
     return render(
         request,

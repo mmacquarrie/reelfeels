@@ -33,3 +33,15 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('profile_pic','username', 'email','password1', 'password2')
+
+
+
+#creating the form to allow users to create new comments
+from .models import Comment
+
+class CommentCreationForm(forms.Form):
+    comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Comment'}))
+
+    class Meta:
+        model = Comment
+        fields = ('content')
