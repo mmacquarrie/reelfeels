@@ -103,10 +103,12 @@
     {% if request.user.is_authenticated %}
       <form id="comment-creation-form" method="post">
           {% csrf_token %}
-          {{form}}
+          <p>
+            <img class="comment-author-picture" src="{{request.user.profile.profile_pic.url}}">
+            {{form.comment}}
+          </p>
           <button type="submit" class="btn btn-main btn-dark">Comment</button>
       </form>
-      <h4 class="text-center"> Welcome User </h4>
 
     <!-- if the user isn't signed in we tell them to sign in to comment -->
     {% else %}

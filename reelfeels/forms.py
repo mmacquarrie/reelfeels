@@ -40,7 +40,7 @@ class SignUpForm(UserCreationForm):
 from .models import Comment
 
 class CommentCreationForm(forms.Form):
-    comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Comment'}))
+    comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Submit a public comment', 'size': '100'}))
 
     class Meta:
         model = Comment
