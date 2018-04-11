@@ -40,6 +40,9 @@ class Video(models.Model):
 
     class Meta:
         ordering = ["-date_shared"]
+        permissions = (
+            ("can_edit", "Can edit video"),
+        )
 
     def __str__(self):
         return self.title

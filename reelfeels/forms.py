@@ -4,7 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Video, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-    
+from django.views.generic.edit import UpdateView
+
 class UserRegistrationForm(forms.Form):
     username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class' : 'form-control required'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control required'}))
@@ -35,7 +36,6 @@ class SignUpForm(UserCreationForm):
         fields = ('profile_pic','username', 'email','password1', 'password2')
 
 
-
 #creating the form to allow users to create new comments
 from .models import Comment
 
@@ -45,3 +45,8 @@ class CommentCreationForm(forms.Form):
     class Meta:
         model = Comment
         fields = ('content')
+
+class VideoUpdateForm(UpdateView):
+    model = Video
+    fields = ['title', 'video_description']
+    template_name_suffix = '_update_form'

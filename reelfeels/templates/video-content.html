@@ -65,13 +65,18 @@
             <img class="comment-author-picture" src="{{ uploader.profile_pic.url }}">
           </a>
           <p>
-            <a href="{% url 'profile' uploader.id %}"><strong>{{ uploader.username }}</strong></a>
+            <a href="{% url 'profile' uploader.id %}"><strong>{{ uploader.user.username }}</strong></a>
           </p>
           <br>
         </div>
         <p>{{ video.video_description }}</p>
         <br />
         <small>Published on {{ video.date_shared }}</small>
+
+        {% if is_owner %}
+        <br/>
+          <a href="{{edit_url}}" class="btn-main btn">Edit video</a>
+        {% endif %}
       </div>
     </div>
   </div>

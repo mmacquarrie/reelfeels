@@ -5,10 +5,8 @@ from django.template import Context
 from .models import Video, Profile, Comment
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
-from .forms import UserRegistrationForm
 from django.contrib.auth import login, authenticate, logout
-from .forms import SignUpForm
-from .forms import CommentCreationForm
+from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, UserRegistrationForm
 
 def index(request):
     return render(request, 'index.html', {})
@@ -17,8 +15,15 @@ def video_content(request, video_id):
     # Get video object from url
     video = get_object_or_404(Video, pk=video_id)
 
+    #note that this references the profile, not the django user
     uploader = video.uploader_id
 
+    if (request.user == uploader.user):
+        is_owner = True
+        edit_url = request.get_full_path() + "/edit"
+    else:
+        is_owner = False
+        edit_url = "" #throws errors otherwise
 
     #form content
     if request.method == 'POST' and request.user.is_authenticated:
@@ -33,7 +38,7 @@ def video_content(request, video_id):
             new_comment.save()
 
 
-            #create a new comment using video, and the content from the form also need to get the comment creators  id 
+            #create a new comment using video, and the content from the form also need to get the comment creators  id
     #form content
 
     form = CommentCreationForm()
@@ -53,6 +58,8 @@ def video_content(request, video_id):
             # 'your_anger':cur_user.anger,
             'uploader': uploader,
             'comment_list': video.comment_set.all,
+            "is_owner": is_owner,
+            "edit_url": edit_url,
         }
     )
 
@@ -103,17 +110,24 @@ def logout_page(request):
     return redirect('home')
 
 def signup_page(request):
+    #If the form is being submitted, process it
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.refresh_from_db()  # load the profile instance created by the signal
+
+            # load the profile instance created by the signal in the profile model
+            user.refresh_from_db()
             user.profile.profile_pic = form.cleaned_data.get('profile_pic')
             user.save()
             raw_password = form.cleaned_data.get('password1')
+
+            #log the user in
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
             return redirect('home')
+
+    #Otherwise, display a new sign up form
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {"form":form})
@@ -127,7 +141,7 @@ def upload_page(request):
         message = "You must log in to upload videos"
         return render(request, 'login.html', {'form': form, 'message': message})
 
-    
+
 
 def search_page(request):
     search_query = request.GET.get('search-query')
@@ -162,3 +176,13 @@ def explore_page(request):
             "popular_videos": popular_videos,
         },
     )
+
+def video_edit(request, video_id):
+    video = get_object_or_404(Video, pk=video_id)
+
+    #If the user is trying to edit a video they own, proceed. Otherwise, deny access.
+    if (request.user == video.uploader_id.user):
+        form = VideoUpdateForm()
+        return render(request, "video_update_form.html", {})
+    else:
+        return render(request, "access_denied.html", {})
