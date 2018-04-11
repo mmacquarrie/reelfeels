@@ -16,10 +16,10 @@ from django.dispatch import receiver
 class Video(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    title = models.TextField(max_length=100, help_text='Insert video title here', verbose_name='Title')
+    title = models.TextField(max_length=100, help_text='Insert video title here', verbose_name='Title', default='An Emotional Video!')
 
     video_link = models.TextField(verbose_name='Link to Video', max_length=1000, help_text='Insert video link here')
-    video_description = models.TextField(max_length=1000, verbose_name="Video Description", null=True)
+    video_description = models.TextField(max_length=1000, verbose_name="Video Description", default='Am I happy? Sad? Disgusting?? Watch me to find out!')
 
     happiness = models.IntegerField(verbose_name='Global happiness', default=0)
     sadness = models.IntegerField(verbose_name='Global sadness', default=0)
@@ -27,7 +27,7 @@ class Video(models.Model):
     anger = models.IntegerField(verbose_name='Global anger', default=0)
     surprise = models.IntegerField(verbose_name='Global surprise', default=0)
 
-    last_updated_emotions = models.DateField(blank=False)
+    last_updated_emotions = models.DateField(null=True, default=datetime.date.today)
 
     yesterdays_views = models.IntegerField(verbose_name='Yesterdays views', default=0)
 
@@ -55,7 +55,7 @@ class Video(models.Model):
             "disgust":self.disgust, "anger":self.anger, "surprise":self.surprise}
         return max(emotions, key=lambda key: emotions[key])
 
-# TO-DO: find a way to delete this without it breaking
+# TO-DO: find a way to delete this without it breaking (or just check if deleting this is magically okay now)
 def profile_filename():
     return 'I exist because there is a weird migration conflict when I am not here'
 

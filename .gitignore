@@ -1,3 +1,4 @@
 .DS_Store
 secret_key.py
 __pycache__/
+db.sqlite3

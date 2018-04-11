@@ -15,11 +15,12 @@
 
 {% block content %}
 <div class="container-fluid">
-	<form id="upload-form">
+	<form id="upload-form" action="" method="post">
+		{% csrf_token %}
 		<fieldset id="fs1">
 			<div class="form-row justify-content-center">
 				<div class="form-group col-md-8">
-					<input type="text" class="form-control" id="video-url-input" placeholder="YouTube URL">
+					{{ form.video_url }}
 				</div>
 			</div>
 			<div class="form-row justify-content-center mt-2">
@@ -46,13 +47,16 @@
 			</div>
 			<div class="form-row justify-content-center mt-2">
 				<div class="form-group col-md-8">
-					<label for="upload-desc" class="text-center h5">Description:</label>
-					<textarea class="form-control" id="upload-desc"></textarea>
+					{{ form.video_title.label }}
+					{{ form.video_title }}
+					{{ form.video_description.label }}
+					{{ form.video_description }}
 				</div>
 				<input id="bug">
 			</div>
 			<div class="form-row justify-content-center my-4">
-				<a href="video"><button type="button" class="btn btn-lg btn-main" id="upload-submit-button">Share!</button></a>
+				<input type="hidden" id="video-url-code"/>
+				<button type="submit" class="btn btn-lg btn-main" id="upload-submit-button">Share!</button>
 			</div>
 		</fieldset>
 	</form>

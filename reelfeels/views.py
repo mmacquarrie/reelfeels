@@ -6,7 +6,8 @@ from .models import Video, Profile, Comment
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from django.contrib.auth import login, authenticate, logout
-from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, UserRegistrationForm
+from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, LoginForm
+from django.urls import reverse
 
 def index(request):
     return render(request, 'index.html', {})
@@ -85,7 +86,7 @@ def login_page(request):
         print('Post request received')
 
         # Create a form instance and populate it with data from the request (binding):
-        form = UserRegistrationForm(request.POST)
+        form = LoginForm(request.POST)
 
         if form.is_valid():
             form_data = form.cleaned_data
@@ -96,12 +97,12 @@ def login_page(request):
                 login(request, user)
                 return redirect('home')
             else:
-                form = UserRegistrationForm()
+                form = LoginForm()
                 message = "Invalid credentials :( Try again"
                 return render(request, 'login.html', {'form': form, 'message': message})
 
     # Else show form
-    form = UserRegistrationForm()
+    form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
 def logout_page(request):
@@ -133,11 +134,30 @@ def signup_page(request):
     return render(request, 'signup.html', {"form":form})
 
 def upload_page(request):
-
+    # if user is logged in, show the upload view
     if request.user.is_authenticated:
-        return render(request, 'upload.html', {})
+        # if user is submitting form
+        if request.method == 'POST':
+            form = VideoUploadForm(request.POST)
+            #have to pop this error since video_url is handled in a specific way by upload.js (url is verified in browser, then video_url is in request.POST)
+            form.errors.pop('video_url')
+            if form.is_valid():
+                new_video = Video()
+                new_video.title = form.cleaned_data.get('video_title')
+                new_video.video_link = request.POST.get('video_url')
+                new_video.video_description = form.cleaned_data.get('video_description')
+                new_video.uploader_id = request.user.profile
+                new_video.date_shared = datetime.date.today()
+                new_video.save()
+                return redirect(reverse('video', args=[new_video.id]))
+
+        # else if server is getting blank/default form for user to fill for the first time
+        else:
+            form = VideoUploadForm()
+        return render(request, 'upload.html', {'form':form})
+    # else if user is not logged in, take them to login view instead
     else:
-        form = UserRegistrationForm()
+        form = LoginForm()
         message = "You must log in to upload videos"
         return render(request, 'login.html', {'form': form, 'message': message})
 
