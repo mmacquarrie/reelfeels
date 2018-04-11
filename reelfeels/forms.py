@@ -5,6 +5,10 @@ from .models import Video, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
     
+"""
+The UserRegistrationForm class seems to be unecessary now that SignUpForm exists --> get rid of it?/replace with SignUpForm?
+"""
+
 class UserRegistrationForm(forms.Form):
     username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class' : 'form-control required'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control required'}))
@@ -42,9 +46,11 @@ from .models import Comment
 class CommentCreationForm(forms.Form):
     comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Submit a public comment', 'size': '100', 'maxlength':'1000'}))
 
-    class Meta:
-        model = Comment
-        fields = ('content')    
+    # This meta class probably does nothing: commenting out for now
+
+    # class Meta:
+    #     model = Comment
+    #     fields = ('content')    
 
 # form class for uploading a video
 class VideoUploadForm(forms.Form):
