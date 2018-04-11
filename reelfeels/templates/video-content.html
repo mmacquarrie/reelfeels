@@ -56,27 +56,29 @@
       </div>
     </div>
   </div>
+
   <!-- Creator info -->
-  <div class="row">
-    <div class="col-md-12">
-      <div id="creator-info">
-        <div id="creator-name">
-          <a href="{% url 'profile' uploader.id %}">
-            <img class="comment-author-picture" src="{{ uploader.profile_pic.url }}">
-          </a>
-          <p>
-            <a href="{% url 'profile' uploader.id %}"><strong>{{ uploader.username }}</strong></a>
-          </p>
-          <br>
-        </div>
-        <p>{{ video.video_description }}</p>
-        <br />
-        <small>Published on {{ video.date_shared }}</small>
+  <div class="container my-2 py-2 float-left" id="creator-info">
+    <div class="row align-items-end">
+      <div class="col-md-auto pr-0">
+        <a href="{% url 'profile' uploader.id %}">
+          <img class="comment-author-picture" src="{{ uploader.profile_pic.url }}">
+        </a>
+        <br/>
+      </div>
+          <div class="col-md-auto pl-0 pb-1 align-self-center">
+            <small>Uploaded by</small> <a id="username-link" href="{% url 'profile' uploader.id %}"><strong>{{ uploader.user }}</strong></a><small> on {{ video.date_shared }}</small>
+          </div>
+      </div>
+    <div class="row">
+      <div class="col-md-auto mt-2">
+        <p id="desc_p">{{ video.video_description }}</p>
       </div>
     </div>
   </div>
 
-  <hr/>
+  <!--those breaks below seem to be necessary, possibly because the whole comments div below is not properly sest up with Bootstrap stuff (container, rows, cols, etc.)-->
+  <br><br><br><br><br><br>
 
   <!-- Comments -->
   <div id="comments-section">
@@ -115,6 +117,7 @@
       <h4 class="text-center"> Want to comment? <a href="{% url 'signup' %}">Sign Up!</a></h4>
     {% endif %}
     <!-- insert comment form here -->
+  </div>
 
 {% endblock %}
 

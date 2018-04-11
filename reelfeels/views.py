@@ -7,8 +7,8 @@ from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from .forms import UserRegistrationForm
 from django.contrib.auth import login, authenticate, logout
-from .forms import SignUpForm
-from .forms import CommentCreationForm
+from .forms import SignUpForm, CommentCreationForm, VideoUploadForm
+from django.urls import reverse
 
 def index(request):
     return render(request, 'index.html', {})
@@ -119,9 +119,28 @@ def signup_page(request):
     return render(request, 'signup.html', {"form":form})
 
 def upload_page(request):
-
+    # if user is logged in, show the upload view
     if request.user.is_authenticated:
-        return render(request, 'upload.html', {})
+        # if user is submitting form
+        if request.method == 'POST':
+            form = VideoUploadForm(request.POST)
+            #have to pop this error since video_url is handled in a specific way by upload.js (url is verified in browser, then video_url is in request.POST)
+            form.errors.pop('video_url')
+            if form.is_valid():
+                new_video = Video()
+                new_video.title = form.cleaned_data.get('video_title')
+                new_video.video_link = request.POST.get('video_url')
+                new_video.video_description = form.cleaned_data.get('video_description')
+                new_video.uploader_id = request.user.profile
+                new_video.date_shared = datetime.date.today()
+                new_video.save()
+                return redirect(reverse('video', args=[new_video.id]))
+
+        # else if server is getting blank/default form for user to fill for the first time
+        else:
+            form = VideoUploadForm()
+        return render(request, 'upload.html', {'form':form})
+    # else if user is not logged in, take them to login view instead
     else:
         form = UserRegistrationForm()
         message = "You must log in to upload videos"

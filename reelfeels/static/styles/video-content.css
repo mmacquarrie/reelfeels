@@ -1,16 +1,18 @@
-#content-row {
-    width: 100%;
-    height: 100%;
+#creator-info{
+    background-color: #f9f9f9;
+    border: 1px solid #e8e8e8; 
 }
 
 #creator-info img {
-    max-height: 50px;
-    max-width: 50px;
-    display: inline-block;
+    max-height: 60px;
+    max-width: 60px;
 }
 
-#creator-info p {
-    display: inline-block;
+#desc_p {
+    padding: 5px;
+    background-color: #9D71C0;
+    color: white;
+    border-radius: 3px;
 }
 
 #comments-section div {
@@ -22,8 +24,12 @@
 }
 
 .comment-author-picture {
-    max-height: 50px;
-    max-width: 50px;
+    max-height: 60px;
+    max-width: 60px;
+    border-style: double;
+	border-color: #9D71C0;
+    border-width: 3px;
+    border-radius: 5px;
 }
 
 /* Comment bubble */
@@ -64,6 +70,10 @@
     padding-top:30px;
     height:0;
     overflow:hidden;
+    border-style: solid;
+	border-color: #80aaff;
+    border-width: 5px;
+    border-radius: 5px;
 }
 
 .video-container iframe{
@@ -105,8 +115,4 @@
 
 .tab button.tablinks{
     width:50%;
-}
-
-#creator-name{
-    background-color: #f9f9f9;
 }

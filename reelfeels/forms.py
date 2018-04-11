@@ -40,8 +40,14 @@ class SignUpForm(UserCreationForm):
 from .models import Comment
 
 class CommentCreationForm(forms.Form):
-    comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Submit a public comment', 'size': '100'}))
+    comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Submit a public comment', 'size': '100', 'maxlength':'1000'}))
 
     class Meta:
         model = Comment
-        fields = ('content')
+        fields = ('content')    
+
+# form class for uploading a video
+class VideoUploadForm(forms.Form):
+    video_url = forms.URLField(widget=forms.URLInput(attrs={'class':'form-control', 'placeholder':'YouTube URL...', 'id':'video-url-input'}))
+    video_title = forms.CharField(label='Title:', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Upload Title...'}))
+    video_description = forms.CharField(label='Description:', widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Upload Description...', 'id':'upload-desc', 'maxlength':'1000', 'rows':'5'}))

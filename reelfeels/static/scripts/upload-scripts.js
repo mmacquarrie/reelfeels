@@ -22,6 +22,10 @@ $(document).ready(function(){
 
     //really strange bug that requires this input to exist in order for 'enter' key to work...
     $("#bug").hide();
+
+    //have video-url-input (text field) give its 'name' to the hidden input field so that the hidden input is the one submitted when user clicks submit (instead of the user text input field) (needs to be done to submit just the video code part of the YouTube url instead of the entire link)
+    $('#video-url-code').attr('name', $('#video-url-input').attr('name'));
+    $('#video-url-input').attr('name', '');
 });
 
 //script for validating YouTube URLs and replacing embedded src with new url
@@ -31,11 +35,11 @@ function validateYouTubeUrl(){
     if (url != undefined || url != '') {
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
         var match = url.match(regExp);
-        if (match && match[2].length == 11) {
+        if (match && match[2].length == 11) {   
              $("#video-preview").attr("src", "https://www.youtube.com/embed/" + match[2] + "?autoplay=0");
-            
-            //insert YouTube code to URL when you click 'Share!' button
-            /***! UN-COMMENT LATER !***/ //$("a").attr("href", "video/#"+match[2]);
+
+            //for passing YouTube video code to the Django form to be handled
+            $('#video-url-code').attr('value', match[2]);
 
             //toggle the form now that a valid URL was input
             toggleForm();
