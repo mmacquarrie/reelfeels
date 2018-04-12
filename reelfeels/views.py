@@ -7,8 +7,8 @@ from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, LoginForm, VideoUploadForm
-from django.urls import reverse
-from django.views.generic.edit import UpdateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import UpdateView, DeleteView
 
 def index(request):
     return render(request, 'index.html', {})
@@ -23,9 +23,11 @@ def video_content(request, video_id):
     if (request.user == uploader.user):
         is_owner = True
         edit_url = request.get_full_path() + "/edit"
+        delete_url = request.get_full_path() + "/delete"
     else:
         is_owner = False
         edit_url = "" #throws errors otherwise
+        delete_url = ""
 
     #form content
     if request.method == 'POST' and request.user.is_authenticated:
@@ -62,6 +64,7 @@ def video_content(request, video_id):
             'comment_list': video.comment_set.all,
             "is_owner": is_owner,
             "edit_url": edit_url,
+            "delete_url":delete_url,
         }
     )
 
@@ -218,3 +221,15 @@ class VideoUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('video', kwargs={'video_id': self.object.id})
+
+class VideoDelete(DeleteView):
+    model = Video
+    template_name = 'video_confirm_delete.html'
+    success_url = reverse_lazy('explore')
+    #would be better to redirect to profile or a success page but I can't get it to work
+
+    def get_object(self, queryset=None):
+        obj = super(VideoDelete, self).get_object()
+        if not obj.uploader_id.user == self.request.user:
+            raise Http404
+        return obj

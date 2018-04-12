@@ -81,6 +81,12 @@
   font-size:1.5rem;
 }
 
+.video-delete-link{
+  position: relative;
+  padding: 10px;
+  font-size:1.5rem;
+}
+
 a.video-edit-link:hover{
   color: #9D71C0 !important;
 }
