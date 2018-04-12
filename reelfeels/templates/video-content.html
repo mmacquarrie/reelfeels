@@ -83,12 +83,12 @@
     <!-- insert text box here -->
     {% for comment in comment_list %}
       <div class="row">
-        <div class="col-md-1 ml-auto">
+        <div class="col-md-1 col-sm-3 ml-auto">
           <a href="{% url 'profile' comment.commenter_id.id %}">
             <img class="video-avatar-comment video-avatar img-fluid" src="{{ comment.commenter_id.profile_pic.url }}">
           </a>
         </div>
-        <div class="col-md-10 mr-auto">
+        <div class="col-md-10 col-sm-9 mr-auto">
           <div class="comment-bubble">
             <a href="{% url 'profile' comment.commenter_id.id %}" class="commenter-author-name">
               <strong>{{ comment.commenter_id.user.username }}:</strong>
@@ -106,11 +106,11 @@
     <form id="comment-creation-form" method="post">
       {% csrf_token %}
       <div class="row">
-        <div class="col-md-1 ml-auto">
+        <div class="col-md-1 col-sm-3 ml-auto">
             <img class="video-avatar-comment video-avatar img-fluid" src="{{request.user.profile.profile_pic.url}}">
         </div>
 
-        <div class="col-md-10 mr-auto">
+        <div class="col-md-10 col-sm-9 mr-auto">
           <div class="comment-bubble comment-bubble-form">
             {{form.comment}}
 
