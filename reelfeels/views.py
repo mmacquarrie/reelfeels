@@ -1,5 +1,5 @@
 import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import Context
 from .models import Video, Profile, Comment
@@ -8,6 +8,7 @@ from urllib.parse import parse_qs, urlparse
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, LoginForm, VideoUploadForm
 from django.urls import reverse
+from django.views.generic.edit import UpdateView
 
 def index(request):
     return render(request, 'index.html', {})
@@ -196,13 +197,24 @@ def explore_page(request):
             "popular_videos": popular_videos,
         },
     )
+class VideoUpdate(UpdateView):
+    model = Video
+    form_class = VideoUpdateForm
+    template_name = 'video_update_form.html'
 
-def video_edit(request, video_id):
-    video = get_object_or_404(Video, pk=video_id)
 
-    #If the user is trying to edit a video they own, proceed. Otherwise, deny access.
-    if (request.user == video.uploader_id.user):
-        form = VideoUpdateForm()
-        return render(request, "video_update_form.html", {})
-    else:
-        return render(request, "access_denied.html", {})
+    def get_initial(self):
+        initial = super(VideoUpdate, self).get_initial()
+
+        # retrieve current object
+        video_object = self.get_object()
+
+        initial['title'] = video_object.title
+        initial['video_description'] = video_object.video_description
+
+        if video_object.uploader_id.user != self.request.user:
+            raise Http404()
+        return initial
+
+    def get_success_url(self):
+        return reverse('video', kwargs={'video_id': self.object.id})

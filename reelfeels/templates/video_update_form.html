@@ -1,5 +1,26 @@
-<form action="" method="post">
-  {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update" />
-</form>
+{% extends "base_template.html" %}
+
+{% block title %}<title>Edit Video</title>{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row mb-25">
+    <div class="col-md-8 ml-auto mr-auto">
+      <h2 class="text-center">Edit Video Details</h2>
+      <form action="" method="post" class="form-control">
+        {% csrf_token %}
+          {{form.title.label}}
+          {{ form.title}}
+
+          {{form.video_description.label}}
+          {{ form.video_description}}
+          <br/>
+          <div class="text-center">
+            <input type="submit" value="Update" class="btn btn-main" />
+          </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

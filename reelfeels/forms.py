@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Video, Profile, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import UpdateView
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class' : 'form-control required'}))
@@ -52,7 +51,24 @@ class VideoUploadForm(forms.Form):
     video_title = forms.CharField(label='Title:', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Upload Title...'}))
     video_description = forms.CharField(label='Description:', widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Upload Description...', 'id':'upload-desc', 'maxlength':'1000', 'rows':'5'}))
 
-class VideoUpdateForm(UpdateView):
-    model = Video
-    fields = ['title', 'video_description']
-    template_name_suffix = '_update_form'
+
+class VideoUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = ( 'title', 'video_description')
+        widgets = {
+            'title': forms.Textarea(attrs={'cols': 10, 'rows': 2, 'class': 'form-control'}),
+            'video_description': forms.Textarea(attrs={'cols': 10, 'rows': 10, 'class': 'form-control'}),
+        }
+        labels = {
+            'title': _('Title'),
+            'video_description': _('Description'),
+        }
+
+    def clean(self):
+        cleaned_data = super(VideoUpdateForm, self).clean()
+
+        title = cleaned_data.get('title')
+        video_description = cleaned_data.get('video_description')
+
+        return cleaned_data
