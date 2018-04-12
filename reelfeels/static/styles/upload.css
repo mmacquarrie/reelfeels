@@ -9,14 +9,6 @@
     background-color: #9D71C0;
 }
 
-.btn-main{
-    color: rgba(255,255,255,.5);
-}
-
-.btn-main:hover{
-    color: #fff;
-}
-
 /*top padding for url input*/
 #fs1{
     padding-top: 10%;
