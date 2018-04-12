@@ -17,6 +17,10 @@
 	margin-bottom: 25px;
 }
 
+.mt-10{
+	margin-top:10px;
+}
+
 .navbar{
 	background-color: #B5428B;
 }
@@ -39,6 +43,16 @@ img.emoticon{
 p.form-error{
 	color: red;
 }
+
+a {
+	color: #B5428B;
+}
+
+a:hover{
+	text-decoration: none;
+	color: #9D71C0
+}
+
 
 
 /* HEADER */

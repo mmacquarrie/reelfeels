@@ -6,7 +6,7 @@ from .models import Video, Profile, Comment
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from django.contrib.auth import login, authenticate, logout
-from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, LoginForm
+from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, LoginForm, VideoUploadForm
 from django.urls import reverse
 
 def index(request):
