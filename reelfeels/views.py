@@ -225,11 +225,13 @@ class VideoUpdate(UpdateView):
 class VideoDelete(DeleteView):
     model = Video
     template_name = 'video_confirm_delete.html'
-    success_url = reverse_lazy('explore')
-    #would be better to redirect to profile or a success page but I can't get it to work
 
     def get_object(self, queryset=None):
         obj = super(VideoDelete, self).get_object()
         if not obj.uploader_id.user == self.request.user:
             raise Http404
         return obj
+
+    def get_success_url(self):
+        obj = super(VideoDelete, self).get_object()
+        return reverse_lazy('profile', args=[obj.uploader_id.id])
