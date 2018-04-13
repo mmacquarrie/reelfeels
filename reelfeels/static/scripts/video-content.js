@@ -44,7 +44,7 @@ var chartOptions = {
     series: {5: {type: 'line'}},
     animation: {
         startup: true,
-        duration: 500,
+        duration: 25,
         easing: "out",
 
     }
@@ -60,14 +60,15 @@ var userEmotionsData = [
     ['Surprise', 0, '#8e24aa']
 ];
 
+//fake data currently
 var generalEmotionsData = [
     ['Emotion', 'Level', {role: "style"}],
-    ['Joy', 0, "#fff176"],
-    ['Sadness', 0, "#1565c0"],
-    ['Disgust', 0, "#388e3c"],
-    ['Anger', 0, "#d32f2f"],
-    //['Fear', 0, "#8e24aa"]
-    ['Surprise', 0, '#8e24aa']
+    ['Joy', 30, "#fff176"],
+    ['Sadness', 60, "#1565c0"],
+    ['Disgust', 90, "#388e3c"],
+    ['Anger', 60, "#d32f2f"],
+    //['Fear', 30, "#8e24aa"]
+    ['Surprise', 30, '#8e24aa']
 ];
 
 var userChartTable, generalChartTable;
@@ -80,20 +81,19 @@ function drawInitial() {
     userChart = new google.visualization.ColumnChart(document.getElementById('user-emotions-chart'));
     generalChart = new google.visualization.ColumnChart(document.getElementById('general-emotions-chart'));
     
-    //commented out initial draw for now (it doens't draw until Affectiva is ready)
-    //userChart.draw(userChartTable, chartOptions);
+    //for now, starts by drawing user chart with all zeroes
+    userChart.draw(userChartTable, chartOptions);
     generalChart.draw(generalChartTable, chartOptions);
 }
 
 // Open default tab
 document.getElementById("defaultOpen").click();
 
-/***                          ***
- *** Affectiva Implementation *** 
- ***                          ***/
+/** --- Affectiva Implementation --- **/
+
 var divRoot = $('#affdex_elements')[0];
 
-//get width and height from the css for this div element
+//get width and height from the css for this div element (kind of irrelevant since the cam feed is hidden, but required)
 var width = $('#affdex_elements').width();
 var height = $('#affdex_elements').height();
 
@@ -105,11 +105,18 @@ var detector = new affdex.CameraDetector(divRoot, width, height, faceMode);
 //we only care about the emotions
 detector.detectAllEmotions();
 
+//this event is when Affecitva is ready
 detector.addEventListener('onInitializeSuccess', function(){
     console.log('Affectiva emotion detector successfully initialized :)')
     
-    //update the user emotions chart every ms time interval
-    setInterval(updateEmotionsChart, 10);
+    //start updating the current emotions chart every 'interval' milliseonds
+    let interval = 10;
+    setInterval(
+        function(){
+            userChart.draw(userChartTable, chartOptions);
+        },
+        interval
+    );
 });
 
 detector.addEventListener('onWebcamConnectSuccess', function(){
@@ -118,18 +125,19 @@ detector.addEventListener('onWebcamConnectSuccess', function(){
 
 detector.addEventListener('onWebcamConnectFailure', function(){
     console.log('Unable to connect to webcam :(');
+    alert("Couldn't access a webcam :'(");
 });
 
 //faces array contains the data processed from the webcam feed
 detector.addEventListener('onImageResultsSuccess', function(faces, image, timestamp){
     if(faces.length > 0){
         //update the user emotions data (from 1 face)
-        let joy = faces[0].emotions['joy'];
-        let sadness = faces[0].emotions['sadness'];
-        let disgust = faces[0].emotions['disgust'];
-        let anger = faces[0].emotions['anger'];
-        //let fear = faces[0].emotions['fear'];
-        let surprise = faces[0].emotions['surprise'];
+        let joy = Math.round(faces[0].emotions['joy']);
+        let sadness = Math.round(faces[0].emotions['sadness']);
+        let disgust = Math.round(faces[0].emotions['disgust']);
+        let anger = Math.round(faces[0].emotions['anger']);
+        //let fear = Math.round(faces[0].emotions['fear']);
+        let surprise = Math.round(faces[0].emotions['surprise']);
 
         userChartTable.setValue(0, 1, joy);
         userChartTable.setValue(1, 1, sadness);
@@ -138,24 +146,21 @@ detector.addEventListener('onImageResultsSuccess', function(faces, image, timest
         //userChartTable.setValue(4, 1, fear);
         userChartTable.setValue(4, 1, surprise);
 
-        /*
-        userEmotionsData[1] = ['Joy', joy, "#fff176"];
-        userEmotionsData[2] = ['Sadness', sadness, "#1565c0"];
-        userEmotionsData[3] = ['Disgust', disgust, "#388e3c"];
-        userEmotionsData[4] = ['Anger', anger, "#d32f2f"];
-        userEmotionsData[5] = ['Fear', fear, "#8e24aa"];
-        */
+        //upadte numbers display
+        $('#user-joy').html(joy);
+        $('#user-sadness').html(sadness);
+        $('#user-disgust').html(disgust);
+        $('#user-anger').html(anger);
+        //$('#user-fear').html(fear);
+        $('#user-surprise').html(surprise);
     }       
 });
 
-var updateEmotionsChart = function(){
-    //let userChartTable = google.visualization.arrayToDataTable(userEmotionsData);
-    userChart.draw(userChartTable, chartOptions);
-}
-
-//start the detector
+//on page load
 $(document).ready(function(){
+    //start the detector
     detector.start();
-    //hide the face cam
+
+    //hide the face cam (div)
     $('#affdex_elements').hide();
 });
