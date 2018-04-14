@@ -39,12 +39,6 @@ class SignUpForm(UserCreationForm):
 class CommentCreationForm(forms.Form):
     comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Submit a public comment', 'size': '100', 'maxlength':'1000'}))
 
-    # This meta class probably does nothing: commenting out for now
-
-    # class Meta:
-    #     model = Comment
-    #     fields = ('content')
-
 # form class for uploading a video
 class VideoUploadForm(forms.Form):
     video_url = forms.URLField(widget=forms.URLInput(attrs={'class':'form-control', 'placeholder':'YouTube URL...', 'id':'video-url-input'}))
@@ -72,3 +66,13 @@ class VideoUpdateForm(forms.ModelForm):
         video_description = cleaned_data.get('video_description')
 
         return cleaned_data
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('profile_pic', )
