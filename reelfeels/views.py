@@ -264,24 +264,3 @@ def update_profile(request):
         message = "You must log in to update your account"
         return render(request, 'login.html', {'form': form, 'message': message})
 
-# def update_profile(request):
-#     if request.user.is_authenticated:
-#         if request.method == 'POST':
-#             user_form = UserUpdateForm(request.POST, instance=request.user)
-#             profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
-#             if user_form.is_valid() and profile_form.is_valid():
-#                 user_form.save()
-#                 profile_form.save()
-#                 return redirect('home')
-#         else:
-#             user_form = UserUpdateForm(instance=request.user)
-#             profile_form = ProfileUpdateForm(instance=request.user.profile)
-#         return render(request, 'user-update-form.html', {
-#             'user_form': user_form,
-#             'profile_form': profile_form
-#         })
-
-#     else:
-#         form = LoginForm()
-#         message = "You must log in to update your account"
-#         return render(request, 'login.html', {'form': form, 'message': message})

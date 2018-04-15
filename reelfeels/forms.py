@@ -63,8 +63,6 @@ class UserUpdateForm(forms.ModelForm):
         fields = ('email', 'password')
 
 class ProfileUpdateForm(forms.ModelForm):
-    profilePicture = forms.ImageField(required=False)
-
     class Meta:
         model = Profile
         fields = ('profile_pic',)
