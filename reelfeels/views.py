@@ -117,13 +117,13 @@ def logout_page(request):
 def signup_page(request):
     #If the form is being submitted, process it
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
 
             # load the profile instance created by the signal in the profile model
             user.refresh_from_db()
-            #user.profile.profile_pic = form.cleaned_data.get('profile_pic')
+            user.profile.profile_pic = form.cleaned_data.get('profile_pic')
             user.save()
             raw_password = form.cleaned_data.get('password1')
 

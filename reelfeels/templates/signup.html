@@ -12,16 +12,16 @@
     <div class="col-md-5 mr-auto">
       <h2 class="text-center"> Create an account </h2>
 
-      <form id="user-creation-form"  class="text-center" method="post" action="">
+      <form id="user-creation-form"  class="text-center" method="post" action="" enctype="multipart/form-data">
           {% csrf_token %}
 
-          <!--<label for="profile-pic" class="hidden">Profile picture</label>
+          <label for="profile-pic" class="hidden">Profile picture</label>
           <div class="profile-pic-upload-wrap">
-            form.profile_pic
+            {{ form.profile_pic }}
             <p><i class="fas fa-image"></i></p>
           </div>
           <small style="color: grey">(Optional)</small>
-          <p class="form-error">{{form.profile_pic.errors|striptags}}</p>-->
+          <p class="form-error">{{form.profile_pic.errors|striptags}}</p>
 
           <label for="email" class="hidden">Email</label>
           {{form.email}}
