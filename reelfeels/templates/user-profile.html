@@ -15,7 +15,11 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 col-xs-12">
-      <img src="{{user.profile_pic.url}}" class='profile-pic mx-auto d-block'>
+      {% if user.profile_pic %}
+        <img src="{{user.profile_pic.url}}" class='profile-pic mx-auto d-block'>
+      {% else %}
+        <img src="{% static 'media/profile_pictures/default.png' %}" class='profile-pic mx-auto d-block'>
+      {% endif %}
       <h4 class="user-details">{{user.username}}</h4>
       <h5 class="user-details">Favorite Emotion: {{user.get_top_emotion}}
         <img src="{% static 'images/emoticons/'|add:user.get_top_emotion|add:'-small.png' %}" class="emoticon">
