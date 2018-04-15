@@ -123,7 +123,7 @@ def signup_page(request):
 
             # load the profile instance created by the signal in the profile model
             user.refresh_from_db()
-            user.profile.profile_pic = form.cleaned_data.get('profile_pic')
+            #user.profile.profile_pic = form.cleaned_data.get('profile_pic')
             user.save()
             raw_password = form.cleaned_data.get('password1')
 

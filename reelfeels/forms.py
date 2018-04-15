@@ -10,7 +10,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control required'}))
 
 class SignUpForm(UserCreationForm):
-    profile_pic = forms.ImageField(required=False)
+    #profile_pic = forms.ImageField(required=False)
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Email', 'class' : 'form-control'}))
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Username', 'class' : 'form-control'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'class' : 'form-control'}))
@@ -18,7 +18,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('profile_pic','username', 'email','password1', 'password2')
+        fields = ('username', 'email','password1', 'password2')
 
 
 #creating the form to allow users to create new comments
