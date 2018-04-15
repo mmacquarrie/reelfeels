@@ -53,12 +53,18 @@ class VideoUpdateForm(forms.ModelForm):
 
         return cleaned_data
 
+
 class UserUpdateForm(forms.ModelForm):
+    email = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ('email', 'password')
 
 class ProfileUpdateForm(forms.ModelForm):
+    profilePicture = forms.ImageField(required=False)
+
     class Meta:
         model = Profile
-        fields = ('profile_pic', )
+        fields = ('profile_pic',)

@@ -7,12 +7,12 @@
   <div class="row mb-25">
     <div class="col-md-8 ml-auto mr-auto">
       <h2 class="text-center">Edit Profile Details</h2>
-      <form method="post">
-  {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ profile_form.as_p }}
-  <button type="submit">Save changes</button>
-</form>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+      <button type="submit">Save changes</button>
+      </form>
     </div>
   </div>
 </div>
