@@ -71,11 +71,14 @@ def video_content(request, video_id):
 def user_profile(request, user_id):
     profile = get_object_or_404(Profile, id=user_id)
 
+    is_owner = (profile == request.user.profile)
+    print (is_owner)
     return render(
         request,
         'user-profile.html',
         context={
             'user': profile,
+            'is_owner': is_owner
         }
     )
 
@@ -249,7 +252,7 @@ def update_profile(request):
                 user.set_password(user_form.cleaned_data.get('password'))
                 user.save()
                 profile_form.save()
-                return redirect('home')
+                return redirect('profile', args=[request.user.id])
 
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
@@ -258,9 +261,8 @@ def update_profile(request):
             'user_form' : user_form,
             'profile_form' : profile_form
         })
-    
+
     else:
         form = LoginForm()
         message = "You must log in to update your account"
         return render(request, 'login.html', {'form': form, 'message': message})
-

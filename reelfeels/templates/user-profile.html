@@ -24,6 +24,11 @@
       <h5 class="user-details">Favorite Emotion: {{user.get_top_emotion}}
         <img src="{% static 'images/emoticons/'|add:user.get_top_emotion|add:'-small.png' %}" class="emoticon">
       </h5>
+      {% if is_owner %}
+        <div class="video-edit-link-wrap text-center">
+          <a href="{% url 'profile-update' %}" class='video-edit-link'><i class="fas fa-edit"></i> Edit Profile</a>
+        </div>
+      {% endif %}
     </div>
     <div class="col-md-4"></div>
   </div>
