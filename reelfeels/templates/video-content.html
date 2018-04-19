@@ -17,7 +17,8 @@
     <!-- Video -->
     <div class="col-lg-8 col-md-7 col-xs-12">
       <div class="video-container">
-        <iframe  src="https://www.youtube.com/embed/{{ video.video_link }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="player" src="https://www.youtube.com/embed/{{ video.video_link }}?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <p id="video-code" hidden>{{ video.video_link }}</p> <!-- a hacky way of passing this value into the javascript... -->
       </div>
     </div>
 
