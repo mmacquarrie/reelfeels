@@ -99,7 +99,7 @@ def login_page(request):
 
     # If the user is already logged in
     if request.user.is_authenticated:
-        return(request, 'index.html', {})
+        return render(request, 'my-profile', {})
 
     # If this is a POST request then process the Form data
     if request.method == 'POST':
