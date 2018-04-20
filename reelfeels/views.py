@@ -132,7 +132,9 @@ def logout_page(request):
 
 def signup_page(request):
     #If the form is being submitted, process it
-    if request.method == 'POST':
+    if request.user.is_authenticated:
+        return redirect('my-profile')
+    elif request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
