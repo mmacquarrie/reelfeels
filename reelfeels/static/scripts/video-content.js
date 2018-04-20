@@ -107,30 +107,41 @@ detector.detectAllEmotions();
 
 //this event is when Affecitva is ready
 detector.addEventListener('onInitializeSuccess', function(){
-    console.log('Affectiva emotion detector successfully initialized :)')
+    //console.log('Affectiva emotion detector successfully initialized :)')
     
     //start updating the current emotions chart every 'interval' milliseonds
     let interval = 10;
     setInterval(
         function(){
             userChart.draw(userChartTable, chartOptions);
+            
+            // Set number displays to 'Paused' when video is not playing
+            if(!videoPlaying){
+                $('#user-joy').html('<i>Paused</i>');
+                $('#user-sadness').html('<i>Paused</i>');
+                $('#user-disgust').html('<i>Paused</i>');
+                $('#user-anger').html('<i>Paused</i>');
+                $('#user-surprise').html('<i>Paused</i>');
+            }
         },
         interval
     );
 });
 
 detector.addEventListener('onWebcamConnectSuccess', function(){
-    console.log('Successfully connected to webcam :)');
+    //console.log('Successfully connected to webcam :)');
 });
 
 detector.addEventListener('onWebcamConnectFailure', function(){
-    console.log('Unable to connect to webcam :(');
+    //console.log('Unable to connect to webcam :(');
     alert("Couldn't access a webcam :'(");
 });
 
+var videoPlaying = false;
+
 //faces array contains the data processed from the webcam feed
 detector.addEventListener('onImageResultsSuccess', function(faces, image, timestamp){
-    if(faces.length > 0){
+    if(faces.length > 0 && videoPlaying){
         //update the user emotions data (from 1 face)
         let joy = Math.round(faces[0].emotions['joy']);
         let sadness = Math.round(faces[0].emotions['sadness']);
@@ -146,14 +157,14 @@ detector.addEventListener('onImageResultsSuccess', function(faces, image, timest
         //userChartTable.setValue(4, 1, fear);
         userChartTable.setValue(4, 1, surprise);
 
-        //upadte numbers display
+        //update numbers display
         $('#user-joy').html(joy);
         $('#user-sadness').html(sadness);
         $('#user-disgust').html(disgust);
         $('#user-anger').html(anger);
         //$('#user-fear').html(fear);
         $('#user-surprise').html(surprise);
-    }       
+    }
 });
 
 //on page load
@@ -163,4 +174,38 @@ $(document).ready(function(){
 
     //hide the face cam (div)
     $('#affdex_elements').hide();
+
+    // Loads the IFrame Player API code asynchronously (from https://stackoverflow.com/a/30991021 and/or Google's YouTube Iframe Player API reference pages)
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 });
+
+// Use the YouTube Iframe API to detect whether the video is currently playing
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+// This function runs when the Iframe YouTube player is ready/initialized
+function onPlayerReady(event){  
+    //event.target.playVideo();
+    //un-comment above if you want video to play immediately on page load (other options available too if we need to do anything to the video iframe on page load...)
+}
+
+// This function runs when the player changes between playing and paused
+function onPlayerStateChange(event) {
+    if(event.data === YT.PlayerState.PLAYING) {
+        //mark the boolean as true so we know the video is currently playing
+        videoPlaying = true;
+    }
+    else{
+        videoPlaying = false;
+    }
+}
