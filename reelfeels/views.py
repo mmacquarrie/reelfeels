@@ -9,6 +9,7 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, LoginForm, VideoUploadForm, UserUpdateForm, ProfileUpdateForm
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     return render(request, 'index.html', {})
@@ -220,38 +221,28 @@ class VideoUpdate(UpdateView):
     form_class = VideoUpdateForm
     template_name = 'video_update_form.html'
 
-    def get_initial(self):
-        if self.uploader_id.user != self.request.user:
-            return HttpResponseForbidden()
-        else:
-            initial = super(VideoUpdate, self).get_initial()
-
-            # retrieve current object
-            video_object = self.get_object()
-
-            initial['title'] = video_object.title
-            initial['video_description'] = video_object.video_description
-
-
-            return initial
-
     def get_success_url(self):
-        return reverse('video', args={},    kwargs={'video_id': self.object.id})
+        return reverse('video', kwargs={'video_id': self.object.id})
+
+    def get_object(self, *args, **kwargs):
+        obj = super(VideoUpdate, self).get_object(*args, **kwargs)
+        if not obj.uploader_id.user == self.request.user:
+            raise Http404()
+        return obj
 
 class VideoDelete(DeleteView):
     model = Video
     template_name = 'video_confirm_delete.html'
 
-    def get_object(self, queryset=None):
-        obj = super(VideoDelete, self).get_object()
-        if not obj.uploader_id.user == self.request.user:
-            return HttpResponseForbidden()
-        return obj
-
     def get_success_url(self):
         obj = super(VideoDelete, self).get_object()
-        return reverse_lazy('profile', args=[obj.uploader_id.id])
+        return reverse_lazy('my-profile')
 
+    def get_object(self, *args, **kwargs):
+        obj = super(VideoDelete, self).get_object(*args, **kwargs)
+        if not obj.uploader_id.user == self.request.user:
+            raise Http404()
+        return obj
 
 def update_profile(request):
     if request.user.is_authenticated:

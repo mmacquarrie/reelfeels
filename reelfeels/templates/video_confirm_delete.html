@@ -18,7 +18,7 @@
         {% csrf_token %}
         <br/>
         <div class="text-center">
-          <h6>Are you sure you want to delete <a href="{% url 'video' object.id %}">{{ object }}</a>?</h6>
+          <h6>Are you sure you want to delete <a href="{% url 'video' object.id%}">{{ object }}</a>?</h6>
         </div>
         <div class="text-center">
           <input type="submit" value="Confirm" class="btn btn-main" />
