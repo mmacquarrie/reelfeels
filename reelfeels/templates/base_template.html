@@ -44,7 +44,7 @@
           <ul class="navbar-nav">
           {% if request.user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile' request.user.profile.id %}" data-navlink="profile"><i class="fas fa-user"></i> Profile </a>
+                <a class="nav-link" href="{% url 'my-profile' %}" data-navlink="my-profile"><i class="fas fa-user"></i> Profile </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Log Out</a>

@@ -1,5 +1,5 @@
 import datetime
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import Context
 from .models import Video, Profile, Comment
@@ -69,7 +69,19 @@ def video_content(request, video_id):
     )
 
 def user_profile(request, user_id):
+    is_owner = (request.user.is_authenticated) and (user_id == request.user.id)
     profile = get_object_or_404(Profile, id=user_id)
+    return render(
+        request,
+        'user-profile.html',
+        context={
+            'user': profile,
+            'is_owner': is_owner
+        }
+    )
+
+def my_profile(request):
+    profile = get_object_or_404(Profile, user_id=request.user.id)
 
     is_owner = (profile == request.user.profile)
     print (is_owner)
@@ -208,22 +220,23 @@ class VideoUpdate(UpdateView):
     form_class = VideoUpdateForm
     template_name = 'video_update_form.html'
 
-
     def get_initial(self):
-        initial = super(VideoUpdate, self).get_initial()
+        if self.uploader_id.user != self.request.user:
+            return HttpResponseForbidden()
+        else:
+            initial = super(VideoUpdate, self).get_initial()
 
-        # retrieve current object
-        video_object = self.get_object()
+            # retrieve current object
+            video_object = self.get_object()
 
-        initial['title'] = video_object.title
-        initial['video_description'] = video_object.video_description
+            initial['title'] = video_object.title
+            initial['video_description'] = video_object.video_description
 
-        if video_object.uploader_id.user != self.request.user:
-            raise Http404()
-        return initial
+
+            return initial
 
     def get_success_url(self):
-        return reverse('video', kwargs={'video_id': self.object.id})
+        return reverse('video', args={},    kwargs={'video_id': self.object.id})
 
 class VideoDelete(DeleteView):
     model = Video
@@ -232,7 +245,7 @@ class VideoDelete(DeleteView):
     def get_object(self, queryset=None):
         obj = super(VideoDelete, self).get_object()
         if not obj.uploader_id.user == self.request.user:
-            raise Http404
+            return HttpResponseForbidden()
         return obj
 
     def get_success_url(self):
