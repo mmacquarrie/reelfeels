@@ -1,3 +1,9 @@
+/* THEME
+ * pink: #B5428B
+ * purple: #9D71C0
+ *
+ */
+
 /* COMMON UI ELEMENTS */
 
 .hidden{
@@ -6,7 +12,7 @@
 
 .container-fluid{
 	min-height:75vh;
-	margin-top: 75px;
+	margin-top: 62px;
 }
 
 #home.container-fluid{
@@ -50,14 +56,17 @@ a {
 
 a:hover{
 	text-decoration: none;
-	color: #9D71C0
+	color: #9D71C0;
 }
 
-
+.video-top-emotion{
+	height:35px;
+	width: auto;
+}
 
 /* HEADER */
 .navbar-brand{
-	font-family: 'Noto Serif';
+	font-family: 'Roboto Slab';
 	font-size: 1.5rem;
 }
 
@@ -171,7 +180,7 @@ footer{
 
 #user-testimony-block{
 	text-align: center;
-	background-color: #d3d3d3;
+	background-color: #c4aada;
 	height: 300px;
 	padding: 15px 0;
 }
@@ -244,21 +253,4 @@ footer{
 
 #sign-in-form input{
 	margin: 10px 0;
-}
-
-/* FILTER SIDEBAR ON MOBILE */
-@media (max-width: 768px){
-	.sidebar.filter-sidebar{
-		position: relative;
-	}
-
-	.filter-sidebar .sidebar-sticky{
-		height:100%;
-    padding:5px;
-	}
-
-	.filter-btn-container .btn-group-toggle{
-		display: inline-block;
-    padding: 5px;
-	}
 }

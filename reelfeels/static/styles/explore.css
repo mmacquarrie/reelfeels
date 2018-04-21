@@ -59,15 +59,15 @@ h2{
 
 /*Check boxes */
 .btn-secondary{
-  color: #d1e0e0;
-  background-color: #80aaff;
-  border-color: #80aaff;
+  color: #fff;
+  background-color: #9D71C0;
+  border-color: #9D71C0;
 }
 
 .btn-secondary:hover{
   color: #fff;
-  background-color: #9D71C0;
-  border-color: #9D71C0;
+  background-color: #80aaff;
+  border-color: #80aaff;
 }
 
 .btn-secondary.focus{
@@ -84,4 +84,37 @@ h2{
   height: 225px;
   width: 100%;
   display: block;
+}
+
+.popular-videos h2, .new-videos h2{
+  border: 1px solid #9D71C0;
+  color: #9D71C0;
+  padding:5px;
+  margin:0;
+  margin-bottom:10px;
+}
+
+input.emo-filter[type='radio'] {
+display: none;
+}
+
+/* FILTER SIDEBAR ON MOBILE */
+@media (max-width: 768px){
+	.sidebar.filter-sidebar{
+		position: relative;
+	}
+
+	.filter-sidebar .sidebar-sticky{
+		height:100%;
+    padding:5px;
+	}
+
+	.filter-btn-container.btn-group-toggle{
+		display: inline-block;
+    padding: 5px;
+	}
+
+  .filter-btn-container .nav-item{
+    display: inline-block;
+  }
 }

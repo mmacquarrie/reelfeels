@@ -9,22 +9,16 @@
       <form id="sign-in-form" method="post" action="/login">
         {% csrf_token %}
         <h3 class="text-center">{% if message %} {{ message }}  {% else %} Welcome Back! {% endif %}</h3>
-        <p>Username</p>
         {{ form.username }}
-        <p>Password</p>
         {{ form.password }}
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
         <button type="submit" class="btn btn-main btn-lg btn-block btn-dark">Log in</button>
       </form>
     </div>
   </div>
   <div class="row">
     <div class="col-md-5 ml-auto mr-auto">
-      <h4 class="text-center"> Don't have an account? <a href="{% url 'signup' %}">Sign Up!</a></h4>
+      <h4 class="text-center"> Don't have an account? </h4>
+      <h4 class="text-center"><a href="{% url 'signup' %}">Sign Up!</a></h4>
     </div>
   </div>
 </div>

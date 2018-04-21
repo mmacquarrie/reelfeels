@@ -12,6 +12,9 @@
 .user-details {
     text-align: center;
 }
+.user-details.username{
+  color: #9D71C0;
+}
 
 .video-thumbnail {
     height: auto;

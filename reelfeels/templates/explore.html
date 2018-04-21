@@ -15,66 +15,82 @@
   <div class = "row">
 
     <!--side bar-->
-    <nav class="col-md-2 d-md-block bg-light sidebar filter-sidebar"><!--remove bg-light to change color w/ .sidebar -->
+    <nav class="col-md-2 d-md-block bg-light sidebar filter-sidebar text-center">
       <div class="sidebar-sticky">
         <h2 align="center"> Filter by:</h2>
-        <div class="btn-group-toggle filter-btn-container text-center" data-toggle="buttons">
-          <label class="btn btn-secondary btn-block active">
-            <input class="emo-filter" type="radio" name="emotions" id="all-filter" checked>
-            <label for="all-filter">All</label>
-          </label>
-          <label class="btn btn-secondary btn-block">
-            <input class="emo-filter" type="radio" name="emotions" id="anger-filter">
-            <label for="anger-filter">Anger</label>
-          </label>
-          <label class="btn btn-secondary btn-block">
-            <input class="emo-filter" type="radio" name="emotions" id="disgust-filter">
-            <label for="disgust-filter">Disgust</label>
-          </label>
-          <label class="btn btn-secondary btn-block">
-            <input class="emo-filter" type="radio" name="emotions" id="happiness-filter">
-            <label for="happiness-filter">Happiness</label>
-          </label>
-          <label class="btn btn-secondary btn-block">
-            <input class="emo-filter" type="radio" name="emotions" id="sadness-filter">
-            <label for="sadness-filter">Sadness</label>
-          </label>
-          <label class="btn btn-secondary btn-block">
-            <input class="emo-filter" type="radio" name="emotions" id="surprise-filter">
-            <label for="surprise-filter">Surprise</label>
-          </label>
-        </div>
+        <ul class="nav flex-column btn-group btn-group-toggle filter-btn-container text-center">
+          <li class="nav-item">
+            <label class="btn btn-secondary btn-block active">
+              <input class="emo-filter" type="radio" name="emotions" id="all-filter" checked>
+              <label for="all-filter">All</label>
+            </label>
+          </li>
+          <li class="nav-item">
+            <label class="btn btn-secondary btn-block">
+              <input class="emo-filter" type="radio" name="emotions" id="anger-filter">
+              <label for="anger-filter">Anger</label>
+            </label>
+          </li>
+          <li class="nav-item">
+            <label class="btn btn-secondary btn-block">
+              <input class="emo-filter" type="radio" name="emotions" id="disgust-filter">
+              <label for="disgust-filter">Disgust</label>
+            </label>
+          </li>
+          <li class="nav-item">
+            <label class="btn btn-secondary btn-block">
+              <input class="emo-filter" type="radio" name="emotions" id="happiness-filter">
+              <label for="happiness-filter">Happiness</label>
+            </label>
+          </li>
+          <li class="nav-item">
+            <label class="btn btn-secondary btn-block">
+              <input class="emo-filter" type="radio" name="emotions" id="sadness-filter">
+              <label for="sadness-filter">Sadness</label>
+            </label>
+          </li>
+          <li class="nav-item">
+            <label class="btn btn-secondary btn-block">
+              <input class="emo-filter" type="radio" name="emotions" id="surprise-filter">
+              <label for="surprise-filter">Surprise</label>
+            </label>
+          </li>
+        </ul>
       </div>
     </nav>
 
     <!-- New Section -->
     <main role ="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       {% if new_videos %}
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">New</h1>
-      </div>
-      <div class="album py-5">
-        <div class="container">
-          <div class="row">
-            {% for new_video in new_videos %}
-            <div class="col-md-4 video-container {{new_video|top_emotion}} all">
-              <div class="card mb-4 box-shadow">
-                <a href="{% url 'video' new_video.id %}">
-                  <img class="card-img-top" src="{{new_video|youtube_thumbnail}}">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-text"><a href="{% url 'video' new_video.id %}">{{new_video.title}}</a></h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="{% url 'profile' new_video.uploader_id.id %}" class="card-link text-secondary">{{new_video.uploader_id.username}}</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="card-link text-secondary">top emotion: {{new_video|top_emotion}}</div>
-                    <small class="text-muted">{{new_video.todays_views}} views</small>
+      <div class="new-videos mb-25">
+        <h2 class="text-center">New</h2>
+        <div class="album">
+          <div class="container">
+            <div class="row">
+              {% for new_video in new_videos %}
+              {% with top_emotion=new_video|top_emotion %}
+              <div class="col-lg-4 col-md-6 video-container {{top_emotion}} all">
+                <div class="card mb-4 box-shadow">
+                  <a href="{% url 'video' new_video.id %}">
+                    <img class="card-img-top" src="{{new_video|youtube_thumbnail}}">
+                  </a>
+                  <div class="card-body">
+                    <a href="{% url 'video' new_video.id %}"><h6 class="card-text">{{new_video.title}}</h6></a>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small><a href="{% url 'profile' new_video.uploader_id.id %}" class="card-link text-secondary">{{new_video.uploader_id.user.username}}</a></small>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">{{new_video.todays_views}} views</small>
+                      <div class="card-link text-secondary">
+                        <img class="video-top-emotion" src="{% static 'images/emoticons/'|add:top_emotion|add:'-small.png' %}" alt='{{top_emotion}}'>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              {% endwith %}
+              {% endfor %}
             </div>
-            {% endfor %}
           </div>
         </div>
       </div>
@@ -82,31 +98,35 @@
 
       <!-- Popular Section -->
       {% if popular_videos %}
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Popular</h1>
-      </div>
-      <div class="album py-5">
-        <div class="container">
-          <div class="row">
-            {% for popular_video in popular_videos %}
-            <div class="col-md-4 video-container {{popular_video|top_emotion}} all">
-              <div class="card mb-4 box-shadow">
-                <a href="{% url 'video' popular_video.id %}">
-                  <img class="card-img-top" src="{{popular_video|youtube_thumbnail}}">
-                </a>
-                <div class="card-body">
-                  <a href="{% url 'video' popular_video.id %}"><h6 class="card-text">{{popular_video.title}}</h6></a>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <a href="{% url 'profile' popular_video.uploader_id.id %}" class="card-link text-secondary">{{popular_video.uploader_id.username}}</a>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="card-link text-secondary">top emotion: {{popular_video|top_emotion}}</div>
-                    <small class="text-muted">{{popular_video.todays_views}} views</small>
+      <div class="popular-videos mb-25">
+        <h2 class="text-center">Popular</h2>
+        <div class="album">
+          <div class="container">
+            <div class="row">
+              {% for popular_video in popular_videos %}
+              {% with top_emotion=popular_video|top_emotion %}
+              <div class="col-lg-4 col-md-6 video-container {{top_emotion}} all">
+                <div class="card mb-4 box-shadow">
+                  <a href="{% url 'video' popular_video.id %}">
+                    <img class="card-img-top" src="{{popular_video|youtube_thumbnail}}">
+                  </a>
+                  <div class="card-body">
+                    <a href="{% url 'video' popular_video.id %}"><h6 class="card-text">{{popular_video.title}}</h6></a>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small><a href="{% url 'profile' popular_video.uploader_id.id %}" class="card-link text-secondary">{{popular_video.uploader_id.user.username}}</a></small>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">{{popular_video.todays_views}} views</small>
+                      <div class="card-link text-secondary">
+                        <img class="video-top-emotion" src="{% static 'images/emoticons/'|add:top_emotion|add:'-small.png' %}" alt='{{top_emotion}}'>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              {% endwith %}
+              {% endfor %}
             </div>
-            {% endfor %}
           </div>
         </div>
       </div>

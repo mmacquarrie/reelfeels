@@ -20,7 +20,7 @@
       {% else %}
         <img src="{% static 'media/profile_pictures/default.png' %}" class='profile-pic mx-auto d-block'>
       {% endif %}
-      <h4 class="user-details">{{user.user.username}}</h4>
+      <h4 class="user-details username">{{user.user.username}}</h4>
       <h5 class="user-details">Favorite Emotion: {{user.get_top_emotion}}
         <img src="{% static 'images/emoticons/'|add:user.get_top_emotion|add:'-small.png' %}" class="emoticon">
       </h5>
@@ -63,7 +63,7 @@
               <img class="video-thumbnail" src="{{video.get_youtube_thumbnail}}">
             </a>
           </div>
-          <div class="col-md-8 col-xs-12">
+          <div class="col-md-8 col-xs-12 mt-1">
             <!-- video text -->
               <a href="{% url 'video' video.id %}"><h5>{{video.title}}</h5></a>
             <p>{{video.video_description}}</p>

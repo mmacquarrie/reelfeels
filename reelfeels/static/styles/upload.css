@@ -2,11 +2,13 @@
 
 .btn-toggle{
     color: #fff;
-    background-color: #80aaff;
+    background-color:#9D71C0;
+    border: 1px solid #9D71C0;
   }
 
 .btn-toggle:hover{
-    background-color: #9D71C0;
+    background-color: #80aaff;
+    border: 1px solid #80aaff;
 }
 
 /*top padding for url input*/
