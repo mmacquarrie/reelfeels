@@ -115,7 +115,7 @@ def login_page(request):
             # A backend authenticated the credentials
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('explore')
             else:
                 form = LoginForm()
                 message = "Invalid credentials :( Try again"
@@ -197,7 +197,8 @@ def search_page(request):
         request,
         'search-results.html',
         context = {
-            "matching_videos": matching_videos
+            "matching_videos": matching_videos,
+            "query": search_query,
         }
     )
 
