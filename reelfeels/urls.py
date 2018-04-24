@@ -16,5 +16,4 @@ urlpatterns = [
     path('logout', views.logout_page, name='logout'),
     path('video/<pk>/edit', views.VideoUpdate.as_view(), name='video-edit'),
     path('video/<pk>/delete', views.VideoDelete.as_view(), name='video-delete'),
-
 ]

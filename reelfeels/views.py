@@ -2,7 +2,7 @@ import datetime
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import Context
-from .models import Video, Profile, Comment
+from .models import Video, Profile, Comment, ViewInstance
 from django.db.models import F
 from urllib.parse import parse_qs, urlparse
 from django.contrib.auth import login, authenticate, logout
@@ -10,64 +10,87 @@ from .forms import SignUpForm, CommentCreationForm, VideoUpdateForm, LoginForm, 
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
     return render(request, 'index.html', {})
 
 def video_content(request, video_id):
-    # Get video object from url
-    video = get_object_or_404(Video, pk=video_id)
+    # if request is an AJAX POST request (and a user is currently logged in), update the ViewInstance (or create a new one if necessary)
+    if(request.method == 'POST' and request.is_ajax() and request.user.is_authenticated):
+        #print(request.POST)
+        cur_video = Video.objects.get(id=video_id)
+        currentView = None
+        # Either get the ViewInstance or create it if it doesn't yet exist
+        try:
+            currentView = ViewInstance.objects.get(video_id=cur_video, viewer_id=request.user.profile)
+        except ViewInstance.DoesNotExist:
+            currentView = ViewInstance(video_id=cur_video, viewer_id=request.user.profile)
+        
+        # update the emotion values in currentView
+        # Note: currently just adding values to the view... (CHANGE THIS BEHAVIOR???)
+        currentView.happiness += int(request.POST.get('joy'))
+        currentView.sadness += int(request.POST.get('sadness'))
+        currentView.disgust += int(request.POST.get('disgust'))
+        currentView.anger += int(request.POST.get('anger'))
+        currentView.surprise += int(request.POST.get('surprise'))
 
-    #note that this references the profile, not the django user
-    uploader = video.uploader_id
+        # set last_watched date to today
+        currentView.last_watched = datetime.date.today()
 
-    if (request.user == uploader.user):
-        is_owner = True
-        edit_url = request.get_full_path() + "/edit"
-        delete_url = request.get_full_path() + "/delete"
+        currentView.save()
+
+        # Note: check admin site to view the updated ViewInstance for testing!!!
+
+        return HttpResponse() #TO-DO: not really sure what to return here... (figure out if this is important!)
+
+    # else, the request is not AJAX, and the page should be normally/synchronously rendered
     else:
-        is_owner = False
-        edit_url = "" #throws errors otherwise
-        delete_url = ""
+        # Get video object from url
+        video = get_object_or_404(Video, pk=video_id)
 
-    #form content
-    if request.method == 'POST' and request.user.is_authenticated:
-        form = CommentCreationForm(request.POST)
+        #note that this references the profile, not the django user
+        uploader = video.uploader_id
 
-        if form.is_valid():
-            form_data = form.cleaned_data
-            new_comment = Comment()
-            new_comment.video_id = video
-            new_comment.commenter_id = request.user.profile
-            new_comment.content = form_data.get('comment')
-            new_comment.save()
+        if (request.user == uploader.user):
+            is_owner = True
+            edit_url = request.get_full_path() + "/edit"
+            delete_url = request.get_full_path() + "/delete"
+        else:
+            is_owner = False
+            edit_url = "" #throws errors otherwise
+            delete_url = ""
 
+        #form content
+        if request.method == 'POST' and request.user.is_authenticated:
+            form = CommentCreationForm(request.POST)
 
-            #create a new comment using video, and the content from the form also need to get the comment creators  id
-    #form content
+            if form.is_valid():
+                form_data = form.cleaned_data
+                new_comment = Comment()
+                new_comment.video_id = video
+                new_comment.commenter_id = request.user.profile
+                new_comment.content = form_data.get('comment')
+                new_comment.save()
 
-    form = CommentCreationForm()
+                #create a new comment using video, and the content from the form also need to get the comment creators  id
+        #form content
 
-    return render(
-        request,
-        'video-content.html',
-        context={
-            'video': video,
-            'form': form,
-            # TO-DO:
-            # current user's stats displayed in 'Your stats' tab...
-            # 'your_happiness':cur_user.happiness,
-            # 'your_sadness':cur_user.sadness,
-            # 'your_disgust':cur_user.disgust,
-            # 'your_surprise':cur_user.surprise,
-            # 'your_anger':cur_user.anger,
-            'uploader': uploader,
-            'comment_list': video.comment_set.all,
-            "is_owner": is_owner,
-            "edit_url": edit_url,
-            "delete_url":delete_url,
-        }
-    )
+        form = CommentCreationForm()
+
+        return render(
+            request,
+            'video-content.html',
+            context={
+                'video': video,
+                'form': form,
+                'uploader': uploader,
+                'comment_list': video.comment_set.all,
+                "is_owner": is_owner,
+                "edit_url": edit_url,
+                "delete_url":delete_url,
+            }
+        )
 
 def user_profile(request, user_id):
     is_owner = (request.user.is_authenticated) and (user_id == request.user.id)
