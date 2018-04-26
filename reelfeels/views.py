@@ -12,8 +12,17 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 
+import numpy as np
+from numpy import trapz
+
+time_offset = 3
+
 def index(request):
     return render(request, 'index.html', {})
+
+def calculus(one, two):
+    arr = np.array([one,two])
+    return trapz(arr, dx=time_offset)
 
 def video_content(request, video_id):
     # if request is an AJAX POST request (and a user is currently logged in), update the ViewInstance (or create a new one if necessary)
@@ -26,14 +35,13 @@ def video_content(request, video_id):
             currentView = ViewInstance.objects.get(video_id=cur_video, viewer_id=request.user.profile)
         except ViewInstance.DoesNotExist:
             currentView = ViewInstance(video_id=cur_video, viewer_id=request.user.profile)
-        
+
         # update the emotion values in currentView
-        # Note: currently just adding values to the view... (CHANGE THIS BEHAVIOR???)
-        currentView.happiness += int(request.POST.get('joy'))
-        currentView.sadness += int(request.POST.get('sadness'))
-        currentView.disgust += int(request.POST.get('disgust'))
-        currentView.anger += int(request.POST.get('anger'))
-        currentView.surprise += int(request.POST.get('surprise'))
+        currentView.calculated_happiness += calculus(currentView.previous_happiness,int(request.POST.get('joy')) )
+        currentView.calculated_sadness += calculus(currentView.previous_sadness,int(request.POST.get('sadness')) )
+        currentView.calculated_disgust += calculus(currentView.previous_disgust, int(request.POST.get('disgust')))
+        currentView.calculated_anger += calculus(currentView.previous_anger,int(request.POST.get('anger')) )
+        currentView.calculated_surprise += calculus(currentView.previous_surprise, int(request.POST.get('surprise')))
 
         # set last_watched date to today
         currentView.last_watched = datetime.date.today()
