@@ -119,6 +119,10 @@ def video_content(request, video_id):
 
             video.save()
 
+        # increase video views by 1
+        video.todays_views += 1
+        video.save()
+
         return render(
             request,
             'video-content.html',
