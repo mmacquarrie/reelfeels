@@ -101,11 +101,17 @@ class ViewInstance(models.Model):
 
     last_watched = models.DateField(verbose_name='Date updated', blank=False)
 
-    happiness = models.IntegerField(verbose_name='Happiness', default=0)
-    sadness = models.IntegerField(verbose_name='Sadness', default=0)
-    disgust = models.IntegerField(verbose_name='Disgust', default=0)
-    anger = models.IntegerField(verbose_name='Anger', default=0)
-    surprise = models.IntegerField(verbose_name='Surprise', default=0)
+    calculated_happiness = models.IntegerField(verbose_name='Calculated Happiness', default=0)
+    calculated_sadness = models.IntegerField(verbose_name='Calculated Sadness', default=0)
+    calculated_disgust = models.IntegerField(verbose_name='Calculated Disgust', default=0)
+    calculated_anger = models.IntegerField(verbose_name='Calculated Anger', default=0)
+    calculated_surprise = models.IntegerField(verbose_name='Calculated Surprise', default=0)
+
+    previous_happiness = models.IntegerField(verbose_name='Happiness', default=0)
+    previous_sadness = models.IntegerField(verbose_name='Sadness', default=0)
+    previous_disgust = models.IntegerField(verbose_name='Disgust', default=0)
+    previous_anger = models.IntegerField(verbose_name='Anger', default=0)
+    previous_surprise = models.IntegerField(verbose_name='Surprise', default=0)
 
 # Comment for a given video, made by a given user
 class Comment(models.Model):
