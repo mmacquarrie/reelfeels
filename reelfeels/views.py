@@ -50,7 +50,7 @@ def video_content(request, video_id):
 
         # Note: check admin site to view the updated ViewInstance for testing!!!
 
-        return False #HttpResponse() #TO-DO: not really sure what to return here... (figure out if this is important!)
+        return HttpResponse() #TO-DO: not really sure what to return here... (figure out if this is important!)
 
     # else, the request is not AJAX, and the page should be normally/synchronously rendered
     else:
@@ -89,7 +89,7 @@ def video_content(request, video_id):
         # update global video stats from all the views for that video
         views = ViewInstance.objects.filter(video_id=video)
         
-        if(len(views) > 0):    
+        if(len(views) > 0):
             new_happy=video.happiness
             new_sadness=video.sadness
             new_disgust=video.disgust
@@ -104,11 +104,13 @@ def video_content(request, video_id):
                 new_surprise += view.calculated_surprise
             
             total_emotions = new_happy + new_sadness + new_disgust + new_anger + new_surprise
-            video.happiness = (new_happy/total_emotions) * 100
-            video.sadness = (new_happy/total_emotions) * 100
-            video.disgust = (new_disgust/total_emotions) * 100
-            video.anger = (video.anger/total_emotions) * 100
-            video.surprise = (video.surprise/total_emotions) * 100
+            video.happiness = round((new_happy/total_emotions) * 100)
+            video.sadness = round((new_happy/total_emotions) * 100)
+            video.disgust = round((new_disgust/total_emotions) * 100)
+            video.anger = round((new_anger/total_emotions) * 100)
+            video.surprise = round((new_surprise/total_emotions) * 100)
+
+            print('surprise' + str(new_surprise))
 
             video.save()
 

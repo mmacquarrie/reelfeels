@@ -60,15 +60,15 @@ var userEmotionsData = [
     ['Surprise', 0, '#8e24aa']
 ];
 
-//fake data currently
+//get data from template
 var generalEmotionsData = [
     ['Emotion', 'Level', {role: "style"}],
-    ['Joy', 30, "#fff176"],
-    ['Sadness', 60, "#1565c0"],
-    ['Disgust', 90, "#388e3c"],
-    ['Anger', 60, "#d32f2f"],
+    ['Joy', parseInt($('#global-happiness').html()), "#fff176"],
+    ['Sadness', parseInt($('#global-sadness').html()), "#1565c0"],
+    ['Disgust', parseInt($('#global-disgust').html()), "#388e3c"],
+    ['Anger', parseInt($('#global-anger').html()), "#d32f2f"],
     //['Fear', 30, "#8e24aa"]
-    ['Surprise', 30, '#8e24aa']
+    ['Surprise', parseInt($('#global-surprise').html()), '#8e24aa']
 ];
 
 var userChartTable, generalChartTable;

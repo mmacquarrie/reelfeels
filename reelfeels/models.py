@@ -113,6 +113,9 @@ class ViewInstance(models.Model):
     previous_anger = models.IntegerField(verbose_name='Previous Anger', default=0)
     previous_surprise = models.IntegerField(verbose_name='Previous Surprise', default=0)
 
+    def __str__(self):
+        return '"' + self.video_id.title + '" viewed by ' + self.viewer_id.user.username
+
 # Comment for a given video, made by a given user
 class Comment(models.Model):
     # I copied the id from the other tables above -- is this fine for comments?
