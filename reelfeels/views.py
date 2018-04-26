@@ -38,10 +38,15 @@ def video_content(request, video_id):
 
         # update the emotion values in currentView
         currentView.calculated_happiness += calculus(currentView.previous_happiness,int(request.POST.get('joy')) )
+        currentView.previous_happiness = int(request.POST.get('joy'))
         currentView.calculated_sadness += calculus(currentView.previous_sadness,int(request.POST.get('sadness')) )
+        currentView.previous_sadness = int(request.POST.get('sadness'))
         currentView.calculated_disgust += calculus(currentView.previous_disgust, int(request.POST.get('disgust')))
+        currentView.previous_disgust = int(request.POST.get('disgust'))
         currentView.calculated_anger += calculus(currentView.previous_anger,int(request.POST.get('anger')) )
+        currentView.previous_anger = int(request.POST.get('anger'))
         currentView.calculated_surprise += calculus(currentView.previous_surprise, int(request.POST.get('surprise')))
+        currentView.previous_surprise = int(request.POST.get('surprise'))
 
         # set last_watched date to today
         currentView.last_watched = datetime.date.today()
