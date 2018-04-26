@@ -107,11 +107,11 @@ class ViewInstance(models.Model):
     calculated_anger = models.IntegerField(verbose_name='Calculated Anger', default=0)
     calculated_surprise = models.IntegerField(verbose_name='Calculated Surprise', default=0)
 
-    previous_happiness = models.IntegerField(verbose_name='Happiness', default=0)
-    previous_sadness = models.IntegerField(verbose_name='Sadness', default=0)
-    previous_disgust = models.IntegerField(verbose_name='Disgust', default=0)
-    previous_anger = models.IntegerField(verbose_name='Anger', default=0)
-    previous_surprise = models.IntegerField(verbose_name='Surprise', default=0)
+    previous_happiness = models.IntegerField(verbose_name='Previous Happiness', default=0)
+    previous_sadness = models.IntegerField(verbose_name='Previous Sadness', default=0)
+    previous_disgust = models.IntegerField(verbose_name='Previous Disgust', default=0)
+    previous_anger = models.IntegerField(verbose_name='Previous Anger', default=0)
+    previous_surprise = models.IntegerField(verbose_name='Previous Surprise', default=0)
 
 # Comment for a given video, made by a given user
 class Comment(models.Model):
