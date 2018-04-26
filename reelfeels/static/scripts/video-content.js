@@ -226,7 +226,7 @@ $(document).ready(function(){
 
     // Send emotion data to server via AJAX request every 'emotion_data_send_interval' milliseconds
     /* Is setInterval a good way to set the timing for this??? */
-    let emotion_data_send_interval = 3000; //change this interval???
+    let emotion_data_send_interval = 1000; //change this interval???
     setInterval(
         ajax_send_emotion_data,
         emotion_data_send_interval
@@ -235,27 +235,30 @@ $(document).ready(function(){
 
 // function encapsulating the ajax request to send emotion data to the server (processed in the video-content view function)
 function ajax_send_emotion_data(){
-    $.ajax({
-        url : window.location.href, //the current url
-        type : "POST",
-        data : {
-            //'csrfmiddlewaretoken' : csrftoken, //I don't think this needs to be here, as it appears to be handled in the ajaxSetup function (?)
-            'joy' : joy,
-            'sadness' : sadness,
-            'disgust' : disgust,
-            'anger' : anger,
-            'surprise' : surprise
-        },
-        success : function(json) {
-            //console.log(json); // log the returned json to the console
-            console.log("AJAX success");
-        },
-        // handle a non-successful response
-        error : function(xhr,errmsg,err) {
-            //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            console.log('AJAX error');
-        }
-    });
+    // only send data if the video is playing
+    if(videoPlaying){
+        $.ajax({
+            url : window.location.href, //the current url
+            type : "POST",
+            data : {
+                //'csrfmiddlewaretoken' : csrftoken, //I don't think this needs to be here, as it appears to be handled in the ajaxSetup function (?)
+                'joy' : joy,
+                'sadness' : sadness,
+                'disgust' : disgust,
+                'anger' : anger,
+                'surprise' : surprise
+            },
+            success : function(json) {
+                //console.log(json); // log the returned json to the console
+                console.log("AJAX success");
+            },
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                console.log('AJAX error');
+            }
+        });
+    }
 }
 
 
