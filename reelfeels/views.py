@@ -42,7 +42,7 @@ def video_content(request, video_id):
 
         # Note: check admin site to view the updated ViewInstance for testing!!!
 
-        return HttpResponse() #TO-DO: not really sure what to return here... (figure out if this is important!)
+        return False #HttpResponse() #TO-DO: not really sure what to return here... (figure out if this is important!)
 
     # else, the request is not AJAX, and the page should be normally/synchronously rendered
     else:
@@ -77,6 +77,32 @@ def video_content(request, video_id):
         #form content
 
         form = CommentCreationForm()
+
+        # update global video stats from all the views for that video
+        views = ViewInstance.objects.filter(video_id=video)
+        
+        if(len(views) > 0):    
+            new_happy=video.happiness
+            new_sadness=video.sadness
+            new_disgust=video.disgust
+            new_anger=video.anger
+            new_surprise=video.surprise 
+            
+            for view in views:
+                new_happy += view.calculated_happiness
+                new_sadness += view.calculated_sadness
+                new_disgust += view.calculated_disgust
+                new_anger += view.calculated_anger
+                new_surprise += view.calculated_surprise
+            
+            total_emotions = new_happy + new_sadness + new_disgust + new_anger + new_surprise
+            video.happiness = (new_happy/total_emotions) * 100
+            video.sadness = (new_happy/total_emotions) * 100
+            video.disgust = (new_disgust/total_emotions) * 100
+            video.anger = (video.anger/total_emotions) * 100
+            video.surprise = (video.surprise/total_emotions) * 100
+
+            video.save()
 
         return render(
             request,
