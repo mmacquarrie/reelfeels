@@ -1,7 +1,19 @@
 let statType = {
     user: "user-stats",
-    general: "general-stats"
+    general: "general-stats",
+    user_history: "user_history-stats"
 }
+
+//store boolean that's true if the user_history-stats div exists; false otherwise
+var previouslyViewed = ($('#user_history-stats').length > 0);
+
+//adjust the css if the third tab needs to be there (which is also if previouslyViewed is true)
+if (previouslyViewed) {
+    $('.tab button.tablinks').css('width', '33%');
+}
+
+//keep track of whether there's a face detected
+var faceDetected = false;
 
 function openStats(evt, sType) {
     var i, tabcontent, tablinks;
@@ -27,7 +39,7 @@ function openStats(evt, sType) {
 google.charts.load('current', {'packages':['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawInitial);
 
-var userChart, generalChart;
+var userChart, generalChart, userHistoricalChart;
 
 var chartOptions = {
     title : 'Emotion Probabilities',
@@ -60,7 +72,7 @@ var userEmotionsData = [
     ['Surprise', 0, '#8e24aa']
 ];
 
-//get data from template
+//get global data from template
 var generalEmotionsData = [
     ['Emotion', 'Level', {role: "style"}],
     ['Joy', parseInt($('#global-happiness').html()), "#fff176"],
@@ -71,7 +83,40 @@ var generalEmotionsData = [
     ['Surprise', parseInt($('#global-surprise').html()), '#8e24aa']
 ];
 
-var userChartTable, generalChartTable;
+//get user's past view data from template if a past view exists
+if (previouslyViewed) {
+    //normalize the stats so they're all real percentages
+    let past_joy = parseInt($('#user-past-happiness').html());
+    let past_sadness = parseInt($('#user-past-sadness').html());
+    let past_disgust = parseInt($('#user-past-disgust').html());
+    let past_anger = parseInt($('#user-past-anger').html());
+    let past_surprise = parseInt($('#user-past-surprise').html());
+
+    let past_sum = past_joy + past_sadness + past_disgust + past_anger + past_surprise;
+    past_joy = (past_joy/past_sum) * 100;
+    past_sadness = (past_sadness/past_sum) * 100;
+    past_disgust = (past_disgust/past_sum) * 100;
+    past_anger = (past_anger/past_sum) * 100;
+    past_surprise = (past_surprise/past_sum) * 100;
+
+    $('#user-past-happiness').html(Math.round(past_joy));
+    $('#user-past-sadness').html(Math.round(past_sadness));
+    $('#user-past-disgust').html(Math.round(past_disgust));
+    $('#user-past-anger').html(Math.round(past_anger));
+    $('#user-past-surprise').html(Math.round(past_surprise));
+    
+
+    var userHistoricalEmotionsData = [
+        ['Emotion', 'Level', {role: "style"}],
+        ['Joy', past_joy, "#fff176"],
+        ['Sadness', past_sadness, "#1565c0"],
+        ['Disgust', past_disgust, "#388e3c"],
+        ['Anger', past_anger, "#d32f2f"],
+        ['Surprise', past_surprise, '#8e24aa']
+    ]
+}
+
+var userChartTable, generalChartTable, userHistoricalChartTable;
 
 function drawInitial() {
 
@@ -81,9 +126,15 @@ function drawInitial() {
     userChart = new google.visualization.ColumnChart(document.getElementById('user-emotions-chart'));
     generalChart = new google.visualization.ColumnChart(document.getElementById('general-emotions-chart'));
     
-    //for now, starts by drawing user chart with all zeroes
     userChart.draw(userChartTable, chartOptions);
     generalChart.draw(generalChartTable, chartOptions);
+
+    //render the user's past stats if they exist
+    if (previouslyViewed) {
+        userHistoricalChartTable = google.visualization.arrayToDataTable(userHistoricalEmotionsData);
+        userHistoricalChart = new google.visualization.ColumnChart(document.getElementById('user-historical-emotions-chart'));
+        userHistoricalChart.draw(userHistoricalChartTable, chartOptions);
+    }
 }
 
 // Open default tab
@@ -110,7 +161,7 @@ detector.addEventListener('onInitializeSuccess', function(){
     //console.log('Affectiva emotion detector successfully initialized :)')
     
     //start updating the current emotions chart every 'chart_draw_interval' milliseonds
-    let chart_draw_interval = 10;
+    let chart_draw_interval = 15;
     setInterval(
         function(){
             userChart.draw(userChartTable, chartOptions);
@@ -133,43 +184,47 @@ let joy=0, sadness=0, disgust=0, anger=0, surprise=0;
 
 //faces array contains the data processed from the webcam feed
 detector.addEventListener('onImageResultsSuccess', function(faces, image, timestamp){
-    if(faces.length > 0 && videoPlaying){
+    if(faces.length > 0) {
+        faceDetected = true;
+
         //update the user emotions data (from 1 face)
         joy = Math.round(faces[0].emotions['joy']);
         sadness = Math.round(faces[0].emotions['sadness']);
         disgust = Math.round(faces[0].emotions['disgust']);
         anger = Math.round(faces[0].emotions['anger']);
-        //let fear = Math.round(faces[0].emotions['fear']);
         surprise = Math.round(faces[0].emotions['surprise']);
 
         userChartTable.setValue(0, 1, joy);
         userChartTable.setValue(1, 1, sadness);
         userChartTable.setValue(2, 1, disgust);
         userChartTable.setValue(3, 1, anger);
-        //userChartTable.setValue(4, 1, fear);
         userChartTable.setValue(4, 1, surprise);
 
-        //update numbers display
-        $('#user-joy').html(joy + '%');
-        $('#user-sadness').html(sadness + '%');
-        $('#user-disgust').html(disgust + '%');
-        $('#user-anger').html(anger + '%');
-        //$('#user-fear').html(fear + '%');
-        $('#user-surprise').html(surprise + '%');
-    }
-    // Set number displays to 'Paused' when video is not playing
-    else if(!videoPlaying){
-        $('#user-joy').html('<i>...</i>');
-        $('#user-sadness').html('<i>...</i>');
-        $('#user-disgust').html('<i>Paused</i>');
-        $('#user-anger').html('<i>...</i>');
-        $('#user-surprise').html('<i>...</i>');
+        if (videoPlaying) {
+            //update numbers display
+            $('#user-joy').html(joy + '%');
+            $('#user-sadness').html(sadness + '%');
+            $('#user-disgust').html(disgust + '%');
+            $('#user-anger').html(anger + '%');
+            $('#user-surprise').html(surprise + '%');
+        }
     }
     // Tell user no faces detected if no faces are detected
     else if(faces.length == 0){
+        faceDetected = false;
+
         $('#user-joy').html('<i>...</i>');
         $('#user-sadness').html('<i>...</i>');
         $('#user-disgust').html('<i>No face detected :(</i>');
+        $('#user-anger').html('<i>...</i>');
+        $('#user-surprise').html('<i>...</i>');
+    }
+    
+    // Set number displays to 'Paused' when video is not playing
+    if(!videoPlaying){
+        $('#user-joy').html('<i>...</i>');
+        $('#user-sadness').html('<i>...</i>');
+        $('#user-disgust').html('<i>Paused</i>');
         $('#user-anger').html('<i>...</i>');
         $('#user-surprise').html('<i>...</i>');
     }
@@ -235,8 +290,8 @@ $(document).ready(function(){
 
 // function encapsulating the ajax request to send emotion data to the server (processed in the video-content view function)
 function ajax_send_emotion_data(){
-    // only send data if the video is playing
-    if(videoPlaying){
+    // only send data if the video is playing and a face is currenty detected
+    if(videoPlaying && faceDetected){
         $.ajax({
             url : window.location.href, //the current url
             type : "POST",
@@ -250,12 +305,12 @@ function ajax_send_emotion_data(){
             },
             success : function(json) {
                 //console.log(json); // log the returned json to the console
-                console.log("AJAX success");
+                //console.log("AJAX success");
             },
             // handle a non-successful response
             error : function(xhr,errmsg,err) {
                 //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                console.log('AJAX error');
+                //console.log('AJAX error');
             }
         });
     }

@@ -115,13 +115,19 @@ def video_content(request, video_id):
             video.anger = round((new_anger/total_emotions) * 100)
             video.surprise = round((new_surprise/total_emotions) * 100)
 
-            print('surprise' + str(new_surprise))
-
             video.save()
 
         # increase video views by 1
         video.todays_views += 1
         video.save()
+
+        # pass in the ViewInstance corresponding to the video and user (if it exists)
+        user_view = None
+        try:
+            user_view = ViewInstance.objects.get(video_id=Video.objects.get(id=video_id), viewer_id=request.user.profile)
+        except ViewInstance.DoesNotExist:
+            # do nothing
+            pass
 
         return render(
             request,
@@ -134,6 +140,7 @@ def video_content(request, video_id):
                 "is_owner": is_owner,
                 "edit_url": edit_url,
                 "delete_url":delete_url,
+                'view': user_view,
             }
         )
 
