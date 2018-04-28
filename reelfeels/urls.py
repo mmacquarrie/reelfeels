@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+
+
 urlpatterns = [
     path('', views.index, name='home'),
     path('video', views.video_content, name='video-static'),
@@ -16,4 +18,8 @@ urlpatterns = [
     path('logout', views.logout_page, name='logout'),
     path('video/<pk>/edit', views.VideoUpdate.as_view(), name='video-edit'),
     path('video/<pk>/delete', views.VideoDelete.as_view(), name='video-delete'),
+    path('comment/add/<video_id>', views.CommentHandler.add_comment, name='add-comment'),
+    path('comment/delete/<video_id>/<comment_id>', views.CommentHandler.delete_comment, name='delete-comment'),
 ]
+
+
