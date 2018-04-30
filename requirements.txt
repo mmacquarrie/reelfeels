@@ -1,0 +1,11 @@
+Django==2.0.2
+django-ajax-selects==1.7.0
+numpy==1.14.2
+pbr==3.1.1
+Pillow==5.0.0
+pytz==2018.3
+six==1.11.0
+stevedore==1.28.0
+virtualenv==15.1.0
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.8.2
