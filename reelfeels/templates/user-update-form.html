@@ -2,16 +2,33 @@
 
 {% block title %}<title>Edit Profile</title>{% endblock %}
 
+
 {% block content %}
 <div class="container-fluid">
   <div class="row mb-25">
     <div class="col-md-8 ml-auto mr-auto">
       <h2 class="text-center">Edit Profile Details</h2>
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" class="form-control">
         {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-      <button type="submit">Save changes</button>
+        <div class="text-center">
+          <label>Profile Picture</label>
+          <br/>
+          {{ profile_form.profile_pic}}
+        </div>
+
+        {{ user_form.email.label }}
+        {{ user_form.email }}
+        <br/>
+        {{ user_form.username.label }}
+        {{ user_form.username }}
+        <br/>
+        {{ user_form.password.label }}
+        {{ user_form.password }}
+
+        <br/>
+        <div class="text-center">
+          <button type="submit" class="btn btn-main">Save changes</button>
+        </div>
       </form>
     </div>
   </div>

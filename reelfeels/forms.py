@@ -55,12 +55,12 @@ class VideoUpdateForm(forms.ModelForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-
+    email = forms.CharField(widget=forms.TextInput(attrs={'class' : 'form-control required', 'placeholder':'Username',}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'form-control required'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class' : 'form-control required'}))
     class Meta:
         model = User
-        fields = ('email', 'password')
+        fields = ('email', 'username', 'password')
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
