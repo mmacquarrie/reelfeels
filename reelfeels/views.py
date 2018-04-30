@@ -27,7 +27,6 @@ def calculus(one, two):
 def video_content(request, video_id):
     # if request is an AJAX POST request (and a user is currently logged in), update the ViewInstance (or create a new one if necessary)
     if(request.method == 'POST' and request.is_ajax() and request.user.is_authenticated):
-        #print(request.POST)
         cur_video = Video.objects.get(id=video_id)
         currentView = None
         # Either get the ViewInstance or create it if it doesn't yet exist
@@ -177,7 +176,6 @@ def login_page(request):
 
     # If this is a POST request then process the Form data
     if request.method == 'POST':
-        print('Post request received')
 
         # Create a form instance and populate it with data from the request (binding):
         form = LoginForm(request.POST)
@@ -368,14 +366,9 @@ class CommentHandler:
     def delete_comment(request, video_id, comment_id):
         video = get_object_or_404(Video, pk=video_id)
         comment = get_object_or_404(Comment, pk=comment_id)
-        print("hello 2")
-
-        print(request.method)
 
         if request.method == 'POST' and request.user.is_authenticated:
-            print("hello1")
             if request.user == comment.commenter_id.user:
-                print("hello")
                 comment.delete()
 
         return redirect("video", video_id)
