@@ -27,7 +27,7 @@
       <!-- Stats tabs -->
       <div class="tab">
         <button class="tablinks active" onclick="openStats(event, statType.user)" id="defaultOpen">Current Feels</button>
-        {% if view %} <button class="tablinks" onclick="openStats(event, statType.user_history)" id="defaultOpen">Historical Feels</button> {% endif %}
+        {% if view %} <button class="tablinks" onclick="openStats(event, statType.user_history)" id="defaultOpen">Last Time</button> {% endif %}
         <button class="tablinks" onclick="openStats(event, statType.general)">General Stats</button>
       </div>
 
@@ -109,13 +109,15 @@
             <strong>{{ comment.commenter_id.user.username }}:</strong>
           </a>
 
+          {{ comment }}
           {% if comment.commenter_id.user == request.user %}
+          <div class="video-edit-link-wrap">
             <form id="comment-delete-form" action="/comment/delete/{{video.id}}/{{comment.id}}" method="post">
               {% csrf_token %}
-              <button type="submit">Delete</button>
+              <button type='submit' class="comment-delete-link"><i class="fas fa-trash-alt"></i></button>
             </form>
+          </div>
           {% endif %}
-          {{ comment }}
         </div>
       </div>
     </div>

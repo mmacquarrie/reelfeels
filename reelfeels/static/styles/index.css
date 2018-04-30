@@ -27,6 +27,10 @@
 	margin-top:10px;
 }
 
+.container-fluid:not(#home){
+	padding-top: 25px;
+}
+
 .navbar{
 	background-color: #B5428B;
 }
@@ -211,7 +215,6 @@ footer{
 
 #sign-up-info{
 	border-right: 1px solid #b3b3b3;
-	padding-top:25%;
 }
 
 #user-creation-form input{

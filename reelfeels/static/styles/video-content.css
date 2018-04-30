@@ -91,7 +91,22 @@ a.video-edit-link:hover{
   color: #9D71C0 !important;
 }
 
+
+
 /* COMMENTS */
+
+.comment-delete-link{
+  position: relative;
+  padding: 5px 10px;
+  font-size:1rem;
+  color: #fff;
+  border:none;
+  background:none;
+}
+
+button.comment-delete-link:hover{
+  color: #B5428B !important;
+}
 
 .comment-bubble {
     position: relative;
