@@ -26,13 +26,14 @@
 
       <!-- Stats tabs -->
       <div class="tab">
-        <button class="tablinks active" onclick="openStats(event, statType.user)" id="defaultOpen">Your Stats</button>
+        <button class="tablinks active" onclick="openStats(event, statType.user)" id="defaultOpen">Current Feels</button>
+        {% if view %} <button class="tablinks" onclick="openStats(event, statType.user_history)" id="defaultOpen">Historical Feels</button> {% endif %}
         <button class="tablinks" onclick="openStats(event, statType.general)">General Stats</button>
       </div>
 
       <!-- Stats content -->
       <div id="user-stats" class="tabcontent">
-        <h3>Your stats</h3>
+        <h3>Your Current Feels</h3>
         <div id="user-emotions-chart"></div>
         <p>Joy: <strong id="user-joy">loading...</strong></p>
         <p>Sadness: <strong id="user-sadness">loading...</strong></p>
@@ -42,14 +43,26 @@
         <p>Surprise: <strong id="user-surprise">loading...</strong></p>
       </div>
 
+      {% if view %}
+      <div id="user_history-stats" class="tabcontent">
+        <h3>What you felt in the past</h3>
+        <div id="user-historical-emotions-chart"></div>
+        <p>Joy: <strong id="user-past-happiness">{{ view.calculated_happiness }}</strong>%</p>
+        <p>Sadness: <strong id="user-past-sadness">{{ view.calculated_sadness }}</strong>%</p>
+        <p>Disgust: <strong id="user-past-disgust">{{ view.calculated_disgust }}</strong>%</p>
+        <p>Anger: <strong id="user-past-anger">{{ view.calculated_anger }}</strong>%</p>
+        <p>Surprise: <strong id="user-past-surprise">{{ view.calculated_surprise }}</strong>%</p>
+      </div>
+      {% endif %}
+
       <div id="general-stats" class="tabcontent">
         <h3>What others felt</h3>
         <div id="general-emotions-chart"></div>
         <p>Joy: <strong id="global-happiness">{{ video.happiness }}</strong>%</p>
         <p>Sadness: <strong id="global-sadness">{{ video.sadness }}</strong>%</p>
         <p>Disgust: <strong id="global-disgust">{{ video.disgust }}</strong>%</p>
-        <p>Surprise: <strong id="global-surprise">{{ video.surprise }}</strong>%</p>
         <p>Anger: <strong id="global-anger">{{ video.anger }}</strong>%</p>
+        <p>Surprise: <strong id="global-surprise">{{ video.surprise }}</strong>%</p>
       </div>
     </div>
   </div>
@@ -95,6 +108,13 @@
           <a href="{% url 'profile' comment.commenter_id.id %}" class="commenter-author-name">
             <strong>{{ comment.commenter_id.user.username }}:</strong>
           </a>
+
+          {% if comment.commenter_id.user == request.user %}
+            <form id="comment-delete-form" action="/comment/delete/{{video.id}}/{{comment.id}}" method="post">
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
+          {% endif %}
           {{ comment }}
         </div>
       </div>
@@ -105,7 +125,7 @@
     <!-- insert comment form here -->
     <!-- if the user is signed in we give them the form to make a new comment -->
     {% if request.user.is_authenticated %}
-    <form id="comment-creation-form" method="post">
+    <form id="comment-creation-form" action="/comment/add/{{video.id}}" method="post">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-1 col-sm-3 ml-auto">

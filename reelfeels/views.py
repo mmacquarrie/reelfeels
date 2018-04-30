@@ -73,22 +73,7 @@ def video_content(request, video_id):
             is_owner = False
             edit_url = "" #throws errors otherwise
             delete_url = ""
-
-        #form content
-        if request.method == 'POST' and request.user.is_authenticated:
-            form = CommentCreationForm(request.POST)
-
-            if form.is_valid():
-                form_data = form.cleaned_data
-                new_comment = Comment()
-                new_comment.video_id = video
-                new_comment.commenter_id = request.user.profile
-                new_comment.content = form_data.get('comment')
-                new_comment.save()
-
-                #create a new comment using video, and the content from the form also need to get the comment creators  id
-        #form content
-
+            
         form = CommentCreationForm()
 
         # update global video stats from all the views for that video
@@ -115,9 +100,19 @@ def video_content(request, video_id):
             video.anger = round((new_anger/total_emotions) * 100)
             video.surprise = round((new_surprise/total_emotions) * 100)
 
-            print('surprise' + str(new_surprise))
-
             video.save()
+
+        # increase video views by 1
+        video.todays_views += 1
+        video.save()
+
+        # pass in the ViewInstance corresponding to the video and user (if it exists)
+        user_view = None
+        try:
+            user_view = ViewInstance.objects.get(video_id=Video.objects.get(id=video_id), viewer_id=request.user.profile)
+        except ViewInstance.DoesNotExist:
+            # do nothing
+            pass
 
         return render(
             request,
@@ -130,6 +125,7 @@ def video_content(request, video_id):
                 "is_owner": is_owner,
                 "edit_url": edit_url,
                 "delete_url":delete_url,
+                'view': user_view,
             }
         )
 
@@ -337,3 +333,35 @@ def update_profile(request):
         form = LoginForm()
         message = "You must log in to update your account"
         return render(request, 'login.html', {'form': form, 'message': message})
+
+class CommentHandler:
+    def add_comment(request, video_id):
+        video = get_object_or_404(Video, pk=video_id)
+
+        if request.method == 'POST' and request.user.is_authenticated:
+            form = CommentCreationForm(request.POST)
+
+            if form.is_valid():
+                form_data = form.cleaned_data
+                new_comment = Comment()
+                new_comment.video_id = video
+                new_comment.commenter_id = request.user.profile
+                new_comment.content = form_data.get('comment')
+                new_comment.save()
+
+        return redirect("video", video_id)
+
+    def delete_comment(request, video_id, comment_id):
+        video = get_object_or_404(Video, pk=video_id)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        print("hello 2")
+
+        print(request.method)
+
+        if request.method == 'POST' and request.user.is_authenticated:
+            print("hello1")
+            if request.user == comment.commenter_id.user:
+                print("hello")
+                comment.delete()
+
+        return redirect("video", video_id)
