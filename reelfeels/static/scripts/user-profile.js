@@ -52,19 +52,19 @@ var chartOptions = {
 
 var userEmotionsData = [
     ['Emotion', 'Level', {role: "style"}],
-    ['Joy', 80, "#fff176"],
-    ['Sadness', 0, "#1565c0"],
-    ['Disgust', 20, "#388e3c"],
-    ['Anger', 0, "#d32f2f"],
-    ['Fear', 0, "#8e24aa"]
+    ['Joy', parseInt($('#user-happiness').html()), "#fff176"],
+    ['Sadness', parseInt($('#user-sadness').html()), "#1565c0"],
+    ['Disgust', parseInt($('#user-disgust').html()), "#388e3c"],
+    ['Anger', parseInt($('#user-anger').html()), "#d32f2f"],
+    ['Surprise', parseInt($('#user-surprise').html()), "#8e24aa"]
 ];
+
 
 function drawInitial() {
 
     var userChartTable = google.visualization.arrayToDataTable(userEmotionsData);
-
     userChart = new google.visualization.ColumnChart(document.getElementById('user-emotions-chart'));
-    
+
     userChart.draw(userChartTable, chartOptions);
 }
 

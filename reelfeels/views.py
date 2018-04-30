@@ -73,34 +73,11 @@ def video_content(request, video_id):
             is_owner = False
             edit_url = "" #throws errors otherwise
             delete_url = ""
-            
+
         form = CommentCreationForm()
 
         # update global video stats from all the views for that video
-        views = ViewInstance.objects.filter(video_id=video)
-        
-        if(len(views) > 0):
-            new_happy=video.happiness
-            new_sadness=video.sadness
-            new_disgust=video.disgust
-            new_anger=video.anger
-            new_surprise=video.surprise 
-            
-            for view in views:
-                new_happy += view.calculated_happiness
-                new_sadness += view.calculated_sadness
-                new_disgust += view.calculated_disgust
-                new_anger += view.calculated_anger
-                new_surprise += view.calculated_surprise
-            
-            total_emotions = new_happy + new_sadness + new_disgust + new_anger + new_surprise
-            video.happiness = round((new_happy/total_emotions) * 100)
-            video.sadness = round((new_happy/total_emotions) * 100)
-            video.disgust = round((new_disgust/total_emotions) * 100)
-            video.anger = round((new_anger/total_emotions) * 100)
-            video.surprise = round((new_surprise/total_emotions) * 100)
-
-            video.save()
+        calculate_global_emotions(None, video)
 
         # increase video views by 1
         video.todays_views += 1
@@ -108,11 +85,12 @@ def video_content(request, video_id):
 
         # pass in the ViewInstance corresponding to the video and user (if it exists)
         user_view = None
-        try:
-            user_view = ViewInstance.objects.get(video_id=Video.objects.get(id=video_id), viewer_id=request.user.profile)
-        except ViewInstance.DoesNotExist:
-            # do nothing
-            pass
+        if (request.user.is_authenticated):
+            try:
+                user_view = ViewInstance.objects.get(video_id=Video.objects.get(id=video_id), viewer_id=request.user.profile)
+            except ViewInstance.DoesNotExist:
+                # do nothing
+                pass
 
         return render(
             request,
@@ -132,6 +110,8 @@ def video_content(request, video_id):
 def user_profile(request, user_id):
     is_owner = (request.user.is_authenticated) and (user_id == request.user.id)
     profile = get_object_or_404(Profile, id=user_id)
+    calculate_global_emotions(profile, None)
+
     return render(
         request,
         'user-profile.html',
@@ -143,9 +123,9 @@ def user_profile(request, user_id):
 
 def my_profile(request):
     profile = get_object_or_404(Profile, user_id=request.user.id)
-
     is_owner = (profile == request.user.profile)
-    print (is_owner)
+    calculate_global_emotions(profile, None)
+
     return render(
         request,
         'user-profile.html',
@@ -154,6 +134,40 @@ def my_profile(request):
             'is_owner': is_owner
         }
     )
+
+# Generalized function for calculating a user/video's overall emotional stats
+def calculate_global_emotions(profile, video):
+    # Get views corresponding to profile/video in parameters
+    if profile is not None and video is None:
+        views = ViewInstance.objects.filter(viewer_id=profile)
+        thing = profile
+    elif video is not None and profile is None:
+        views = ViewInstance.objects.filter(video_id=video)
+        thing = video
+    else:
+        raise Http404()
+
+    # Sum up all the emotion data for a given user/video and calculate the ratio of each emotion
+    if(views.count() > 0):
+        total_happy = total_sadness = total_disgust = total_anger = total_surprise = 0
+
+        for view in views:
+            total_happy += view.calculated_happiness
+            total_sadness += view.calculated_sadness
+            total_disgust += view.calculated_disgust
+            total_anger += view.calculated_anger
+            total_surprise += view.calculated_surprise
+
+            total_emotions = total_happy + total_sadness + total_disgust + total_anger + total_surprise
+
+            # Don't divide by 0, kids
+            if (total_emotions > 0):
+                thing.happiness = round((total_happy/total_emotions) * 100)
+                thing.sadness = round((total_happy/total_emotions) * 100)
+                thing.disgust = round((total_disgust/total_emotions) * 100)
+                thing.anger = round((total_anger/total_emotions) * 100)
+                thing.surprise = round((total_surprise/total_emotions) * 100)
+                thing.save()
 
 def login_page(request):
 
@@ -268,7 +282,7 @@ def explore_page(request):
     new_videos = Video.objects.filter(date_shared__gte=new_cutoff)
 
     # Get list of popular videos
-    popular_videos = Video.objects.order_by("-todays_views")[:10]
+    popular_videos = Video.objects.order_by("-todays_views")[:6]
 
     # Get list of controversial videos?
     return render(
