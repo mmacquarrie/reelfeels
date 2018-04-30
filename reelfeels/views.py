@@ -333,7 +333,7 @@ def update_profile(request):
                 user.set_password(user_form.cleaned_data.get('password'))
                 user.save()
                 profile_form.save()
-                return redirect('profile', args=[request.user.id])
+                return redirect(reverse('profile', args=[request.user.profile.id]))
 
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
