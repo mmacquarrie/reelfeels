@@ -162,7 +162,7 @@ def calculate_global_emotions(profile, video):
             # Don't divide by 0, kids
             if (total_emotions > 0):
                 thing.happiness = round((total_happy/total_emotions) * 100)
-                thing.sadness = round((total_happy/total_emotions) * 100)
+                thing.sadness = round((total_sadness/total_emotions) * 100)
                 thing.disgust = round((total_disgust/total_emotions) * 100)
                 thing.anger = round((total_anger/total_emotions) * 100)
                 thing.surprise = round((total_surprise/total_emotions) * 100)
