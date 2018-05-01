@@ -94,6 +94,12 @@ h2{
   margin-bottom:10px;
 }
 
+.filter-title {
+  color: #9D71C0;
+  margin-top:25px;
+  margin-bottom:5px;
+}
+
 input.emo-filter[type='radio'] {
 display: none;
 }
