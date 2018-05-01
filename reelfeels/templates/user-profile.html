@@ -55,22 +55,28 @@
 
       <!-- Content -->
       <div id="user-content" class="tabcontent">
-      	{% for video in user.video_set.all %}
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-            <!-- video thumbnail -->
-            <a href="{% url 'video' video.id %}">
-              <img class="video-thumbnail" src="{{video.get_youtube_thumbnail}}">
-            </a>
+        {% if user.video_set.all %}
+        	{% for video in user.video_set.all %}
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <!-- video thumbnail -->
+              <a href="{% url 'video' video.id %}">
+                <img class="video-thumbnail" src="{{video.get_youtube_thumbnail}}">
+              </a>
+            </div>
+            <div class="col-md-8 col-xs-12 mt-1">
+              <!-- video text -->
+                <a href="{% url 'video' video.id %}"><h5>{{video.title}}</h5></a>
+              <p>{{video.video_description}}</p>
+            </div>
           </div>
-          <div class="col-md-8 col-xs-12 mt-1">
-            <!-- video text -->
-              <a href="{% url 'video' video.id %}"><h5>{{video.title}}</h5></a>
-            <p>{{video.video_description}}</p>
+          <hr>
+          {% endfor %}
+        {% else %}
+          <div class="text-center">
+            They haven't uploaded any videos yet :(
           </div>
-        </div>
-        <hr>
-        {% endfor %}
+        {% endif %}
       </div>
     </div>
     <div class="col-md-3"></div>

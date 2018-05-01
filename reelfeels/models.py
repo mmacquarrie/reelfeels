@@ -65,7 +65,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, db_column='user')
     # TO-DO: decide where to put uploaded files
-    profile_pic = models.ImageField(upload_to='profile_pictures/', null=True, blank=True, default = 'profile_pictures/default.png')
+    profile_pic = models.ImageField(upload_to='profile_pictures/', null=True, blank=True, default='profile_pictures/default.png')
 
     happiness = models.IntegerField(verbose_name='Overall happiness', default=0)
     sadness = models.IntegerField(verbose_name='Overall sadness', default=0)

@@ -82,7 +82,7 @@
           {% if uploader.profile_pic %}
             <img class="video-avatar-uploader video-avatar img-fluid text-center" src="{{ uploader.profile_pic.url }}">
           {% else %}
-            <img class="video-avatar-uploader video-avatar img-fluid text-center" src="{% static 'media/profile_pictures/default.jpg' %}">
+            <img class="option-2 video-avatar-uploader video-avatar img-fluid text-center" src="{% static 'media/profile_pictures/default.png' %}">
           {% endif %}
         </a>
         <br/>
@@ -107,7 +107,7 @@
           {% if comment.commenter_id.profile_pic %}
             <img class="video-avatar-comment video-avatar img-fluid" src="{{ comment.commenter_id.profile_pic.url }}">
           {% else %}
-            <img class="video-avatar-comment video-avatar img-fluid" src="{% static 'media/profile_pictures/default.jpg' %}">
+            <img class="video-avatar-comment video-avatar img-fluid" src="{% static 'media/profile_pictures/default.png' %}">
           {% endif %}
         </a>
       </div>
@@ -142,7 +142,7 @@
           {% if request.user.profile.profile_pic %}
             <img class="video-avatar-comment video-avatar img-fluid" src="{{request.user.profile.profile_pic.url}}">
           {% else %}
-            <img class="video-avatar-comment video-avatar img-fluid" src="{% static 'media/profile_pictures/default.jpg' %}">
+            <img class="video-avatar-comment video-avatar img-fluid" src="{% static 'media/profile_pictures/default.png' %}">
           {% endif %}
         </div>
 
